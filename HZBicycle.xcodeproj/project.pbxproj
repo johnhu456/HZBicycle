@@ -18,6 +18,12 @@
 		E0630AAD1DB9C44C0012EA3A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0630AAB1DB9C44C0012EA3A /* LaunchScreen.storyboard */; };
 		E0630AB81DB9C44C0012EA3A /* HZBicycleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AB71DB9C44C0012EA3A /* HZBicycleTests.m */; };
 		E0630AC31DB9C44C0012EA3A /* HZBicycleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AC21DB9C44C0012EA3A /* HZBicycleUITests.m */; };
+		E0630AD71DB9F0220012EA3A /* HBBaseDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AD61DB9F0220012EA3A /* HBBaseDataModel.m */; };
+		E0630ADA1DB9F04A0012EA3A /* HBRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AD91DB9F04A0012EA3A /* HBRequestManager.m */; };
+		E0630AE61DB9F1710012EA3A /* HBBicycleBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AE41DB9F1710012EA3A /* HBBicycleBaseModel.m */; };
+		E0630AE91DB9F9550012EA3A /* HBBicycleResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AE81DB9F9550012EA3A /* HBBicycleResultModel.m */; };
+		E0630AEC1DB9FA760012EA3A /* HBBicycleStationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AEB1DB9FA760012EA3A /* HBBicycleStationModel.m */; };
+		E0630AF41DBDB41C0012EA3A /* NSDictionary+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AF31DBDB41C0012EA3A /* NSDictionary+FHExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +69,19 @@
 		E0630ABE1DB9C44C0012EA3A /* HZBicycleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HZBicycleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0630AC21DB9C44C0012EA3A /* HZBicycleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZBicycleUITests.m; sourceTree = "<group>"; };
 		E0630AC41DB9C44C0012EA3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0630AD51DB9F0220012EA3A /* HBBaseDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBaseDataModel.h; path = Model/HBBaseDataModel.h; sourceTree = "<group>"; };
+		E0630AD61DB9F0220012EA3A /* HBBaseDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBBaseDataModel.m; path = Model/HBBaseDataModel.m; sourceTree = "<group>"; };
+		E0630AD81DB9F04A0012EA3A /* HBRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBRequestManager.h; path = RequestCenter/HBRequestManager.h; sourceTree = "<group>"; };
+		E0630AD91DB9F04A0012EA3A /* HBRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBRequestManager.m; path = RequestCenter/HBRequestManager.m; sourceTree = "<group>"; };
+		E0630AE31DB9F1710012EA3A /* HBBicycleBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBicycleBaseModel.h; path = Model/HBBicycleBaseModel.h; sourceTree = "<group>"; };
+		E0630AE41DB9F1710012EA3A /* HBBicycleBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBBicycleBaseModel.m; path = Model/HBBicycleBaseModel.m; sourceTree = "<group>"; };
+		E0630AE71DB9F9550012EA3A /* HBBicycleResultModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBicycleResultModel.h; path = RequestCenter/HBBicycleResultModel.h; sourceTree = "<group>"; };
+		E0630AE81DB9F9550012EA3A /* HBBicycleResultModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBBicycleResultModel.m; path = RequestCenter/HBBicycleResultModel.m; sourceTree = "<group>"; };
+		E0630AEA1DB9FA760012EA3A /* HBBicycleStationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBicycleStationModel.h; path = Model/HBBicycleStationModel.h; sourceTree = "<group>"; };
+		E0630AEB1DB9FA760012EA3A /* HBBicycleStationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBBicycleStationModel.m; path = Model/HBBicycleStationModel.m; sourceTree = "<group>"; };
+		E0630AF11DBDB32F0012EA3A /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		E0630AF21DBDB41C0012EA3A /* NSDictionary+FHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+FHExtension.h"; path = "Util/NSDictionary+FHExtension.h"; sourceTree = "<group>"; };
+		E0630AF31DBDB41C0012EA3A /* NSDictionary+FHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+FHExtension.m"; path = "Util/NSDictionary+FHExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +150,9 @@
 		E0630A9C1DB9C44C0012EA3A /* HZBicycle */ = {
 			isa = PBXGroup;
 			children = (
+				E0630AED1DBDAD7E0012EA3A /* Util */,
+				E0630AD41DB9EF640012EA3A /* Model */,
+				E0630AD01DB9EC2B0012EA3A /* RequestCenter */,
 				E0630AA01DB9C44C0012EA3A /* AppDelegate.h */,
 				E0630AA11DB9C44C0012EA3A /* AppDelegate.m */,
 				E0630AA31DB9C44C0012EA3A /* ViewController.h */,
@@ -148,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				E0630A9E1DB9C44C0012EA3A /* main.m */,
+				E0630AF11DBDB32F0012EA3A /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -168,6 +191,39 @@
 				E0630AC41DB9C44C0012EA3A /* Info.plist */,
 			);
 			path = HZBicycleUITests;
+			sourceTree = "<group>";
+		};
+		E0630AD01DB9EC2B0012EA3A /* RequestCenter */ = {
+			isa = PBXGroup;
+			children = (
+				E0630AD81DB9F04A0012EA3A /* HBRequestManager.h */,
+				E0630AD91DB9F04A0012EA3A /* HBRequestManager.m */,
+			);
+			name = RequestCenter;
+			sourceTree = "<group>";
+		};
+		E0630AD41DB9EF640012EA3A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E0630AD51DB9F0220012EA3A /* HBBaseDataModel.h */,
+				E0630AD61DB9F0220012EA3A /* HBBaseDataModel.m */,
+				E0630AE31DB9F1710012EA3A /* HBBicycleBaseModel.h */,
+				E0630AE41DB9F1710012EA3A /* HBBicycleBaseModel.m */,
+				E0630AE71DB9F9550012EA3A /* HBBicycleResultModel.h */,
+				E0630AE81DB9F9550012EA3A /* HBBicycleResultModel.m */,
+				E0630AEA1DB9FA760012EA3A /* HBBicycleStationModel.h */,
+				E0630AEB1DB9FA760012EA3A /* HBBicycleStationModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E0630AED1DBDAD7E0012EA3A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				E0630AF21DBDB41C0012EA3A /* NSDictionary+FHExtension.h */,
+				E0630AF31DBDB41C0012EA3A /* NSDictionary+FHExtension.m */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 		EABB50E024F3D70F894DA1BE /* Frameworks */ = {
@@ -447,9 +503,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0630AE91DB9F9550012EA3A /* HBBicycleResultModel.m in Sources */,
 				E0630AA51DB9C44C0012EA3A /* ViewController.m in Sources */,
+				E0630AEC1DB9FA760012EA3A /* HBBicycleStationModel.m in Sources */,
 				E0630AA21DB9C44C0012EA3A /* AppDelegate.m in Sources */,
+				E0630AF41DBDB41C0012EA3A /* NSDictionary+FHExtension.m in Sources */,
 				E0630A9F1DB9C44C0012EA3A /* main.m in Sources */,
+				E0630ADA1DB9F04A0012EA3A /* HBRequestManager.m in Sources */,
+				E0630AE61DB9F1710012EA3A /* HBBicycleBaseModel.m in Sources */,
+				E0630AD71DB9F0220012EA3A /* HBBaseDataModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +660,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = H3MEX3W3VV;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "/Users/HU/Documents/IOS开发/Github托管/HZBicycle/HZBicycle/PrefixHeader.pch";
 				INFOPLIST_FILE = HZBicycle/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -612,6 +676,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = H3MEX3W3VV;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "/Users/HU/Documents/IOS开发/Github托管/HZBicycle/HZBicycle/PrefixHeader.pch";
 				INFOPLIST_FILE = HZBicycle/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

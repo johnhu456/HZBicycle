@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-HZBicycle.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -19,10 +24,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YTKNetwork.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>20F983110483B2184DD7B3357CC6240E</key>
+		<key>0F189C39EFE18F007B36D8A04AF55D26</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -32,7 +42,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A1F480C065BD37889E96F007C991B402</key>
+		<key>928353533005A4198EBDA5B700D37B64</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A4183B0F561F2DCEEAE178379AC635E9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C53EDF9A6F594AAC804903F01CFDBC2B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

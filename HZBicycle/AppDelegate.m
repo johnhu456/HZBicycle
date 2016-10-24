@@ -7,16 +7,19 @@
 //
 
 #import "AppDelegate.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
 
 @interface AppDelegate ()
 
 @end
 
+static NSString *const kAMapAppKey = @"46e4a0f82fe002fffd0cf4391f2b5cc9";
 @implementation AppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    //注册高德地图
+    [AMapServices sharedServices].apiKey = kAMapAppKey;
     return YES;
 }
 

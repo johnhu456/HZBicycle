@@ -2,13 +2,17 @@
 # platform :ios, '9.0'
 
 target 'HZBicycle' do
-  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
-  # use_frameworks!
+  #AMap
+  pod 'AMapFoundation','~>1.3.1'
   pod 'AMap2DMap','~>4.3.0'
+  pod 'AMapLocation','~>2.1.1'
 
+  #YTKNetwork
+  pod 'YTKNetwork'
+  
   target 'HZBicycleTests' do
     inherit! :search_paths
-    # Pods for testing
+    pod 'YTKNetwork'
   end
 
   target 'HZBicycleUITests' do

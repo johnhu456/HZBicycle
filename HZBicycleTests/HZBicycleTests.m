@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <YTKRequest.h>
 
 @interface HZBicycleTests : XCTestCase
 
