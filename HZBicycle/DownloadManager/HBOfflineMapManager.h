@@ -7,15 +7,39 @@
 //
 
 #import "HBBicycleBaseModel.h"
-#import <AMapFoundationKit/AMapFoundationKit.h>
-
-@interface HBOfflineMapManager : HBBicycleBaseModel
 
 /**
- 初始化配置，默认杭州
+ 以城市为单位进行离线下载，管理的类。
  */
-+ (void)config;
+@interface HBOfflineMapManager : HBBicycleBaseModel
+/**
+ 当前选中城市
+ */
+@property (nonatomic, strong, readonly) MAOfflineCity *selectedCity;
 
+#pragma mark - Public Method
+/**
+ 获取/创建单例
+ */
++ (instancetype)sharedManager;
+
+/**
+ 配置城市，默认杭州
+ */
+- (void)config;
+
+/**
+ 以城市代码进行初始化
+ */
+- (void)configWithCityCode:(NSString *)code;
+
+
+/**
+ 下载当前选中城市
+
+ @param downloadBlock 下载回调
+ */
+- (void)startDownloadWithBlock:(MAOfflineMapDownloadBlock)downloadBlock;
 
 
 @end

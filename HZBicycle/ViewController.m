@@ -8,10 +8,6 @@
 
 #import "ViewController.h"
 
-#import <AMapFoundationKit/AMapFoundationKit.h>
-#import <AMap3DMap/MAMapKit/MAMapKit.h>
-#import <AMapLocationKit/AMapLocationKit.h>
-
 #import "HBBicycleStationModel.h"
 @interface ViewController ()<AMapLocationManagerDelegate,MAMapViewDelegate>
 
@@ -28,6 +24,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [HBRequestManager config];
+    [[HBOfflineMapManager sharedManager] config];
+#warning 单独分理出下载功能
+    [[HBOfflineMapManager sharedManager] startDownloadWithBlock:^(MAOfflineItem *downloadItem, MAOfflineMapDownloadStatus downloadStatus, id info) {
+        NSLog(@"%@",downloadItem);
+        NSLog(@"%ld",(long)downloadStatus);
+        NSLog(@"%@",info);
+        NSLog(@"======");
+        if (downloadStatus == MAOfflineMapDownloadStatusFinished) {
+            [self.mapView reloadMap];
+        }
+    }];
 
     //添加地图
     self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
@@ -42,7 +49,8 @@
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     [self.locationManager requestLocationWithReGeocode:NO completionBlock:nil];
     self.locationManager.delegate = self;
-    [self.locationManager startUpdatingLocation];
+//    [self.locationManager startUpdatingLocation];
+    [self.locationManager requestLocationWithReGeocode:NO completionBlock:nil];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

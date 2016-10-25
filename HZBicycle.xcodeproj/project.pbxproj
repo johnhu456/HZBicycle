@@ -26,6 +26,7 @@
 		E0630AF41DBDB41C0012EA3A /* NSDictionary+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AF31DBDB41C0012EA3A /* NSDictionary+FHExtension.m */; };
 		E0630AF81DBDFE6A0012EA3A /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AF71DBDFE6A0012EA3A /* Foundation+Log.m */; };
 		E0630AFC1DBEF27D0012EA3A /* HBOfflineMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AFB1DBEF27D0012EA3A /* HBOfflineMapManager.m */; };
+		E0E079751DBF453E0028AB83 /* MainBicycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,9 @@
 		E0630AF71DBDFE6A0012EA3A /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Foundation+Log.m"; path = "Util/Foundation+Log.m"; sourceTree = "<group>"; };
 		E0630AFA1DBEF27D0012EA3A /* HBOfflineMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBOfflineMapManager.h; path = DownloadManager/HBOfflineMapManager.h; sourceTree = "<group>"; };
 		E0630AFB1DBEF27D0012EA3A /* HBOfflineMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBOfflineMapManager.m; path = DownloadManager/HBOfflineMapManager.m; sourceTree = "<group>"; };
+		E0E079701DBF2B8D0028AB83 /* FHMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FHMarco.h; path = Util/FHMarco.h; sourceTree = "<group>"; };
+		E0E079731DBF453E0028AB83 /* MainBicycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainBicycleViewController.h; path = ViewController/MainBicycleViewController.h; sourceTree = "<group>"; };
+		E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainBicycleViewController.m; path = ViewController/MainBicycleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +159,7 @@
 		E0630A9C1DB9C44C0012EA3A /* HZBicycle */ = {
 			isa = PBXGroup;
 			children = (
+				E0E079711DBF45030028AB83 /* ViewController */,
 				E0630AF91DBEF11A0012EA3A /* DownloadManager */,
 				E0630AED1DBDAD7E0012EA3A /* Util */,
 				E0630AD41DB9EF640012EA3A /* Model */,
@@ -226,6 +231,7 @@
 		E0630AED1DBDAD7E0012EA3A /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				E0E079701DBF2B8D0028AB83 /* FHMarco.h */,
 				E0630AF71DBDFE6A0012EA3A /* Foundation+Log.m */,
 				E0630AF21DBDB41C0012EA3A /* NSDictionary+FHExtension.h */,
 				E0630AF31DBDB41C0012EA3A /* NSDictionary+FHExtension.m */,
@@ -240,6 +246,15 @@
 				E0630AFB1DBEF27D0012EA3A /* HBOfflineMapManager.m */,
 			);
 			name = DownloadManager;
+			sourceTree = "<group>";
+		};
+		E0E079711DBF45030028AB83 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E0E079731DBF453E0028AB83 /* MainBicycleViewController.h */,
+				E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 		EABB50E024F3D70F894DA1BE /* Frameworks */ = {
@@ -520,6 +535,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0630AE91DB9F9550012EA3A /* HBBicycleResultModel.m in Sources */,
+				E0E079751DBF453E0028AB83 /* MainBicycleViewController.m in Sources */,
 				E0630AF81DBDFE6A0012EA3A /* Foundation+Log.m in Sources */,
 				E0630AA51DB9C44C0012EA3A /* ViewController.m in Sources */,
 				E0630AEC1DB9FA760012EA3A /* HBBicycleStationModel.m in Sources */,

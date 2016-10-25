@@ -20,6 +20,12 @@ static NSString *const kAMapAppKey = @"46e4a0f82fe002fffd0cf4391f2b5cc9";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //注册高德地图
     [AMapServices sharedServices].apiKey = kAMapAppKey;
+    //初始化请求中心
+    [HBRequestManager config];
+    //初始化下载中心,默认杭州
+    [[HBOfflineMapManager sharedManager] config];
+    
+    //SetRootViewController
     return YES;
 }
 
