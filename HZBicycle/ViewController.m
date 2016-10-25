@@ -9,7 +9,7 @@
 #import "ViewController.h"
 
 #import <AMapFoundationKit/AMapFoundationKit.h>
-#import <AMap2DMap/MAMapKit/MAMapKit.h>
+#import <AMap3DMap/MAMapKit/MAMapKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 
 #import "HBBicycleStationModel.h"
@@ -63,7 +63,7 @@
     
     [annotation setCoordinate: AMapCoordinateConvert(CLLocationCoordinate2DMake(model.lat, model.lon),AMapCoordinateTypeBaidu)];
     [annotation setTitle:model.address];
-    [annotation setSubtitle:[NSString stringWithFormat:@"%d",model.bikenum]];
+    [annotation setSubtitle:[NSString stringWithFormat:@"%lu",(unsigned long)model.bikenum]];
     [self addAnnotationToMapView:annotation];
 }
 
