@@ -24,6 +24,7 @@
 		E0630AE91DB9F9550012EA3A /* HBBicycleResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AE81DB9F9550012EA3A /* HBBicycleResultModel.m */; };
 		E0630AEC1DB9FA760012EA3A /* HBBicycleStationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AEB1DB9FA760012EA3A /* HBBicycleStationModel.m */; };
 		E0630AF41DBDB41C0012EA3A /* NSDictionary+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AF31DBDB41C0012EA3A /* NSDictionary+FHExtension.m */; };
+		E0630AF81DBDFE6A0012EA3A /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AF71DBDFE6A0012EA3A /* Foundation+Log.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		E0630AF11DBDB32F0012EA3A /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		E0630AF21DBDB41C0012EA3A /* NSDictionary+FHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+FHExtension.h"; path = "Util/NSDictionary+FHExtension.h"; sourceTree = "<group>"; };
 		E0630AF31DBDB41C0012EA3A /* NSDictionary+FHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+FHExtension.m"; path = "Util/NSDictionary+FHExtension.m"; sourceTree = "<group>"; };
+		E0630AF71DBDFE6A0012EA3A /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Foundation+Log.m"; path = "Util/Foundation+Log.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +222,7 @@
 		E0630AED1DBDAD7E0012EA3A /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				E0630AF71DBDFE6A0012EA3A /* Foundation+Log.m */,
 				E0630AF21DBDB41C0012EA3A /* NSDictionary+FHExtension.h */,
 				E0630AF31DBDB41C0012EA3A /* NSDictionary+FHExtension.m */,
 			);
@@ -504,6 +507,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0630AE91DB9F9550012EA3A /* HBBicycleResultModel.m in Sources */,
+				E0630AF81DBDFE6A0012EA3A /* Foundation+Log.m in Sources */,
 				E0630AA51DB9C44C0012EA3A /* ViewController.m in Sources */,
 				E0630AEC1DB9FA760012EA3A /* HBBicycleStationModel.m in Sources */,
 				E0630AA21DB9C44C0012EA3A /* AppDelegate.m in Sources */,

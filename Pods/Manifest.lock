@@ -19,6 +19,7 @@ PODS:
   - AMapFoundation (1.3.1)
   - AMapLocation (2.1.1):
     - AMapFoundation (~> 1.2)
+  - MJExtension (3.0.13)
   - YTKNetwork (2.0.1):
     - AFNetworking (~> 3.0)
 
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - AMap2DMap (~> 4.3.0)
   - AMapFoundation (~> 1.3.1)
   - AMapLocation (~> 2.1.1)
+  - MJExtension
   - YTKNetwork
 
 SPEC CHECKSUMS:
@@ -33,8 +35,9 @@ SPEC CHECKSUMS:
   AMap2DMap: f3f0fc5cdbf0242ff22da0c8605f24f8d7187b35
   AMapFoundation: 636834a27cd003084f56b4232f3031e6a44c7e7e
   AMapLocation: dd203f76b034ef5cb546600f4e1ffad2a3a14072
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
   YTKNetwork: f21ad2073b3353a11d257593a2859f2904bbec75
 
-PODFILE CHECKSUM: aff8af28b45370536a907a9772ad7a06e629318e
+PODFILE CHECKSUM: 6a172e86679c8a887b0bcf33b4ad09c18b1c6af8
 
 COCOAPODS: 1.0.1

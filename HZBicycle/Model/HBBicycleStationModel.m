@@ -10,4 +10,10 @@
 
 @implementation HBBicycleStationModel
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName
+{
+    return @{
+             @"stationID": @"id"
+             };
+}
 @end

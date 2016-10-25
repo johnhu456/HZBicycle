@@ -10,6 +10,9 @@ target 'HZBicycle' do
   #YTKNetwork
   pod 'YTKNetwork'
   
+  #MJExtension
+  pod 'MJExtension','~>3.0.13'
+  
   target 'HZBicycleTests' do
     inherit! :search_paths
     pod 'YTKNetwork'

@@ -7,6 +7,7 @@
 //
 
 #import "HBBicycleBaseModel.h"
+#import <MJExtension.h>
 
 @interface HBBicycleStationModel : HBBicycleBaseModel
 

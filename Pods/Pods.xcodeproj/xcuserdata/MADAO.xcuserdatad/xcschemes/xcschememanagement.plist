@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJExtension.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-HZBicycle.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,6 +42,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1E6732DFB257CF54728183A7743B972E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>37AD54B0395BC9744F161DF1070CEE2A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>45046553F50C22130E059CDFF14F0FD8</key>
 		<dict>
 			<key>primary</key>
@@ -47,12 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A4183B0F561F2DCEEAE178379AC635E9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C53EDF9A6F594AAC804903F01CFDBC2B</key>
+		<key>9EAB3E42EF957541E6C3C76D35FD008E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -12,11 +12,14 @@
 #import <AMap2DMap/MAMapKit/MAMapKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 
+#import "HBBicycleStationModel.h"
 @interface ViewController ()<AMapLocationManagerDelegate,MAMapViewDelegate>
 
 @property (nonatomic, strong) AMapLocationManager *locationManager;
 
 @property (nonatomic, strong) MAMapView *mapView;
+
+@property (nonatomic, strong) NSArray *stationArray;
 
 @end
 
@@ -25,15 +28,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [HBRequestManager config];
-    [HBRequestManager sendNearBicycleRequestWithLongtitude:@(120.1703) latitude:@(30.19067) length:@(800) successJsonObject:^(NSDictionary *jsonDict) {
-        NSLog(@"%@",jsonDict);
-    } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
-        NSLog(@"%@",request);
-    }];
+
     //添加地图
     self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
+    [self.mapView setUserTrackingMode:MAUserTrackingModeFollow];
     self.mapView.delegate = self;
-    [self.mapView setUserTrackingMode:MAUserTrackingModeFollowWithHeading];
     [self.view addSubview:self.mapView];
     
     
@@ -58,30 +57,55 @@
     [self addAnnotationToMapView:annotation];
 }
 
+- (void)addAnnotationWithStation:(HBBicycleStationModel *)model
+{
+    MAPointAnnotation *annotation = [[MAPointAnnotation alloc] init];
+    
+    [annotation setCoordinate: AMapCoordinateConvert(CLLocationCoordinate2DMake(model.lat, model.lon),AMapCoordinateTypeBaidu)];
+    [annotation setTitle:model.address];
+    [annotation setSubtitle:[NSString stringWithFormat:@"%d",model.bikenum]];
+    [self addAnnotationToMapView:annotation];
+}
+
 - (void)addAnnotationToMapView:(id<MAAnnotation>)annotation
 {
     [self.mapView addAnnotation:annotation];
     
-    [self.mapView selectAnnotation:annotation animated:YES];
-    [self.mapView setZoomLevel:15.1 animated:NO];
+//    [self.mapView selectAnnotation:annotation animated:YES];
+//    [self.mapView setZoomLevel:15.1 animated:NO];
     [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
 }
 
+- (void)addStations
+{
+    for (NSDictionary *dict in self.stationArray) {
+        HBBicycleStationModel *model = [HBBicycleStationModel mj_objectWithKeyValues:dict];
+        [self addAnnotationWithStation:model];
+    }
+    
+}
 
 #pragma mark - AMapLocationManagerDelegate
 - (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
 {
-    NSLog(@"%@",location);
-    if (location){
+    if (location) {
+//        CLLocationCoordinate2D baiduCoordinate = AMapCoordinateConvert(location.coordinate,AMapCoordinateTypeBaidu);
+//        CLLocation *new = [[CLLocation alloc] initWithLatitude:baiduCoordinate.latitude longitude:baiduCoordinate.longitude];
         [self addAnnotationWithLocation:location];
+        [HBRequestManager sendNearBicycleRequestWithLongtitude:@(location.coordinate.longitude) latitude:@(location.coordinate.latitude) length:@(800) successJsonObject:^(NSDictionary *jsonDict) {
+            NSLog(@"%@",jsonDict);
+            self.stationArray = jsonDict[@"data"];
+            [self addStations];
+        } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
+            NSLog(@"%@",request);
+        }];
     }
-    NSLog(@"long:%.7f, latitude:%.7f",location.coordinate.longitude, location.coordinate.latitude);
 }
 
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
 {
-    if ([annotation isKindOfClass:[MAPointAnnotation class]])
-    {
+//    if ([annotation isKindOfClass:[MAPointAnnotation class]])
+//    {
         static NSString *pointReuseIndetifier = @"pointReuseIndetifier";
         
         MAPinAnnotationView *annotationView = (MAPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndetifier];
@@ -96,9 +120,9 @@
         annotationView.pinColor         = MAPinAnnotationColorPurple;
         
         return annotationView;
-    }
-    
-    return nil;
+//    }
+//    
+//    return nil;
 }
 
 //- (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay
