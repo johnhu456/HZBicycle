@@ -47,11 +47,24 @@
     
     //设置定位精度
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    [self.locationManager requestLocationWithReGeocode:NO completionBlock:nil];
     self.locationManager.delegate = self;
-//    [self.locationManager startUpdatingLocation];
-    [self.locationManager requestLocationWithReGeocode:NO completionBlock:nil];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self.locationManager requestLocationWithReGeocode:NO completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        if (location) {
+            [self addAnnotationWithLocation:location];
+            NSLog(@"=======%f, %f",location.coordinate.latitude,location.coordinate.longitude);
+            CLLocationCoordinate2D baiduCoordinate = [DFLocationConverter gcj02ToWgs84:location.coordinate];
+            NSLog(@"-------%f, %f",baiduCoordinate.latitude,baiduCoordinate.longitude);
+            [HBRequestManager sendNearBicycleRequestWithLatitude:@(baiduCoordinate.latitude)
+                                                      longtitude:@(baiduCoordinate.longitude)
+                                                          length:@(800)
+                                               successJsonObject:^(NSDictionary *jsonDict) {
+                                                   self.stationArray = jsonDict[@"data"];
+                                                   [self addStations];
+                                               } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
+                                                   NSLog(@"%@",request);
+                                               }];
+        }
+    }];
 }
 
 - (void)addAnnotationWithLocation:(CLLocation *)location
@@ -96,18 +109,7 @@
 #pragma mark - AMapLocationManagerDelegate
 - (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location
 {
-    if (location) {
-//        CLLocationCoordinate2D baiduCoordinate = AMapCoordinateConvert(location.coordinate,AMapCoordinateTypeBaidu);
-//        CLLocation *new = [[CLLocation alloc] initWithLatitude:baiduCoordinate.latitude longitude:baiduCoordinate.longitude];
-        [self addAnnotationWithLocation:location];
-        [HBRequestManager sendNearBicycleRequestWithLongtitude:@(location.coordinate.longitude) latitude:@(location.coordinate.latitude) length:@(800) successJsonObject:^(NSDictionary *jsonDict) {
-            NSLog(@"%@",jsonDict);
-            self.stationArray = jsonDict[@"data"];
-            [self addStations];
-        } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
-            NSLog(@"%@",request);
-        }];
-    }
+
 }
 
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation

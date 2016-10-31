@@ -55,7 +55,6 @@
         NSArray *cityArray = [MAOfflineMap sharedOfflineMap].cities;
         @WEAKSELF;
         [cityArray enumerateObjectsUsingBlock:^(MAOfflineItemMunicipality *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSLog(@"%@",obj.cityCode);
             if (![obj.cityCode isKindOfClass:[NSString class]]){
                 return;
             }

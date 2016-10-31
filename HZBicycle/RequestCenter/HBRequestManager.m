@@ -11,45 +11,40 @@
 #pragma mark - RequestURL
 static NSString *const kBaseRequestURL = @"http://c.ggzxc.com.cn/wz";
 static NSString *const kNearBicycleRequestURL = @"np_getBikesByWeiXin.do";
-
-
-
-
-
-
-
+static NSString *const kCoordinateConvertRequestURL = @"np_translate.do";
 
 #pragma mark - Requests
 @implementation HBBaseRequest
 
--(YTKResponseSerializerType)responseSerializerType
-{
+-(YTKResponseSerializerType)responseSerializerType {
     return YTKResponseSerializerTypeHTTP;
 }
 
-@end
-@interface HBNearBicycleRequest(){
-    NSNumber *_longtitude;
-    NSNumber *_latitude;
-    NSNumber *_length;
+- (id)requestArgument {
+    return self.requestArguments;
 }
 
 @end
+
 @implementation HBNearBicycleRequest
 
-- (YTKRequestMethod)requestMethod
-{
+- (YTKRequestMethod)requestMethod {
     return YTKRequestMethodGET;
 }
 
-- (NSString *)requestUrl
-{
+- (NSString *)requestUrl {
     return kNearBicycleRequestURL;
 }
 
-- (id)requestArgument
-{
-    return self.requestArguments;
+@end
+
+@implementation HBCoordianteConvertRequest
+- (YTKRequestMethod)requestMethod {
+    return YTKRequestMethodGET;
+}
+
+- (NSString *)requestUrl {
+    return kCoordinateConvertRequestURL;
 }
 
 @end
@@ -58,13 +53,11 @@ static NSString *const kNearBicycleRequestURL = @"np_getBikesByWeiXin.do";
 #pragma mark - RequestManager
 @implementation HBRequestManager
 
-+ (void)config
-{
++ (void)config {
     [self setBaseURL:kBaseRequestURL];
 }
 
-+ (instancetype)sharedManager
-{
++ (instancetype)sharedManager {
     static HBRequestManager *_manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -74,22 +67,20 @@ static NSString *const kNearBicycleRequestURL = @"np_getBikesByWeiXin.do";
 }
 
 #pragma mark - Public Method
-+ (void)setBaseURL:(NSString *)baseURL
-{
++ (void)setBaseURL:(NSString *)baseURL {
     [[YTKNetworkConfig sharedConfig] setBaseUrl:baseURL];
 }
 
 #pragma mark - SendRequest
-+ (void)sendNearBicycleRequestWithLongtitude:(NSNumber *)lon
-                                    latitude:(NSNumber *)la
-                                      length:(NSNumber *)len
-                          successJsonObject:(void (^)(NSDictionary *))success
-                           failureCompletion:(YTKRequestCompletionBlock)failure
-{
++ (void)sendNearBicycleRequestWithLatitude:(NSNumber *)lat
+                                longtitude:(NSNumber *)lon
+                                    length:(NSNumber *)len
+                         successJsonObject:(void (^)(NSDictionary *))success
+                         failureCompletion:(YTKRequestCompletionBlock)failure {
     HBNearBicycleRequest *nearBicycleRequest =  [[HBNearBicycleRequest alloc] init];
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setObjectOrNil:lon forKey:@"lng"];
-    [params setObjectOrNil:la forKey:@"lat"];
+    [params setObjectOrNil:lat forKey:@"lat"];
     [params setObjectOrNil:len forKey:@"len"];
     nearBicycleRequest.requestArguments = params;
     [nearBicycleRequest startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
