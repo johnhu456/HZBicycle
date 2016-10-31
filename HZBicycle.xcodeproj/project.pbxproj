@@ -27,6 +27,7 @@
 		E0630AF81DBDFE6A0012EA3A /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AF71DBDFE6A0012EA3A /* Foundation+Log.m */; };
 		E08DD5701DC6F90700064283 /* HBMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD56D1DC6F90700064283 /* HBMapManager.m */; };
 		E08DD5711DC6F90700064283 /* HBOfflineMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD56F1DC6F90700064283 /* HBOfflineMapManager.m */; };
+		E08DD5761DC7401900064283 /* HBLocationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD5751DC7401900064283 /* HBLocationButton.m */; };
 		E0E079751DBF453E0028AB83 /* MainBicycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,8 @@
 		E08DD56D1DC6F90700064283 /* HBMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBMapManager.m; path = Manager/HBMapManager.m; sourceTree = "<group>"; };
 		E08DD56E1DC6F90700064283 /* HBOfflineMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBOfflineMapManager.h; path = Manager/HBOfflineMapManager.h; sourceTree = "<group>"; };
 		E08DD56F1DC6F90700064283 /* HBOfflineMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBOfflineMapManager.m; path = Manager/HBOfflineMapManager.m; sourceTree = "<group>"; };
+		E08DD5741DC7401800064283 /* HBLocationButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBLocationButton.h; path = Widgets/HBLocationButton.h; sourceTree = "<group>"; };
+		E08DD5751DC7401900064283 /* HBLocationButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBLocationButton.m; path = Widgets/HBLocationButton.m; sourceTree = "<group>"; };
 		E0E079701DBF2B8D0028AB83 /* FHMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FHMarco.h; path = Util/FHMarco.h; sourceTree = "<group>"; };
 		E0E079731DBF453E0028AB83 /* MainBicycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainBicycleViewController.h; path = ViewController/MainBicycleViewController.h; sourceTree = "<group>"; };
 		E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainBicycleViewController.m; path = ViewController/MainBicycleViewController.m; sourceTree = "<group>"; };
@@ -162,6 +165,7 @@
 		E0630A9C1DB9C44C0012EA3A /* HZBicycle */ = {
 			isa = PBXGroup;
 			children = (
+				E08DD5721DC73FDC00064283 /* Widgets */,
 				E0E079711DBF45030028AB83 /* ViewController */,
 				E0630AF91DBEF11A0012EA3A /* Manager */,
 				E0630AED1DBDAD7E0012EA3A /* Util */,
@@ -251,6 +255,15 @@
 				E08DD56F1DC6F90700064283 /* HBOfflineMapManager.m */,
 			);
 			name = Manager;
+			sourceTree = "<group>";
+		};
+		E08DD5721DC73FDC00064283 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				E08DD5741DC7401800064283 /* HBLocationButton.h */,
+				E08DD5751DC7401900064283 /* HBLocationButton.m */,
+			);
+			name = Widgets;
 			sourceTree = "<group>";
 		};
 		E0E079711DBF45030028AB83 /* ViewController */ = {
@@ -545,6 +558,7 @@
 				E0630AF81DBDFE6A0012EA3A /* Foundation+Log.m in Sources */,
 				E0630AA51DB9C44C0012EA3A /* ViewController.m in Sources */,
 				E0630AEC1DB9FA760012EA3A /* HBBicycleStationModel.m in Sources */,
+				E08DD5761DC7401900064283 /* HBLocationButton.m in Sources */,
 				E0630AA21DB9C44C0012EA3A /* AppDelegate.m in Sources */,
 				E0630AF41DBDB41C0012EA3A /* NSDictionary+FHExtension.m in Sources */,
 				E0630A9F1DB9C44C0012EA3A /* main.m in Sources */,

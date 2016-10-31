@@ -31,8 +31,6 @@
 #pragma mark - ReqeustManager
 @interface HBRequestManager : NSObject
 
-//+ (instancetype)sharedManager;
-
 + (void)config;
 
 + (void)setBaseURL:(NSString *)baseURL;

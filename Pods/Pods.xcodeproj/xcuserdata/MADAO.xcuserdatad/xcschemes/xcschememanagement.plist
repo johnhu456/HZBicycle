@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-HZBicycle.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,17 +47,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1E6732DFB257CF54728183A7743B972E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>37AD54B0395BC9744F161DF1070CEE2A</key>
+		<key>1FB38AFE2BAE04F61BCF8362AE771B4C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>45046553F50C22130E059CDFF14F0FD8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -63,6 +68,11 @@
 			<true/>
 		</dict>
 		<key>9EAB3E42EF957541E6C3C76D35FD008E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F314F90F9D349D8641F6F41C62D36945</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -8,7 +8,10 @@ target 'HZBicycle' do
   pod 'AMapLocation','~>2.1.1'
 
   #YTKNetwork
-  pod 'YTKNetwork'
+  pod 'YTKNetwork','~>2.0.1'
+  
+  #Masonry
+  pod 'Masonry','~>1.0.2'
   
   #MJExtension
   pod 'MJExtension','~>3.0.13'

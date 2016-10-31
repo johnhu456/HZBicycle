@@ -11,15 +11,24 @@
 
 #import "FHMarco.h"
 
+//地图相关
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMap3DMap/MAMapKit/MAMapKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 
+//布局
+#import <Masonry.h>
+
+//扩展
 #import "NSDictionary+FHExtension.h"
 
+//管理类
 #import "HBRequestManager.h"
 #import "HBMapManager.h"
 #import "HBOfflineMapManager.h"
+
+//模型
+#import "HBBicycleStationModel.h"
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
