@@ -9,8 +9,6 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
-#import "FHMarco.h"
-
 //地图相关
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMap3DMap/MAMapKit/MAMapKit.h>
@@ -20,6 +18,8 @@
 #import <Masonry.h>
 
 //扩展
+#import "FHMarco.h"
+#import "HBMarco.h"
 #import "NSDictionary+FHExtension.h"
 
 //管理类
@@ -29,6 +29,7 @@
 
 //模型
 #import "HBBicycleStationModel.h"
+#import "HBBicycleResultModel.h"
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

@@ -9,6 +9,9 @@
 #import "MainBicycleViewController.h"
 #import "HBLocationButton.h"
 
+#import "HBBicyclePointAnnotation.h"
+#import "HBBicycleAnnotationView.h"
+
 @interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate>
 
 #pragma mark - Views
@@ -31,6 +34,8 @@
  站点数组
  */
 @property (nonatomic, strong) NSArray *stationArray;
+
+@property (nonatomic, strong) HBBicycleResultModel *stationResult;
 
 @end
 
@@ -96,7 +101,8 @@ static CGFloat const kContentInsets = 15.f;
                                                       longtitude:@(wgs84Coordinate.longitude)
                                                           length:@(800)
                                                successJsonObject:^(NSDictionary *jsonDict) {
-                                                   self.stationArray = jsonDict[@"data"];
+                                                   self.stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
+                                                   NSLog(@"%@",self.stationResult);
                                                    [self addBicycleStations];
                                                    [self.locationButton endActivityAnimation];
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
@@ -106,72 +112,42 @@ static CGFloat const kContentInsets = 15.f;
     }];
 }
 
-
-
 /**
  将自行车站添加到地图上
  */
 - (void)addBicycleStations {
-    for (NSDictionary *dict in self.stationArray) {
-        HBBicycleStationModel *model = [HBBicycleStationModel mj_objectWithKeyValues:dict];
+    for (HBBicycleStationModel *model in self.stationResult.data) {
         [self addAnnotationWithStation:model];
     }
 }
 
 - (void)addAnnotationWithStation:(HBBicycleStationModel *)model
 {
-    MAPointAnnotation *annotation = [[MAPointAnnotation alloc] init];
-    [annotation setCoordinate: AMapCoordinateConvert(CLLocationCoordinate2DMake(model.lat, model.lon),AMapCoordinateTypeBaidu)];
-    [annotation setTitle:model.address];
-    [annotation setSubtitle:[NSString stringWithFormat:@"%lu",(unsigned long)model.bikenum]];
+    HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:model];
     [self addAnnotationToMapView:annotation];
 }
 
 - (void)addAnnotationToMapView:(id<MAAnnotation>)annotation
 {
     [self.mapView addAnnotation:annotation];
-    
-    //    [self.mapView selectAnnotation:annotation animated:YES];
-    //    [self.mapView setZoomLevel:15.1 animated:NO];
+    //设为中心点
     [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
 }
-
-- (void)addAnnotationWithLocation:(CLLocation *)location
-{
-    MAPointAnnotation *annotation = [[MAPointAnnotation alloc] init];
-    [annotation setCoordinate:location.coordinate];
-    
-    [annotation setTitle:[NSString stringWithFormat:@"lat:%f;lon:%f;", location.coordinate.latitude, location.coordinate.longitude]];
-    [annotation setSubtitle:[NSString stringWithFormat:@"accuracy:%.2fm", location.horizontalAccuracy]];
-    
-    [self addAnnotationToMapView:annotation];
-}
-
-#pragma mark - WidgetsActions
-
 
 #pragma mark - MapViewDelegate
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
 {
-    //    if ([annotation isKindOfClass:[MAPointAnnotation class]])
-    //    {
-    static NSString *pointReuseIndetifier = @"pointReuseIndetifier";
+    if ([annotation isKindOfClass:[HBBicyclePointAnnotation class]]) {
+        static NSString *pointReuseIndetifier = @"pointReuseIndetifier";
     
-    MAPinAnnotationView *annotationView = (MAPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndetifier];
-    if (annotationView == nil)
-    {
-        annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndetifier];
+        HBBicycleAnnotationView *annotationView = (HBBicycleAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndetifier];
+        if (annotationView == nil) {
+            annotationView = [[HBBicycleAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndetifier];
+        }
+        return annotationView;
+    }else {
+        return nil;
     }
-    
-    annotationView.canShowCallout   = YES;
-    annotationView.animatesDrop     = YES;
-    annotationView.draggable        = NO;
-    annotationView.pinColor         = MAPinAnnotationColorPurple;
-    
-    return annotationView;
-    //    }
-    //
-    //    return nil;
 }
 
 

@@ -10,4 +10,9 @@
 
 @implementation HBBicycleResultModel
 
++ (NSDictionary *)mj_objectClassInArray {
+    return @{
+             @"data":[HBBicycleStationModel class],
+             };
+}
 @end
