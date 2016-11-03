@@ -17,10 +17,10 @@
 
 @end
 
-#warning todo 
-static CGFloat const kPopViewHeight = 60.f;
+static CGFloat const kPopViewHeight = 80.f;
 static CGFloat const kPopViewWidth = 150.f;
 static CGFloat const kContentInsets = 15.f;
+static CGFloat const kContentAdd = 33.f;
 
 @implementation HBBicycleAnnotationView
 - (id)initWithAnnotation:(id<MAAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier {
@@ -38,7 +38,7 @@ static CGFloat const kContentInsets = 15.f;
     }
     if (selected) {
         if (self.popView ==nil ) {
-            self.popView = [[HBBicyclePopView alloc] initWithFrame:CGRectMake(0, 0, kPopViewWidth, kPopViewHeight)];
+            self.popView = [[HBBicyclePopView alloc] initWithFrame:CGRectMake(5, 5, kPopViewWidth, kPopViewHeight)];
             [self addSubview:self.popView];
         }
     }else {
@@ -62,8 +62,9 @@ static CGFloat const kContentInsets = 15.f;
         CGSize titleSize = [title sizeWithAttributes:@{
                                                        NSFontAttributeName : HB_FONT_LIGHT_SIZE(14)
                                                        }];
-        self.calloutOffset = CGPointMake(- titleSize.width/2.f , -kPopViewHeight - 20.f);
-        self.popView.frame = CGRectMake(self.popView.frame.origin.x + self.calloutOffset.x + 2 * kContentInsets, self.popView.frame.origin.y + self.calloutOffset.y, titleSize.width, kPopViewHeight);
+        //偏移量
+        self.calloutOffset = CGPointMake(-titleSize.width/1.4f, -kPopViewHeight + 3.f);
+        self.popView.frame = CGRectMake(self.popView.frame.origin.x + self.calloutOffset.x + 2 * kContentInsets, self.popView.frame.origin.y + self.calloutOffset.y, titleSize.width + kContentAdd, kPopViewHeight);
     }
 }
 

@@ -93,6 +93,7 @@ static CGFloat const kContentInsets = 15.f;
  发送单次定位请求
  */
 - (void)reloadLocation {
+    @WEAKSELF;
     [self.locationManager requestLocationWithReGeocode:NO completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
         if (location) {
             [self.mapView setCenterCoordinate:location.coordinate animated:YES];
@@ -101,10 +102,11 @@ static CGFloat const kContentInsets = 15.f;
                                                       longtitude:@(wgs84Coordinate.longitude)
                                                           length:@(800)
                                                successJsonObject:^(NSDictionary *jsonDict) {
-                                                   self.stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
-                                                   NSLog(@"%@",self.stationResult);
-                                                   [self addBicycleStations];
-                                                   [self.locationButton endActivityAnimation];
+                                                   [weakSelf.mapView removeAnnotations:self.mapView.annotations];
+                                                   weakSelf.stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
+                                                   NSLog(@"%@",weakSelf.stationResult);
+                                                   [weakSelf addBicycleStations];
+                                                   [weakSelf.locationButton endActivityAnimation];
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
                                                    NSLog(@"%@",request);
                                                }];
