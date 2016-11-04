@@ -12,4 +12,6 @@
 //站点模型
 @property (nonatomic, strong) HBBicycleStationModel *stationModel;
 
+//显示动画
+- (void)popAnimation;
 @end

@@ -150,6 +150,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E013EDDA1DCC23BE008F4259 /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				E08DD5771DC876BA00064283 /* HBBicyclePopView.h */,
+				E08DD5781DC876BA00064283 /* HBBicyclePopView.m */,
+				E08DD57F1DC8984900064283 /* HBBicycleAnnotationView.h */,
+				E08DD5801DC8984900064283 /* HBBicycleAnnotationView.m */,
+				E013EDD71DC9C3D5008F4259 /* HBBicyclePointAnnotation.h */,
+				E013EDD81DC9C3D5008F4259 /* HBBicyclePointAnnotation.m */,
+			);
+			name = Annotation;
+			sourceTree = "<group>";
+		};
 		E0630A911DB9C44C0012EA3A = {
 			isa = PBXGroup;
 			children = (
@@ -269,14 +282,9 @@
 		E08DD5721DC73FDC00064283 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				E013EDDA1DCC23BE008F4259 /* Annotation */,
 				E08DD5741DC7401800064283 /* HBLocationButton.h */,
 				E08DD5751DC7401900064283 /* HBLocationButton.m */,
-				E08DD5771DC876BA00064283 /* HBBicyclePopView.h */,
-				E08DD5781DC876BA00064283 /* HBBicyclePopView.m */,
-				E08DD57F1DC8984900064283 /* HBBicycleAnnotationView.h */,
-				E08DD5801DC8984900064283 /* HBBicycleAnnotationView.m */,
-				E013EDD71DC9C3D5008F4259 /* HBBicyclePointAnnotation.h */,
-				E013EDD81DC9C3D5008F4259 /* HBBicyclePointAnnotation.m */,
 			);
 			name = Widgets;
 			sourceTree = "<group>";

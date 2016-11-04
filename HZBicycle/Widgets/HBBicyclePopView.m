@@ -36,7 +36,8 @@
 
 @end
 
-static CGFloat const kContentInsets = 15.f;
+static CGFloat const kContentInsets = 10.f;
+static CGFloat const kShadowAdd = 3.f;
 static CGFloat const kShadowInsets = 12.f;
 static CGFloat const kTitleLabelHeight = 15.f;
 static CGFloat const kCornerRadius = 5.f;
@@ -67,14 +68,14 @@ static CGFloat const kArrorHeight = 10.f;
     
     //标题标签
     self.titleLabel = [[UILabel alloc] init];
-    self.titleLabel.textAlignment = NSTextAlignmentLeft;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.font = HB_FONT_LIGHT_SIZE(14);
     self.titleLabel.textColor = [UIColor whiteColor];
     [self addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.mas_left).with.offset(kContentInsets);
         make.top.equalTo(weakSelf.mas_top).with.offset(kContentInsets);
-        make.right.equalTo(weakSelf.mas_right).with.offset(-kContentInsets);
+        make.right.equalTo(weakSelf.mas_right).with.offset(-2 * kContentInsets);
         make.height.mas_equalTo(kTitleLabelHeight);
     }];
     
@@ -82,7 +83,7 @@ static CGFloat const kArrorHeight = 10.f;
     self.rentNumLabel = [[UILabel alloc] init];
     self.rentNumLabel.font = HB_FONT_LIGHT_SIZE(12);
     self.rentNumLabel.textColor = [UIColor whiteColor];
-    self.rentNumLabel.textAlignment = NSTextAlignmentCenter;
+    self.rentNumLabel.textAlignment = NSTextAlignmentLeft;
     [self addSubview:self.rentNumLabel];
     [self.rentNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(weakSelf.mas_left).with.offset(kContentInsets);
@@ -95,17 +96,18 @@ static CGFloat const kArrorHeight = 10.f;
     self.returnNumLabel = [[UILabel alloc] init];
     self.returnNumLabel.font = HB_FONT_LIGHT_SIZE(12);
     self.returnNumLabel.textColor = [UIColor whiteColor];
-    self.returnNumLabel.textAlignment = NSTextAlignmentCenter;
+    self.returnNumLabel.textAlignment = NSTextAlignmentRight;
     [self addSubview:self.returnNumLabel];
     [self.returnNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(kTitleLabelHeight);
         make.width.equalTo(weakSelf.mas_width).dividedBy(2);
         make.top.equalTo(weakSelf.titleLabel.mas_bottom).with.offset(kContentInsets);
-        make.right.equalTo(weakSelf.mas_right).with.offset(-kContentInsets);
+        make.right.equalTo(weakSelf.mas_right).with.offset(- 3 * kContentInsets);
     }];
 }
 
 - (void)setupLayer {
+    [self layoutIfNeeded];
     //清除上一次数据
     [self.blurMaskLayer removeFromSuperlayer];
     self.blurView.layer.mask = nil;
@@ -118,7 +120,7 @@ static CGFloat const kArrorHeight = 10.f;
     self.blurMaskLayer.shadowOpacity = 0.8;
     self.blurMaskLayer.shadowOffset = CGSizeMake(2, 2);
     //绘制曲线
-    CGPoint leftTopCenter = CGPointMake(self.bounds.origin.x + kCornerRadius , self.bounds.origin.y + kCornerRadius);
+    CGPoint leftTopCenter = CGPointMake(self.bounds.origin.x + kCornerRadius + kShadowAdd, self.bounds.origin.y + kCornerRadius);
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithArcCenter:leftTopCenter radius:kCornerRadius startAngle:M_PI endAngle:1.5 * M_PI clockwise:YES];
     [maskPath addLineToPoint:CGPointMake(self.bounds.size.width - kCornerRadius - kShadowInsets, self.bounds.origin.y)];
     CGPoint rightTopCenter = CGPointMake(self.bounds.size.width - kCornerRadius - kShadowInsets, self.bounds.origin.y + kCornerRadius);
@@ -129,8 +131,8 @@ static CGFloat const kArrorHeight = 10.f;
     [maskPath addLineToPoint:CGPointMake(CGRectGetMidX(self.bounds) + kArrorHeight/2.f, self.bounds.size.height - kArrorHeight - kShadowInsets)];
     [maskPath addLineToPoint:CGPointMake(CGRectGetMidX(self.bounds), self.bounds.size.height - kShadowInsets)];
     [maskPath addLineToPoint:CGPointMake(CGRectGetMidX(self.bounds) - kArrorHeight/2.f, self.bounds.size.height - kArrorHeight - kShadowInsets)];
-    [maskPath addLineToPoint:CGPointMake(self.bounds.origin.x + kCornerRadius, self.bounds.size.height - kArrorHeight - kShadowInsets)];
-    CGPoint leftBottomCenter = CGPointMake(self.bounds.origin.x + kCornerRadius, self.bounds.size.height - kArrorHeight - kCornerRadius - kShadowInsets);
+    [maskPath addLineToPoint:CGPointMake(self.bounds.origin.x + kCornerRadius + kShadowAdd, self.bounds.size.height - kArrorHeight - kShadowInsets)];
+    CGPoint leftBottomCenter = CGPointMake(self.bounds.origin.x + kCornerRadius + kShadowAdd, self.bounds.size.height - kArrorHeight - kCornerRadius - kShadowInsets);
     [maskPath addArcWithCenter:leftBottomCenter radius:kCornerRadius startAngle:0.5 * M_PI endAngle:M_PI clockwise:YES];
     [maskPath closePath];
     self.blurMaskLayer.path = maskPath.CGPath;
@@ -145,31 +147,37 @@ static CGFloat const kArrorHeight = 10.f;
     
     //生成圆点图片
     NSTextAttachment *rentAttach = [[NSTextAttachment alloc] init];
+    rentAttach.bounds = CGRectMake(13, -12, 32, 32);
     rentAttach.image = [self convertViewToImage:[self iconViewWithColor:HB_COLOR_SOFTGREEN]];
     
     NSTextAttachment *returnAttach = [[NSTextAttachment alloc] init];
+    returnAttach.bounds = CGRectMake(13, -12, 32, 32);
     returnAttach.image = [self convertViewToImage:[self iconViewWithColor:HB_COLOR_SOFTORANGE]];
     
     //合成字符串
-    NSAttributedString *rentString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"可借:%lu",(unsigned long)stationModel.rentcount]
-                                                                     attributes:@{
-                                                                                NSAttachmentAttributeName:rentAttach,
-                                                                                NSFontAttributeName:HB_FONT_LIGHT_SIZE(12)
-                                                                                }];
+    NSMutableAttributedString *rentString = [[NSMutableAttributedString attributedStringWithAttachment:rentAttach] mutableCopy];
     
-    NSAttributedString *returnString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"可还:%lu",(unsigned long)stationModel.restorecount]
-                                                                     attributes:@{
-                                                                                  NSAttachmentAttributeName:returnAttach,
-                                                                                  NSFontAttributeName:HB_FONT_LIGHT_SIZE(12)
-                                                                                  }];
+    
+
+    
+    NSMutableAttributedString *returnString = [[NSAttributedString attributedStringWithAttachment:returnAttach] mutableCopy];
+
+    [rentString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"可借：%lu",(unsigned long)stationModel.rentcount]
+                                                                              attributes:@{
+                                                                                           NSFontAttributeName:HB_FONT_LIGHT_SIZE(12)
+                                                                                           }]];
+    
+    [returnString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"可还：%lu",(unsigned long)stationModel.restorecount]
+                                                                                attributes:@{
+                                                                                            NSFontAttributeName:HB_FONT_LIGHT_SIZE(12)
+                                                                                            }]];
     [self.rentNumLabel setAttributedText:rentString];
     [self.returnNumLabel setAttributedText:returnString];
+
 }
 
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
-    //为阴影留出距离
-    self.bounds = CGRectMake(self.bounds.origin.x + 2, self.bounds.origin.y + 2, self.bounds.size.width, self.bounds.size.height);
     [self setupLayer];
 }
 
@@ -205,7 +213,7 @@ static CGFloat const kArrorHeight = 10.f;
 - (UIView *)iconViewWithColor:(UIColor *)color {
     UIView *iconView = [[UIView alloc] initWithFrame:CGRectMake(-10, 0, 32, 32)];
     UIBezierPath *roundBezierPath = [UIBezierPath bezierPath];
-    [roundBezierPath addArcWithCenter:iconView.center radius:2.25f startAngle:0 endAngle:2* M_PI clockwise:YES];
+    [roundBezierPath addArcWithCenter:iconView.center radius:2.5f startAngle:0 endAngle:2* M_PI clockwise:YES];
     CAShapeLayer *roundLayer = [CAShapeLayer layer];
     roundLayer.path = roundBezierPath.CGPath;
     roundLayer.strokeColor               = [color CGColor];
@@ -216,5 +224,16 @@ static CGFloat const kArrorHeight = 10.f;
 }
 
 #pragma mark - Private Method
-
+- (void)popAnimation {
+    self.transform = CGAffineTransformMakeScale(0.7, 0.7);
+    self.alpha = 0;
+    [UIView animateWithDuration:0.15 animations:^{
+        self.transform = CGAffineTransformMakeScale(1.2, 1.2);
+        self.alpha = 1;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.15 animations:^{
+            self.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        }];
+    }];
+}
 @end
