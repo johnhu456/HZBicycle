@@ -7,8 +7,10 @@
 //
 
 #import "MainBicycleViewController.h"
-#import "HBLocationButton.h"
 
+#import "MainSettingViewController.h"
+
+#import "HBLocationButton.h"
 #import "HBBicyclePointAnnotation.h"
 #import "HBBicycleAnnotationView.h"
 
@@ -29,6 +31,11 @@
  定位按钮
  */
 @property (nonatomic, strong) HBLocationButton *locationButton;
+
+/**
+ 设置按钮
+ */
+@property (nonatomic, strong) HBBaseRoundButton *settingButton;
 
 /**
  站点数组
@@ -72,11 +79,18 @@ static CGFloat const kContentInsets = 15.f;
     [self reloadLocation];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //隐藏导航栏
+    self.navigationController.navigationBarHidden = YES;
+}
+
 #pragma mark - Layout
 
 - (void)setupButtons {
     @WEAKSELF;
-    self.locationButton = [[HBLocationButton alloc] initWithClickBlock:^{
+    self.locationButton = [[HBLocationButton alloc] initWithIconImage:ImageInName(@"main_location") clickBlock:^{
+        [weakSelf.locationButton startActivityAnimation];
         [weakSelf reloadLocation];
     }];
     [self.view addSubview:self.locationButton];
@@ -85,7 +99,17 @@ static CGFloat const kContentInsets = 15.f;
         make.bottom.equalTo(weakSelf.view.mas_bottom).with.offset( -kButtonWidth * 2);
         make.right.equalTo(weakSelf.view.mas_right).with.offset(-kContentInsets);
     }];
-    self.locationButton.layer.cornerRadius = kButtonWidth/2.f;
+    
+    self.settingButton = [[HBBaseRoundButton alloc] initWithIconImage:ImageInName(@"main_setting") clickBlock:^{
+        MainSettingViewController *settingVC = [[MainSettingViewController alloc] init];
+        [self.navigationController pushViewController:settingVC animated:YES];
+    }];
+    [self.view addSubview:self.settingButton];
+    [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.height.mas_equalTo(kButtonWidth);
+        make.top.equalTo(weakSelf.locationButton.mas_bottom).with.offset(kContentInsets);
+        make.right.equalTo(weakSelf.locationButton.mas_right);
+    }];
 }
 
 #pragma mark - Location

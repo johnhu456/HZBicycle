@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainBicycleViewController.h"
+#import "HBBicycleNavigationController.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
 
 @interface AppDelegate ()
@@ -29,7 +30,8 @@ static NSString *const kAMapAppKey = @"46e4a0f82fe002fffd0cf4391f2b5cc9";
     //创建根视图控制器
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     MainBicycleViewController *bicycleVC = [[MainBicycleViewController alloc] init];
-    [self.window setRootViewController:bicycleVC];
+    HBBicycleNavigationController *navigationController = [[HBBicycleNavigationController alloc] initWithRootViewController:bicycleVC];
+    [self.window setRootViewController:navigationController];
     [self.window makeKeyAndVisible];
     
     return YES;

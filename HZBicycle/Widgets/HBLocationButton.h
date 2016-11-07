@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HBBaseRoundButton.h"
 
-@interface HBLocationButton : UIButton
-
-- (instancetype)initWithClickBlock:(void(^)())block;
+@interface HBLocationButton : HBBaseRoundButton
 
 /**
  开始加载动画

@@ -11,55 +11,20 @@
 @interface HBLocationButton()
 
 /**
- 按钮点击回调
- */
-@property (nonatomic, copy) void(^buttonClickBlock)();
-
-/**
- 按钮图标
- */
-@property (nonatomic, strong) UIImageView *iconView;
-
-/**
  加载指示器
  */
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
 @end
 
-//icon大小
-static CGFloat const kContentInsets = 10.f;
 
 @implementation HBLocationButton
 
-- (instancetype)initWithClickBlock:(void (^)())block {
-    if (self = [super init]) {
-        self.buttonClickBlock = block;
-        //设置阴影
-        self.layer.shadowOffset = CGSizeMake(2, 2);
-        self.layer.shadowOpacity = 0.8;
-        self.layer.shadowColor = [UIColor blackColor].CGColor;
-        
-        [self addTarget:self action:@selector(handleButtonOnClick:) forControlEvents:UIControlEventTouchUpInside];
-        self.backgroundColor = [UIColor whiteColor];
-        [self setupSubViews];
+- (instancetype)initWithIconImage:(UIImage *)image clickBlock:(void(^)())block {
+    if (self = [super initWithIconImage:image clickBlock:block]) {
         [self setupActivityIndicator];
     }
     return self;
-}
-
-
-/**
- 设置子视图
- */
-- (void)setupSubViews {
-    self.iconView = [[UIImageView alloc] initWithImage:ImageInName(@"main_location")];
-    [self addSubview:self.iconView];
-    @WEAKSELF;
-    [self.iconView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(weakSelf).with.offset(kContentInsets);
-        make.right.bottom.equalTo(weakSelf).with.offset(-kContentInsets);
-    }];
 }
 
 - (void)setupActivityIndicator {
@@ -67,8 +32,8 @@ static CGFloat const kContentInsets = 10.f;
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self addSubview:self.activityIndicator];
     [self.activityIndicator mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(weakSelf).with.offset(kContentInsets);
-        make.right.bottom.equalTo(weakSelf).with.offset(-kContentInsets);
+        make.left.top.equalTo(weakSelf).with.offset(kHBRoundButtonContentInsets);
+        make.right.bottom.equalTo(weakSelf).with.offset(-kHBRoundButtonContentInsets);
     }];
     self.activityIndicator.hidden = YES;
 }
@@ -85,14 +50,5 @@ static CGFloat const kContentInsets = 10.f;
     self.iconView.hidden = NO;
     [self.activityIndicator stopAnimating];
 }
-
-#pragma mark - ButtonAction
-- (void)handleButtonOnClick:(UIButton *)sender {
-    [self startActivityAnimation];
-    if (self.buttonClickBlock) {
-        self.buttonClickBlock();
-    }
-}
-
 
 @end
