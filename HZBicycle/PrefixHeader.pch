@@ -14,6 +14,9 @@
 #import <AMap3DMap/MAMapKit/MAMapKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 
+//视图控制器
+#import "HBBaseViewController.h"
+
 //布局
 #import <Masonry.h>
 

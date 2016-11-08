@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainBicycleViewController : UIViewController
+@interface MainBicycleViewController : HBBaseViewController
 
 @end

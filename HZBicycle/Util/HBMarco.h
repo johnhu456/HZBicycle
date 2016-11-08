@@ -18,4 +18,7 @@
 #define HB_COLOR_SOFTGREEN FHColorWithHexRGB(0xB3D66E)
 #define HB_COLOR_SOFTORANGE FHColorWithHexRGB(0xF8931D)
 
+#define HB_COLOR_SLDMIN FHColorWithHexRGB(0x305670)
+#define HB_COLOR_SLDMID [UIColor lightGrayColor]
+#define HB_COLOR_SLDMAX FHColorWithHexRGB(0x4C5A68)
 #endif /* HBMarco_h */

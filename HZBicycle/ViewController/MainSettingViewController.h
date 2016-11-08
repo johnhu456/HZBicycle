@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainSettingViewController : UIViewController
+@interface MainSettingViewController : HBBaseViewController
 
 @end

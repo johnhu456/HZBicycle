@@ -7,8 +7,9 @@
 //
 
 #import "HBBicycleNavigationController.h"
+#import "UINavigationBar+Awesome.h"
 
-@interface HBBicycleNavigationController ()
+@interface HBBicycleNavigationController ()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -16,7 +17,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //界面相关
+    [self setupUserInterface];
+    //开启侧滑返回
+    self.interactivePopGestureRecognizer.enabled = YES;
+    //不指定代理，会因为自定义按钮的原因造成侧滑失败
+    self.interactivePopGestureRecognizer.delegate = self;
+    
     // Do any additional setup after loading the view.
+}
+
+- (void)setupUserInterface {
+    self.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationBar lt_setBackgroundColor:HB_COLOR_DARKBLUE];
+    [self.navigationBar setTitleTextAttributes:@{
+                                                NSForegroundColorAttributeName:[UIColor whiteColor]
+                                                }];
 }
 
 - (void)didReceiveMemoryWarning {

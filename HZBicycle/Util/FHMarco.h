@@ -101,6 +101,11 @@
 #define ImageInName(name) [UIImage imageNamed:name]
 
 /*==========================================*/
+#pragma mark - Class
+#define StrFromClass(aClass) NSStringFromClass([aClass class])
+#define NibFromClass(aClass) [UINib nibWithNibName:NSStringFromClass([aClass class]) bundle:nil]
+
+/*==========================================*/
 #pragma mark - Log
 
 #ifndef __OPTIMIZE__

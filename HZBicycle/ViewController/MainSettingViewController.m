@@ -8,15 +8,42 @@
 
 #import "MainSettingViewController.h"
 
-@interface MainSettingViewController ()
+//Cells
+#import "HBBicycleAccuracyCell.h"
+#import "HBOfflineMapCell.h"
+
+@interface MainSettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
+static CGFloat const kAccuracyCellHeight = 115.f;
+static CGFloat const kOfflineCellHeight = 135.f;
+
 @implementation MainSettingViewController
 
+#pragma mark - UserInterface
+- (void)setupTableView {
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStylePlain];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:self.tableView];
+    
+    //注册Cell
+    [self.tableView registerNib:NibFromClass(HBBicycleAccuracyCell) forCellReuseIdentifier:StrFromClass(HBBicycleAccuracyCell)];
+    [self.tableView registerNib:NibFromClass(HBOfflineMapCell) forCellReuseIdentifier:StrFromClass(HBOfflineMapCell)];
+}
+
+#pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"设置";
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    //设置TableView
+    [self setupTableView];
     // Do any additional setup after loading the view.
 }
 
@@ -28,6 +55,35 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+#warning  to change;
+    return 2;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        HBBicycleAccuracyCell *accuaryCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBBicycleAccuracyCell)];
+        return accuaryCell;
+    }else {
+        HBOfflineMapCell *offlineMapCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBOfflineMapCell)];
+        return offlineMapCell;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return kAccuracyCellHeight;
+    }else {
+        return kOfflineCellHeight;
+    }
+
 }
 
 /*

@@ -81,6 +81,10 @@ static CGFloat const kContentInsets = 15.f;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     //隐藏导航栏
     self.navigationController.navigationBarHidden = YES;
 }
