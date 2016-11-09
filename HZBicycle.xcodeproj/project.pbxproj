@@ -41,6 +41,7 @@
 		E08DD5811DC8984900064283 /* HBBicycleAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD5801DC8984900064283 /* HBBicycleAnnotationView.m */; };
 		E09E603A1DD1B65900956F1C /* HBOfflineMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E09E60381DD1B65900956F1C /* HBOfflineMapCell.m */; };
 		E09E603B1DD1B65900956F1C /* HBOfflineMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E09E60391DD1B65900956F1C /* HBOfflineMapCell.xib */; };
+		E09E603F1DD2C1BF00956F1C /* HBDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E09E603E1DD2C1BF00956F1C /* HBDownloadButton.m */; };
 		E0E079751DBF453E0028AB83 /* MainBicycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +133,8 @@
 		E09E60371DD1B65900956F1C /* HBOfflineMapCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBOfflineMapCell.h; path = Widgets/HBOfflineMapCell.h; sourceTree = "<group>"; };
 		E09E60381DD1B65900956F1C /* HBOfflineMapCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBOfflineMapCell.m; path = Widgets/HBOfflineMapCell.m; sourceTree = "<group>"; };
 		E09E60391DD1B65900956F1C /* HBOfflineMapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HBOfflineMapCell.xib; path = Widgets/HBOfflineMapCell.xib; sourceTree = "<group>"; };
+		E09E603D1DD2C1BF00956F1C /* HBDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBDownloadButton.h; path = Widgets/HBDownloadButton.h; sourceTree = "<group>"; };
+		E09E603E1DD2C1BF00956F1C /* HBDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBDownloadButton.m; path = Widgets/HBDownloadButton.m; sourceTree = "<group>"; };
 		E0E079701DBF2B8D0028AB83 /* FHMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FHMarco.h; path = Util/FHMarco.h; sourceTree = "<group>"; };
 		E0E079731DBF453E0028AB83 /* MainBicycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainBicycleViewController.h; path = ViewController/MainBicycleViewController.h; sourceTree = "<group>"; };
 		E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainBicycleViewController.m; path = ViewController/MainBicycleViewController.m; sourceTree = "<group>"; };
@@ -229,6 +232,8 @@
 				E09E60371DD1B65900956F1C /* HBOfflineMapCell.h */,
 				E09E60381DD1B65900956F1C /* HBOfflineMapCell.m */,
 				E09E60391DD1B65900956F1C /* HBOfflineMapCell.xib */,
+				E09E603D1DD2C1BF00956F1C /* HBDownloadButton.h */,
+				E09E603E1DD2C1BF00956F1C /* HBDownloadButton.m */,
 			);
 			name = SettingCell;
 			sourceTree = "<group>";
@@ -682,6 +687,7 @@
 				E029C22C1DD199A700FC017B /* UINavigationBar+Awesome.m in Sources */,
 				E08DD5811DC8984900064283 /* HBBicycleAnnotationView.m in Sources */,
 				E013EDDE1DCC5B90008F4259 /* HBBaseRoundButton.m in Sources */,
+				E09E603F1DD2C1BF00956F1C /* HBDownloadButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

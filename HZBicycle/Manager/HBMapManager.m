@@ -20,6 +20,10 @@
     return CLLocationCoordinate2DMake(bd_lat, bd_lon);
 }
 
++ (CLLocationCoordinate2D)hangZhouCenter {
+    return CLLocationCoordinate2DMake(30.252096, 120.163452);
+}
+
 @end
 
 #define LAT_OFFSET_0(x,y) -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * sqrt(fabs(x))

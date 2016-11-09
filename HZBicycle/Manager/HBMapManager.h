@@ -19,7 +19,10 @@
  */
 + (CLLocationCoordinate2D)convertToBaiduCoordinate:(CLLocationCoordinate2D)coordinate;
 
-
+/**
+ 获取杭州的中心点坐标
+ */
++ (CLLocationCoordinate2D)hangZhouCenter;
 @end
 
 /**

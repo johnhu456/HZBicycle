@@ -73,7 +73,22 @@
         //未选择城市
         downloadBlock(nil,MAOfflineMapDownloadStatusError,[NSError errorWithDomain:NSURLErrorDomain code:-999 userInfo:@{@"message":@"Please run config or congfigWithCode first"}]);
         return;
-    }else{
+    }
+    //判断下载对象状态:
+//    MAOfflineItemStatusNone = 0,    //!< 不存在
+//    MAOfflineItemStatusCached,      //!< 缓存状态
+//    MAOfflineItemStatusInstalled,   //!< 已安装
+//    MAOfflineItemStatusExpired      //!< 已过期
+//    typedef void(^MAOfflineMapDownloadBlock)(MAOfflineItem * downloadItem, MAOfflineMapDownloadStatus downloadStatus, id info);
+    else if (self.selectedCity.itemStatus == MAOfflineItemStatusInstalled) {
+        //下载好了
+#warning to recover
+//       downloadBlock(self.selectedCity,MAOfflineMapDownloadStatusFinished,nil);
+#warning to delete
+        [[MAOfflineMap sharedOfflineMap] clearDisk];
+        [[MAOfflineMap sharedOfflineMap] downloadItem:self.selectedCity shouldContinueWhenAppEntersBackground:YES downloadBlock:downloadBlock];
+    }
+    else if (self.selectedCity.itemStatus == MAOfflineItemStatusCached || self.selectedCity.itemStatus == MAOfflineItemStatusNone){
         //高德支持断点续传，是否自动更新还不知道
         [[MAOfflineMap sharedOfflineMap] downloadItem:self.selectedCity shouldContinueWhenAppEntersBackground:YES downloadBlock:downloadBlock];
     }

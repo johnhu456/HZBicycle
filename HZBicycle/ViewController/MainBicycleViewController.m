@@ -56,25 +56,15 @@ static CGFloat const kContentInsets = 15.f;
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //添加地图
-    self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
-    [self.mapView setUserTrackingMode:MAUserTrackingModeFollowWithHeading];
-    self.mapView.zoomLevel = 15;
-    self.mapView.delegate = self;
-    [self.view addSubview:self.mapView];
-    
-    self.locationManager = [[AMapLocationManager alloc] init];
-    
     //设置定位精度
+    self.locationManager = [[AMapLocationManager alloc] init];
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     self.locationManager.delegate = self;
     
-    //无法调整角度
-    self.mapView.rotateCameraEnabled = NO;
-    
+    //设置地图视图
+    [self setupMapView];
     //设置定位按钮等
     [self setupButtons];
-    
     //开启一次定位
     [self reloadLocation];
 }
@@ -90,7 +80,30 @@ static CGFloat const kContentInsets = 15.f;
 }
 
 #pragma mark - Layout
+- (void)setupMapView {
+    //添加地图
+    self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
+    [self.mapView setUserTrackingMode:MAUserTrackingModeFollowWithHeading];
+    self.mapView.zoomLevel = 15;
+    //无法调整角度
+    self.mapView.rotateCameraEnabled = NO;
+    self.mapView.delegate = self;
+    
+    //设置中心点
+    if (self.mapView.userLocation.location) {
+        self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
+    } else{
+        //设置为杭州中心点
+        self.mapView.centerCoordinate = [HBMapManager hangZhouCenter];
+    }
+    
+    //设置指南针位置下移
+    self.mapView.compassOrigin = CGPointMake(self.mapView.compassOrigin.x, self.mapView.compassOrigin.y + 20);
+    self.mapView.scaleOrigin = CGPointMake(self.mapView.scaleOrigin.x, self.mapView.scaleOrigin.y + 20);
+    
+    [self.view addSubview:self.mapView];
 
+}
 - (void)setupButtons {
     @WEAKSELF;
     self.locationButton = [[HBLocationButton alloc] initWithIconImage:ImageInName(@"main_location") clickBlock:^{

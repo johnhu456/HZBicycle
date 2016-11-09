@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="401" height="134"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="401" height="134"/>
+                <frame key="frameInset" width="401" height="133"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qg1-QQ-dXo">
@@ -44,8 +44,8 @@
                                     <constraint firstAttribute="height" constant="45" id="UOV-JU-H12"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3z1-CP-7r9">
-                                <state key="normal" title="Button">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3z1-CP-7r9">
+                                <state key="normal" image="main_download_pause">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
@@ -55,7 +55,7 @@
                             <constraint firstItem="em9-Kl-gqm" firstAttribute="bottom" secondItem="0Vx-0Q-rF2" secondAttribute="bottom" id="29m-C1-bOK"/>
                             <constraint firstItem="NdA-71-ugk" firstAttribute="leading" secondItem="Qg1-QQ-dXo" secondAttribute="leading" constant="15" id="AB5-Yx-WME"/>
                             <constraint firstItem="NdA-71-ugk" firstAttribute="top" secondItem="Qg1-QQ-dXo" secondAttribute="top" constant="15" id="ApD-Bs-K6F"/>
-                            <constraint firstItem="3z1-CP-7r9" firstAttribute="top" secondItem="Qg1-QQ-dXo" secondAttribute="top" constant="34" id="Cr5-9A-B0p"/>
+                            <constraint firstItem="3z1-CP-7r9" firstAttribute="top" secondItem="Qg1-QQ-dXo" secondAttribute="top" constant="24" id="Cr5-9A-B0p"/>
                             <constraint firstAttribute="trailing" secondItem="NdA-71-ugk" secondAttribute="trailing" constant="15" id="LGF-dU-g7f"/>
                             <constraint firstItem="0Vx-0Q-rF2" firstAttribute="top" secondItem="NdA-71-ugk" secondAttribute="bottom" constant="15" id="NgX-uh-82v"/>
                             <constraint firstItem="qDw-r8-2DL" firstAttribute="leading" secondItem="Qg1-QQ-dXo" secondAttribute="leading" id="VKT-Nt-yHw"/>
@@ -83,6 +83,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="main_map_hangzhou" width="749" height="179"/>
+        <image name="main_download_pause" width="34" height="34"/>
+        <image name="main_map_hangzhou" width="374" height="89"/>
     </resources>
 </document>

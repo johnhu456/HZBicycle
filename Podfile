@@ -16,9 +16,12 @@ target 'HZBicycle' do
   #MJExtension
   pod 'MJExtension','~>3.0.13'
   
+  #DownloadButton
+#  pod 'DownloadButton','~>0.1.0'
+  
   target 'HZBicycleTests' do
     inherit! :search_paths
-    pod 'YTKNetwork'
+    pod 'YTKNetwork','~>2.0.1'
   end
 
   target 'HZBicycleUITests' do

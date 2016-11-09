@@ -30,7 +30,7 @@ DEPENDENCIES:
   - AMapLocation (~> 2.1.1)
   - Masonry (~> 1.0.2)
   - MJExtension (~> 3.0.13)
-  - YTKNetwork
+  - YTKNetwork (~> 2.0.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -41,6 +41,6 @@ SPEC CHECKSUMS:
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   YTKNetwork: f21ad2073b3353a11d257593a2859f2904bbec75
 
-PODFILE CHECKSUM: f2e1fdfbbe700c03b886fe1f23cca8b9ceca4cd6
+PODFILE CHECKSUM: 294dce1dcc65b6e098c7ef20514b74d6f779c625
 
 COCOAPODS: 1.0.1
