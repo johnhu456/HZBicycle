@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DownloadButton-DownloadButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>DownloadButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,7 +57,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1FB38AFE2BAE04F61BCF8362AE771B4C</key>
+		<key>4127A194D70AE27553D72AA539BC9F6F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,7 +67,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>50DD76973FD2D1794CBAECFC51A4D292</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>796E573A3BE67B7E8AA4D32E960EB69B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F314F90F9D349D8641F6F41C62D36945</key>
+		<key>BFADBD7670641F553EC4657DC55E8667</key>
 		<dict>
 			<key>primary</key>
 			<true/>

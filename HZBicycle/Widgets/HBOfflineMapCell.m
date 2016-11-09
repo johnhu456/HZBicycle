@@ -8,6 +8,7 @@
 
 #import "HBOfflineMapCell.h"
 
+
 @implementation HBOfflineMapCell
 
 - (void)awakeFromNib {

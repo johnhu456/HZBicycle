@@ -12,9 +12,11 @@
 #import "HBBicycleAccuracyCell.h"
 #import "HBOfflineMapCell.h"
 
-@interface MainSettingViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MainSettingViewController ()<UITableViewDelegate,UITableViewDataSource,PKDownloadButtonDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, weak) PKDownloadButton *downloadButton;
 
 @end
 
@@ -73,6 +75,8 @@ static CGFloat const kOfflineCellHeight = 135.f;
         return accuaryCell;
     }else {
         HBOfflineMapCell *offlineMapCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBOfflineMapCell)];
+        offlineMapCell.pkDownLoadButton.delegate = self;
+//        offlineMapCell.downLoadButton.stopButton.
         return offlineMapCell;
     }
 }
@@ -84,6 +88,32 @@ static CGFloat const kOfflineCellHeight = 135.f;
         return kOfflineCellHeight;
     }
 
+}
+
+#pragma mark - PKDownloadButtonDelegate
+- (void)downloadButtonTapped:(PKDownloadButton *)downloadButton
+                currentState:(PKDownloadButtonState)state {
+    switch (state) {
+        case kPKDownloadButtonState_StartDownload:
+            self.downloadButton.state = kPKDownloadButtonState_Pending;
+//            [self.pendingSimulator startDownload];
+            break;
+        case kPKDownloadButtonState_Pending:
+//            [self.pendingSimulator cancelDownload];
+            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+            break;
+        case kPKDownloadButtonState_Downloading:
+//            [self.downloaderSimulator cancelDownload];
+            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+            break;
+        case kPKDownloadButtonState_Downloaded:
+            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+//            self.imageView.hidden = YES;
+            break;
+        default:
+            NSAssert(NO, @"unsupported state");
+            break;
+    }
 }
 
 /*

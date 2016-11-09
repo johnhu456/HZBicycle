@@ -17,7 +17,7 @@ target 'HZBicycle' do
   pod 'MJExtension','~>3.0.13'
   
   #DownloadButton
-#  pod 'DownloadButton','~>0.1.0'
+  pod 'DownloadButton','~>0.1.0'
   
   target 'HZBicycleTests' do
     inherit! :search_paths
