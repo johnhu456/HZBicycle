@@ -29,6 +29,11 @@
 - (void)config;
 
 /**
+ 清除下载数据
+ */
+- (void)clearMap;
+
+/**
  以城市代码进行初始化
  */
 - (void)configWithCityCode:(NSString *)code;

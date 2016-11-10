@@ -44,37 +44,13 @@
                                     <constraint firstAttribute="height" constant="45" id="UOV-JU-H12"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Adr-26-Aiz" customClass="PKStopDownloadButton">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOv-82-4K7" customClass="PKDownloadButton">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="43" id="8ki-Ck-NrO"/>
-                                    <constraint firstAttribute="height" constant="43" id="BAG-jV-HhM"/>
+                                    <constraint firstAttribute="height" constant="30" id="agi-Oy-tis"/>
+                                    <constraint firstAttribute="width" constant="55" id="i4i-Hf-k3R"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="radius">
-                                        <real key="value" value="16"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="emptyLineWidth">
-                                        <real key="value" value="0.5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="filledLineWidth">
-                                        <real key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="filledLineStyleOuter" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
-                                        <real key="value" value="0.5"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="stopButtonWidth">
-                                        <real key="value" value="11"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dOv-82-4K7" customClass="PKDownloadButton">
-                                <frame key="frameInset" minX="162" minY="22" width="141" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.2901960784" green="0.56470588239999997" blue="0.8862745098" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.2470588235" green="0.34509803919999998" blue="0.4549019608" alpha="1" colorSpace="calibratedRGB"/>
@@ -82,14 +58,14 @@
                             <constraint firstItem="em9-Kl-gqm" firstAttribute="bottom" secondItem="0Vx-0Q-rF2" secondAttribute="bottom" id="29m-C1-bOK"/>
                             <constraint firstItem="NdA-71-ugk" firstAttribute="leading" secondItem="Qg1-QQ-dXo" secondAttribute="leading" constant="15" id="AB5-Yx-WME"/>
                             <constraint firstItem="NdA-71-ugk" firstAttribute="top" secondItem="Qg1-QQ-dXo" secondAttribute="top" constant="15" id="ApD-Bs-K6F"/>
+                            <constraint firstItem="dOv-82-4K7" firstAttribute="top" secondItem="Qg1-QQ-dXo" secondAttribute="top" constant="29" id="JOQ-Kv-FAe"/>
                             <constraint firstAttribute="trailing" secondItem="NdA-71-ugk" secondAttribute="trailing" constant="15" id="LGF-dU-g7f"/>
-                            <constraint firstAttribute="trailing" secondItem="Adr-26-Aiz" secondAttribute="trailing" constant="15" id="Mdy-Qh-O1W"/>
                             <constraint firstItem="0Vx-0Q-rF2" firstAttribute="top" secondItem="NdA-71-ugk" secondAttribute="bottom" constant="15" id="NgX-uh-82v"/>
                             <constraint firstItem="qDw-r8-2DL" firstAttribute="leading" secondItem="Qg1-QQ-dXo" secondAttribute="leading" id="VKT-Nt-yHw"/>
                             <constraint firstItem="em9-Kl-gqm" firstAttribute="leading" secondItem="0Vx-0Q-rF2" secondAttribute="trailing" constant="5" id="XkO-3a-fRr"/>
                             <constraint firstItem="0Vx-0Q-rF2" firstAttribute="leading" secondItem="Qg1-QQ-dXo" secondAttribute="leading" constant="15" id="dTW-xn-eQ9"/>
-                            <constraint firstItem="Adr-26-Aiz" firstAttribute="top" secondItem="Qg1-QQ-dXo" secondAttribute="top" constant="24" id="kiH-1f-d9h"/>
                             <constraint firstAttribute="trailing" secondItem="qDw-r8-2DL" secondAttribute="trailing" id="kty-MF-kQB"/>
+                            <constraint firstAttribute="trailing" secondItem="dOv-82-4K7" secondAttribute="trailing" constant="15" id="obZ-qR-dDk"/>
                             <constraint firstAttribute="bottom" secondItem="qDw-r8-2DL" secondAttribute="bottom" id="uct-bm-9jP"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -107,10 +83,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="downLoadButton" destination="Adr-26-Aiz" id="bmU-rg-meS"/>
                 <outlet property="pkDownLoadButton" destination="dOv-82-4K7" id="BVK-W2-h82"/>
             </connections>
-            <point key="canvasLocation" x="-143.5" y="102"/>
+            <point key="canvasLocation" x="-346.5" y="89"/>
         </tableViewCell>
     </objects>
     <resources>

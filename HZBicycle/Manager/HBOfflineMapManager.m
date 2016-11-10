@@ -42,9 +42,12 @@
 }
 
 #pragma mark - Public Method
-- (void)config
-{
+- (void)config {
     [self configWithCityCode:@"0571"];
+}
+
+- (void)clearMap {
+    [[MAOfflineMap sharedOfflineMap] clearDisk];
 }
 
 - (void)configWithCityCode:(NSString *)code
@@ -82,10 +85,7 @@
 //    typedef void(^MAOfflineMapDownloadBlock)(MAOfflineItem * downloadItem, MAOfflineMapDownloadStatus downloadStatus, id info);
     else if (self.selectedCity.itemStatus == MAOfflineItemStatusInstalled) {
         //下载好了
-#warning to recover
-//       downloadBlock(self.selectedCity,MAOfflineMapDownloadStatusFinished,nil);
-#warning to delete
-        [[MAOfflineMap sharedOfflineMap] clearDisk];
+       downloadBlock(self.selectedCity,MAOfflineMapDownloadStatusCompleted,nil);
         [[MAOfflineMap sharedOfflineMap] downloadItem:self.selectedCity shouldContinueWhenAppEntersBackground:YES downloadBlock:downloadBlock];
     }
     else if (self.selectedCity.itemStatus == MAOfflineItemStatusCached || self.selectedCity.itemStatus == MAOfflineItemStatusNone){

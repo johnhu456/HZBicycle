@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PKDownloadButton.h"
+#import <PKDownloadButton.h>
 
 @interface HBOfflineMapCell : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet PKStopDownloadButton *downLoadButton;
 
 @property (weak, nonatomic) IBOutlet PKDownloadButton *pkDownLoadButton;
 

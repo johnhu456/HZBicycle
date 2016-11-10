@@ -13,7 +13,15 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.pkDownLoadButton.tintColor = [UIColor whiteColor];
+    self.pkDownLoadButton.stopDownloadButton.tintColor = [UIColor whiteColor];
+    self.pkDownLoadButton.startDownloadButton.tintColor = [UIColor whiteColor];
+    [self.pkDownLoadButton.startDownloadButton setTitle:@"下载" forState:UIControlStateNormal];
+    [self.pkDownLoadButton.startDownloadButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.pkDownLoadButton.stopDownloadButton.radius = 15.f;
+    self.pkDownLoadButton.stopDownloadButton.emptyLineWidth = 1.f;
+    self.pkDownLoadButton.stopDownloadButton.filledLineWidth = 2.f;
+    self.pkDownLoadButton.stopDownloadButton.filledLineStyleOuter = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

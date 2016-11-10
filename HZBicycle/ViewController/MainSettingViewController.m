@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, weak) PKDownloadButton *downloadButton;
+@property (nonatomic, strong) PKDownloadButton *downloadButton;
 
 @end
 
@@ -38,6 +38,29 @@ static CGFloat const kOfflineCellHeight = 135.f;
     [self.tableView registerNib:NibFromClass(HBOfflineMapCell) forCellReuseIdentifier:StrFromClass(HBOfflineMapCell)];
 }
 
+- (void)setupDownloadButtonState {
+    MAOfflineItemStatus downloadStatus = [[HBOfflineMapManager sharedManager] selectedCity].itemStatus;
+    switch (downloadStatus) {
+        case MAOfflineItemStatusNone:
+            //可下载状态
+            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+            break;
+        case MAOfflineItemStatusCached:
+            //下载到一半
+            self.downloadButton.state = kPKDownloadButtonState_Pending;
+            break;
+        case MAOfflineItemStatusInstalled:
+            //可删除
+            self.downloadButton.state = kPKDownloadButtonState_Downloaded;
+            break;
+        case MAOfflineItemStatusExpired:
+            //已过期
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,7 +69,9 @@ static CGFloat const kOfflineCellHeight = 135.f;
     
     //设置TableView
     [self setupTableView];
-    // Do any additional setup after loading the view.
+    
+    //设置下载按钮的状态
+    [self setupDownloadButtonState];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,7 +101,7 @@ static CGFloat const kOfflineCellHeight = 135.f;
     }else {
         HBOfflineMapCell *offlineMapCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBOfflineMapCell)];
         offlineMapCell.pkDownLoadButton.delegate = self;
-//        offlineMapCell.downLoadButton.stopButton.
+        self.downloadButton = offlineMapCell.pkDownLoadButton;
         return offlineMapCell;
     }
 }
@@ -93,10 +118,29 @@ static CGFloat const kOfflineCellHeight = 135.f;
 #pragma mark - PKDownloadButtonDelegate
 - (void)downloadButtonTapped:(PKDownloadButton *)downloadButton
                 currentState:(PKDownloadButtonState)state {
+    @WEAKSELF;
     switch (state) {
         case kPKDownloadButtonState_StartDownload:
-            self.downloadButton.state = kPKDownloadButtonState_Pending;
-//            [self.pendingSimulator startDownload];
+        {
+            self.downloadButton.state = kPKDownloadButtonState_Downloading;
+            [[HBOfflineMapManager sharedManager] startDownloadWithBlock:^(MAOfflineItem *downloadItem, MAOfflineMapDownloadStatus downloadStatus, id info) {
+                if (downloadStatus == MAOfflineMapDownloadStatusProgress) {
+//                    NSLog(@"===%ld,  info:%@",(long)downloadStatus,info);
+                    NSDictionary *infoDic = (NSDictionary *)info;
+                    CGFloat downPrecent = [infoDic[MAOfflineMapDownloadReceivedSizeKey] floatValue]/[infoDic[MAOfflineMapDownloadExpectedSizeKey] floatValue]/1.f;
+                    weakSelf.downloadButton.stopDownloadButton.progress = downPrecent;
+                }
+                if (downloadStatus == MAOfflineMapDownloadStatusCompleted) {
+                    //下载完成
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        weakSelf.downloadButton.stopDownloadButton.progress = 1;
+                        weakSelf.downloadButton.state = kPKDownloadButtonState_Downloaded;
+                        [weakSelf.downloadButton setNeedsDisplay];
+                    });
+
+                }
+            }];
+        }
             break;
         case kPKDownloadButtonState_Pending:
 //            [self.pendingSimulator cancelDownload];
@@ -108,6 +152,7 @@ static CGFloat const kOfflineCellHeight = 135.f;
             break;
         case kPKDownloadButtonState_Downloaded:
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+            [[HBOfflineMapManager sharedManager] clearMap];
 //            self.imageView.hidden = YES;
             break;
         default:
