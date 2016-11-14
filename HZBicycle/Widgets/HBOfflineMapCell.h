@@ -11,6 +11,19 @@
 
 @interface HBOfflineMapCell : UITableViewCell
 
+/**
+ 下载按钮
+ */
 @property (weak, nonatomic) IBOutlet PKDownloadButton *pkDownLoadButton;
+
+/**
+ 城市名称标签
+ */
+@property (weak, nonatomic) IBOutlet UILabel *lblCity;
+
+/**
+ 离线包大小
+ */
+@property (weak, nonatomic) IBOutlet UILabel *lblSize;
 
 @end

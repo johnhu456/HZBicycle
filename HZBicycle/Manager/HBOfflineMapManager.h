@@ -46,5 +46,13 @@
  */
 - (void)startDownloadWithBlock:(MAOfflineMapDownloadBlock)downloadBlock;
 
+/**
+ 暂停下载当前选中城市
+ */
+- (void)stopDownload;
 
+/**
+ 是否正在下载
+ */
+- (BOOL)isDownloading;
 @end

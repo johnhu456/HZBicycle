@@ -50,8 +50,7 @@
     [[MAOfflineMap sharedOfflineMap] clearDisk];
 }
 
-- (void)configWithCityCode:(NSString *)code
-{
+- (void)configWithCityCode:(NSString *)code {
     //初始化离线地图
     [[MAOfflineMap sharedOfflineMap] setupWithCompletionBlock:^(BOOL setupSuccess) {
         //根据编码 选取城市
@@ -70,12 +69,18 @@
     }];
 }
 
-- (void)startDownloadWithBlock:(MAOfflineMapDownloadBlock)downloadBlock
-{
+- (void)startDownloadWithBlock:(MAOfflineMapDownloadBlock)downloadBlock {
     if (self.selectedCity == nil) {
         //未选择城市
         downloadBlock(nil,MAOfflineMapDownloadStatusError,[NSError errorWithDomain:NSURLErrorDomain code:-999 userInfo:@{@"message":@"Please run config or congfigWithCode first"}]);
         return;
+    }
+    else if ([[MAOfflineMap sharedOfflineMap] isDownloadingForItem:self.selectedCity]) {
+        //先静默暂停一次
+        [[MAOfflineMap sharedOfflineMap] pauseItem:self.selectedCity];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[MAOfflineMap sharedOfflineMap] downloadItem:self.selectedCity shouldContinueWhenAppEntersBackground:YES downloadBlock:downloadBlock];
+        });
     }
     //判断下载对象状态:
 //    MAOfflineItemStatusNone = 0,    //!< 不存在
@@ -94,6 +99,13 @@
     }
 }
 
+- (void)stopDownload {
+    [[MAOfflineMap sharedOfflineMap] pauseItem:self.selectedCity];
+}
+
+- (BOOL)isDownloading {
+    return [[MAOfflineMap sharedOfflineMap] isDownloadingForItem:self.selectedCity];
+}
 #pragma mark - Private Method
 
 @end

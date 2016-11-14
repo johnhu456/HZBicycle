@@ -18,10 +18,13 @@
 
 @property (nonatomic, strong) PKDownloadButton *downloadButton;
 
+@property (nonatomic, weak) HBOfflineMapCell *offlineMapCell;
+
 @end
 
 static CGFloat const kAccuracyCellHeight = 115.f;
 static CGFloat const kOfflineCellHeight = 135.f;
+static CGFloat const kSizeAdapter = 1024.f * 1024.f;
 
 @implementation MainSettingViewController
 
@@ -39,19 +42,39 @@ static CGFloat const kOfflineCellHeight = 135.f;
 }
 
 - (void)setupDownloadButtonState {
-    MAOfflineItemStatus downloadStatus = [[HBOfflineMapManager sharedManager] selectedCity].itemStatus;
+    MAOfflineItem *offlineItem = [[HBOfflineMapManager sharedManager] selectedCity];
+    MAOfflineItemStatus downloadStatus = offlineItem.itemStatus;
     switch (downloadStatus) {
         case MAOfflineItemStatusNone:
-            //可下载状态
-            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
-            break;
-        case MAOfflineItemStatusCached:
             //下载到一半
-            self.downloadButton.state = kPKDownloadButtonState_Pending;
+            if ([[HBOfflineMapManager sharedManager] isDownloading]) {
+                //可能正在下载
+                self.downloadButton.state = kPKDownloadButtonState_Downloading;
+                [self startDownloadTask];
+            }else{
+                //可下载状态
+                self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+            }
             break;
-        case MAOfflineItemStatusInstalled:
+        case MAOfflineItemStatusCached: {
+            //下载到一半
+            if ([[HBOfflineMapManager sharedManager] isDownloading]) {
+                //可能正在下载
+                self.downloadButton.state = kPKDownloadButtonState_Downloading;
+                [self startDownloadTask];
+            }else{
+                self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+                //设置显示下载量
+                self.offlineMapCell.lblSize.text = [NSString stringWithFormat:@"%.2f/%.2f MB",offlineItem.downloadedSize/kSizeAdapter,offlineItem.size/kSizeAdapter];
+            }
+        }
+            break;
+        case MAOfflineItemStatusInstalled: {
             //可删除
             self.downloadButton.state = kPKDownloadButtonState_Downloaded;
+            //设置显示下载量
+            self.offlineMapCell.lblSize.text = [NSString stringWithFormat:@"%.2f MB",offlineItem.size/kSizeAdapter];
+        }
             break;
         case MAOfflineItemStatusExpired:
             //已过期
@@ -59,6 +82,7 @@ static CGFloat const kOfflineCellHeight = 135.f;
         default:
             break;
     }
+    
 }
 
 #pragma mark - LifeCycle
@@ -69,9 +93,6 @@ static CGFloat const kOfflineCellHeight = 135.f;
     
     //设置TableView
     [self setupTableView];
-    
-    //设置下载按钮的状态
-    [self setupDownloadButtonState];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -81,7 +102,6 @@ static CGFloat const kOfflineCellHeight = 135.f;
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UITableViewDataSource
@@ -102,6 +122,9 @@ static CGFloat const kOfflineCellHeight = 135.f;
         HBOfflineMapCell *offlineMapCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBOfflineMapCell)];
         offlineMapCell.pkDownLoadButton.delegate = self;
         self.downloadButton = offlineMapCell.pkDownLoadButton;
+        self.offlineMapCell = offlineMapCell;
+        //设置下载按钮的显示状态
+        [self setupDownloadButtonState];
         return offlineMapCell;
     }
 }
@@ -118,42 +141,28 @@ static CGFloat const kOfflineCellHeight = 135.f;
 #pragma mark - PKDownloadButtonDelegate
 - (void)downloadButtonTapped:(PKDownloadButton *)downloadButton
                 currentState:(PKDownloadButtonState)state {
-    @WEAKSELF;
     switch (state) {
         case kPKDownloadButtonState_StartDownload:
         {
             self.downloadButton.state = kPKDownloadButtonState_Downloading;
-            [[HBOfflineMapManager sharedManager] startDownloadWithBlock:^(MAOfflineItem *downloadItem, MAOfflineMapDownloadStatus downloadStatus, id info) {
-                if (downloadStatus == MAOfflineMapDownloadStatusProgress) {
-//                    NSLog(@"===%ld,  info:%@",(long)downloadStatus,info);
-                    NSDictionary *infoDic = (NSDictionary *)info;
-                    CGFloat downPrecent = [infoDic[MAOfflineMapDownloadReceivedSizeKey] floatValue]/[infoDic[MAOfflineMapDownloadExpectedSizeKey] floatValue]/1.f;
-                    weakSelf.downloadButton.stopDownloadButton.progress = downPrecent;
-                }
-                if (downloadStatus == MAOfflineMapDownloadStatusCompleted) {
-                    //下载完成
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        weakSelf.downloadButton.stopDownloadButton.progress = 1;
-                        weakSelf.downloadButton.state = kPKDownloadButtonState_Downloaded;
-                        [weakSelf.downloadButton setNeedsDisplay];
-                    });
-
-                }
-            }];
+            //开始下载任务
+            [self startDownloadTask];
         }
             break;
         case kPKDownloadButtonState_Pending:
-//            [self.pendingSimulator cancelDownload];
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+            //开始下载任务
+            [self startDownloadTask];
             break;
         case kPKDownloadButtonState_Downloading:
-//            [self.downloaderSimulator cancelDownload];
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+            [[HBOfflineMapManager sharedManager] stopDownload];
             break;
         case kPKDownloadButtonState_Downloaded:
+            //清空地图数据
+#warning 做个弹窗
             self.downloadButton.state = kPKDownloadButtonState_StartDownload;
             [[HBOfflineMapManager sharedManager] clearMap];
-//            self.imageView.hidden = YES;
             break;
         default:
             NSAssert(NO, @"unsupported state");
@@ -161,14 +170,34 @@ static CGFloat const kOfflineCellHeight = 135.f;
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Private Method
+- (void)startDownloadTask {
+    @WEAKSELF;
+    [[HBOfflineMapManager sharedManager] startDownloadWithBlock:^(MAOfflineItem *downloadItem, MAOfflineMapDownloadStatus downloadStatus, id info) {
+        if (downloadStatus == MAOfflineMapDownloadStatusProgress) {
+            NSDictionary *infoDic = (NSDictionary *)info;
+            CGFloat received = [infoDic[MAOfflineMapDownloadReceivedSizeKey] floatValue];
+            CGFloat expected = [infoDic[MAOfflineMapDownloadExpectedSizeKey] floatValue];
+            CGFloat downPrecent = received/expected/1.f;
+            //更新按钮下载进度
+            weakSelf.downloadButton.stopDownloadButton.progress = downPrecent;
+            //更新离线包大小显示
+            weakSelf.offlineMapCell.lblSize.text = [NSString stringWithFormat:@"%.2f/%.2f MB",received/kSizeAdapter,expected/kSizeAdapter];
+        }
+        if (downloadStatus == MAOfflineMapDownloadStatusCompleted) {
+            //下载完成
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.downloadButton.stopDownloadButton.progress = 1;
+                weakSelf.downloadButton.state = kPKDownloadButtonState_Downloaded;
+                //更新离线包大小显示
+                weakSelf.offlineMapCell.lblSize.text = [NSString stringWithFormat:@"%.2f MB",downloadItem.size/kSizeAdapter];
+                [weakSelf.downloadButton setNeedsDisplay];
+            });
+        }
+    }];
 }
-*/
 
+- (void)dealloc {
+    NSLog(@"dealloced");
+}
 @end

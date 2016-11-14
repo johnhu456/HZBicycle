@@ -30,10 +30,10 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="23.5MB" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em9-Kl-gqm">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00 MB" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="em9-Kl-gqm">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="19" id="Jlw-kc-ZH1"/>
-                                    <constraint firstAttribute="width" constant="70" id="zGa-rm-b9S"/>
+                                    <constraint firstAttribute="width" constant="100" id="zGa-rm-b9S"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -83,9 +83,11 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="lblCity" destination="0Vx-0Q-rF2" id="YdK-my-OTz"/>
+                <outlet property="lblSize" destination="em9-Kl-gqm" id="5oQ-sr-rEv"/>
                 <outlet property="pkDownLoadButton" destination="dOv-82-4K7" id="BVK-W2-h82"/>
             </connections>
-            <point key="canvasLocation" x="-346.5" y="89"/>
+            <point key="canvasLocation" x="-560" y="56"/>
         </tableViewCell>
     </objects>
     <resources>

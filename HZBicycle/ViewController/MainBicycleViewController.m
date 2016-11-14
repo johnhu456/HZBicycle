@@ -119,7 +119,7 @@ static CGFloat const kContentInsets = 15.f;
     
     self.settingButton = [[HBBaseRoundButton alloc] initWithIconImage:ImageInName(@"main_setting") clickBlock:^{
         MainSettingViewController *settingVC = [[MainSettingViewController alloc] init];
-        [self.navigationController pushViewController:settingVC animated:YES];
+        [weakSelf.navigationController pushViewController:settingVC animated:YES];
     }];
     [self.view addSubview:self.settingButton];
     [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
