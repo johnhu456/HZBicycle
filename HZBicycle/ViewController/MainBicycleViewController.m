@@ -137,13 +137,13 @@ static CGFloat const kContentInsets = 15.f;
     @WEAKSELF;
     [self.locationManager requestLocationWithReGeocode:NO completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
         if (location) {
-            [self.mapView setCenterCoordinate:location.coordinate animated:YES];
+            [weakSelf.mapView setCenterCoordinate:location.coordinate animated:YES];
             CLLocationCoordinate2D wgs84Coordinate = [DFLocationConverter gcj02ToWgs84:location.coordinate];
             [HBRequestManager sendNearBicycleRequestWithLatitude:@(wgs84Coordinate.latitude)
                                                       longtitude:@(wgs84Coordinate.longitude)
-                                                          length:@(800)
+                                                          length:@([HBUserDefultsManager searchDistance])
                                                successJsonObject:^(NSDictionary *jsonDict) {
-                                                   [weakSelf.mapView removeAnnotations:self.mapView.annotations];
+                                                   [weakSelf.mapView removeAnnotations:weakSelf.mapView.annotations];
                                                    weakSelf.stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
                                                    NSLog(@"%@",weakSelf.stationResult);
                                                    [weakSelf addBicycleStations];

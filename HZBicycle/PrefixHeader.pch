@@ -30,6 +30,7 @@
 #import "HBRequestManager.h"
 #import "HBMapManager.h"
 #import "HBOfflineMapManager.h"
+#import "HBUserDefultsManager.h"
 
 //模型
 #import "HBBicycleStationModel.h"

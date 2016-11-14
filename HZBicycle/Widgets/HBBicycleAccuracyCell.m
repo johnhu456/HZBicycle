@@ -8,14 +8,6 @@
 
 #import "HBBicycleAccuracyCell.h"
 
-/**
- 自定义进度条
- */
-@interface CustomSlider : UISlider
-
-@end
-
-
 @implementation CustomSlider
 
 - (CGRect)trackRectForBounds:(CGRect)bounds {
@@ -57,6 +49,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     //设置控件颜色
     self.sldDistance.minimumTrackTintColor = HB_COLOR_SLDMIN;
     self.sldDistance.maximumTrackTintColor = HB_COLOR_SLDMAX;
@@ -64,11 +57,22 @@
 
 }
 
+#pragma mark - Setter
+- (void)setSearchDistance:(CGFloat)searchDistance {
+    _searchDistance = searchDistance;
+    self.sldAccuracy.value = _searchDistance;
+    self.lblResult.text = [NSString stringWithFormat:@"%d米",(int)_searchDistance];
+}
+
+#pragma mark - Action
 //处理滑动条滑动
 - (IBAction)handleSliderValueChanged:(UISlider *)sender {
     NSInteger intValue = (int)sender.value/100 * 100;
     sender.value = intValue;
     self.lblResult.text = [NSString stringWithFormat:@"%d米",(int)sender.value];
+    if (self.handleSldValueChanged) {
+        self.handleSldValueChanged(intValue);
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

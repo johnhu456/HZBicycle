@@ -14,6 +14,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     //设置下载按钮
     self.pkDownLoadButton.tintColor = [UIColor whiteColor];
     self.pkDownLoadButton.startDownloadButton.tintColor = [UIColor whiteColor];

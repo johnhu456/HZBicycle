@@ -98,6 +98,7 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = NO;
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,6 +118,10 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         HBBicycleAccuracyCell *accuaryCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBBicycleAccuracyCell)];
+        accuaryCell.handleSldValueChanged = ^(NSInteger intValue){
+            [HBUserDefultsManager setSearchDistance:intValue];
+        };
+        accuaryCell.searchDistance = [HBUserDefultsManager searchDistance];
         return accuaryCell;
     }else {
         HBOfflineMapCell *offlineMapCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBOfflineMapCell)];
