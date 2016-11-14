@@ -13,8 +13,9 @@
 #import "HBLocationButton.h"
 #import "HBBicyclePointAnnotation.h"
 #import "HBBicycleAnnotationView.h"
+#import "HBSearchBar.h"
 
-@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate>
+@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete>
 
 #pragma mark - Views
 /**
@@ -36,6 +37,11 @@
  设置按钮
  */
 @property (nonatomic, strong) HBBaseRoundButton *settingButton;
+
+/**
+ 搜索栏
+ */
+@property (nonatomic, strong) HBSearchBar *searchBar;
 
 /**
  站点数组
@@ -65,6 +71,8 @@ static CGFloat const kContentInsets = 15.f;
     [self setupMapView];
     //设置定位按钮等
     [self setupButtons];
+    //设置搜索框
+    [self setupSearchBar];
     //开启一次定位
     [self reloadLocation];
 }
@@ -98,8 +106,8 @@ static CGFloat const kContentInsets = 15.f;
     }
     
     //设置指南针位置下移
-    self.mapView.compassOrigin = CGPointMake(self.mapView.compassOrigin.x, self.mapView.compassOrigin.y + 20);
-    self.mapView.scaleOrigin = CGPointMake(self.mapView.scaleOrigin.x, self.mapView.scaleOrigin.y + 20);
+    self.mapView.showsCompass = NO;
+    self.mapView.scaleOrigin = CGPointMake(self.mapView.scaleOrigin.x, self.view.frame.size.height - 40);
     
     [self.view addSubview:self.mapView];
 
@@ -126,6 +134,19 @@ static CGFloat const kContentInsets = 15.f;
         make.width.height.mas_equalTo(kButtonWidth);
         make.top.equalTo(weakSelf.locationButton.mas_bottom).with.offset(kContentInsets);
         make.right.equalTo(weakSelf.locationButton.mas_right);
+    }];
+}
+
+- (void)setupSearchBar {
+    @WEAKSELF;
+    self.searchBar = [[HBSearchBar alloc] init];
+    self.searchBar.delegate = self;
+    [self.view addSubview:self.searchBar];
+    [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.mas_topLayoutGuideBottom).with.offset(15.f);
+        make.height.mas_equalTo(@50);
+        make.left.equalTo(weakSelf.view.mas_left).with.offset(kContentInsets);
+        make.right.equalTo(weakSelf.view.mas_right).with.offset(-kContentInsets);
     }];
 }
 
@@ -193,7 +214,18 @@ static CGFloat const kContentInsets = 15.f;
     }
 }
 
+#pragma mark - HBSearchBarDelegate
+- (void)searchBarDidBeginEdit:(HBSearchBar *)searchBar {
+    NSLog(@"begin");
+}
 
+- (void)searchBar:(HBSearchBar *)searchBar textDidChanged:(NSString *)text {
+    NSLog(@"start %@ ",text);
+}
+
+-(void)searchBar:(HBSearchBar *)searchBar didFinishEdit:(NSString *)text {
+    NSLog(@"end %@",text);
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
