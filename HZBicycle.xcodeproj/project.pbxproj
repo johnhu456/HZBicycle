@@ -35,6 +35,8 @@
 		E0630AF81DBDFE6A0012EA3A /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AF71DBDFE6A0012EA3A /* Foundation+Log.m */; };
 		E06DD0C71DD9CB000024039D /* HBUserDefultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0C61DD9CB000024039D /* HBUserDefultsManager.m */; };
 		E06DD0CA1DD9F3BC0024039D /* HBSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0C91DD9F3BC0024039D /* HBSearchBar.m */; };
+		E06DD0CD1DDAA0D00024039D /* MainSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0CC1DDAA0D00024039D /* MainSearchViewController.m */; };
+		E06DD0D11DDAAB7C0024039D /* HBSearchTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0D01DDAAB7C0024039D /* HBSearchTransition.m */; };
 		E08DD5701DC6F90700064283 /* HBMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD56D1DC6F90700064283 /* HBMapManager.m */; };
 		E08DD5711DC6F90700064283 /* HBOfflineMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD56F1DC6F90700064283 /* HBOfflineMapManager.m */; };
 		E08DD5761DC7401900064283 /* HBLocationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD5751DC7401900064283 /* HBLocationButton.m */; };
@@ -123,6 +125,10 @@
 		E06DD0C61DD9CB000024039D /* HBUserDefultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBUserDefultsManager.m; path = Manager/HBUserDefultsManager.m; sourceTree = "<group>"; };
 		E06DD0C81DD9F3BC0024039D /* HBSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBSearchBar.h; path = Widgets/HBSearchBar.h; sourceTree = "<group>"; };
 		E06DD0C91DD9F3BC0024039D /* HBSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBSearchBar.m; path = Widgets/HBSearchBar.m; sourceTree = "<group>"; };
+		E06DD0CB1DDAA0D00024039D /* MainSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainSearchViewController.h; path = ViewController/MainSearchViewController.h; sourceTree = "<group>"; };
+		E06DD0CC1DDAA0D00024039D /* MainSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainSearchViewController.m; path = ViewController/MainSearchViewController.m; sourceTree = "<group>"; };
+		E06DD0CF1DDAAB7C0024039D /* HBSearchTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBSearchTransition.h; path = Transition/HBSearchTransition.h; sourceTree = "<group>"; };
+		E06DD0D01DDAAB7C0024039D /* HBSearchTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBSearchTransition.m; path = Transition/HBSearchTransition.m; sourceTree = "<group>"; };
 		E08DD56C1DC6F90700064283 /* HBMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBMapManager.h; path = Manager/HBMapManager.h; sourceTree = "<group>"; };
 		E08DD56D1DC6F90700064283 /* HBMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBMapManager.m; path = Manager/HBMapManager.m; sourceTree = "<group>"; };
 		E08DD56E1DC6F90700064283 /* HBOfflineMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBOfflineMapManager.h; path = Manager/HBOfflineMapManager.h; sourceTree = "<group>"; };
@@ -271,6 +277,7 @@
 		E0630A9C1DB9C44C0012EA3A /* HZBicycle */ = {
 			isa = PBXGroup;
 			children = (
+				E06DD0CE1DDAAB4E0024039D /* Transition */,
 				E013EDE61DCC8AD1008F4259 /* NavigationController */,
 				E08DD5721DC73FDC00064283 /* Widgets */,
 				E0E079711DBF45030028AB83 /* ViewController */,
@@ -367,6 +374,15 @@
 			name = Manager;
 			sourceTree = "<group>";
 		};
+		E06DD0CE1DDAAB4E0024039D /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				E06DD0CF1DDAAB7C0024039D /* HBSearchTransition.h */,
+				E06DD0D01DDAAB7C0024039D /* HBSearchTransition.m */,
+			);
+			name = Transition;
+			sourceTree = "<group>";
+		};
 		E08DD5721DC73FDC00064283 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +401,8 @@
 				E029C2341DD1A74F00FC017B /* HBBaseViewController.m */,
 				E0E079731DBF453E0028AB83 /* MainBicycleViewController.h */,
 				E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */,
+				E06DD0CB1DDAA0D00024039D /* MainSearchViewController.h */,
+				E06DD0CC1DDAA0D00024039D /* MainSearchViewController.m */,
 				E013EDE31DCC835E008F4259 /* MainSettingViewController.h */,
 				E013EDE41DCC835E008F4259 /* MainSettingViewController.m */,
 				E08DD57C1DC87C3900064283 /* ViewController.h */,
@@ -687,10 +705,12 @@
 				E013EDE21DCC642F008F4259 /* UIButton+FHExtension.m in Sources */,
 				E0630AF41DBDB41C0012EA3A /* NSDictionary+FHExtension.m in Sources */,
 				E08DD57E1DC87C3900064283 /* ViewController.m in Sources */,
+				E06DD0CD1DDAA0D00024039D /* MainSearchViewController.m in Sources */,
 				E029C2351DD1A74F00FC017B /* HBBaseViewController.m in Sources */,
 				E013EDE91DCC8B09008F4259 /* HBBicycleNavigationController.m in Sources */,
 				E06DD0CA1DD9F3BC0024039D /* HBSearchBar.m in Sources */,
 				E029C2311DD19A8000FC017B /* HBBicycleAccuracyCell.m in Sources */,
+				E06DD0D11DDAAB7C0024039D /* HBSearchTransition.m in Sources */,
 				E0630A9F1DB9C44C0012EA3A /* main.m in Sources */,
 				E08DD5711DC6F90700064283 /* HBOfflineMapManager.m in Sources */,
 				E0630ADA1DB9F04A0012EA3A /* HBRequestManager.m in Sources */,

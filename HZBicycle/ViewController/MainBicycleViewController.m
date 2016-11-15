@@ -9,13 +9,13 @@
 #import "MainBicycleViewController.h"
 
 #import "MainSettingViewController.h"
+#import "MainSearchViewController.h"
 
 #import "HBLocationButton.h"
 #import "HBBicyclePointAnnotation.h"
 #import "HBBicycleAnnotationView.h"
-#import "HBSearchBar.h"
 
-@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete>
+@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete,UINavigationControllerDelegate>
 
 #pragma mark - Views
 /**
@@ -39,11 +39,6 @@
 @property (nonatomic, strong) HBBaseRoundButton *settingButton;
 
 /**
- 搜索栏
- */
-@property (nonatomic, strong) HBSearchBar *searchBar;
-
-/**
  站点数组
  */
 @property (nonatomic, strong) NSArray *stationArray;
@@ -62,6 +57,7 @@ static CGFloat const kContentInsets = 15.f;
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     //设置定位精度
     self.locationManager = [[AMapLocationManager alloc] init];
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
@@ -81,6 +77,7 @@ static CGFloat const kContentInsets = 15.f;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.navigationController.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -147,7 +144,7 @@ static CGFloat const kContentInsets = 15.f;
 
 - (void)setupSearchBar {
     @WEAKSELF;
-    self.searchBar = [[HBSearchBar alloc] init];
+    self.searchBar = [[HBSearchBar alloc] initWithShowType:HBSearchBarShowTypeSearch];
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
     [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -222,10 +219,6 @@ static CGFloat const kContentInsets = 15.f;
     }
 }
 
-- (void)mapView:(MAMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
-    
-}
-
 - (void)offlineDataDidReload:(MAMapView *)mapView {
     NSLog(@"OFFLINEMAP LOADED");
 }
@@ -233,6 +226,9 @@ static CGFloat const kContentInsets = 15.f;
 #pragma mark - HBSearchBarDelegate
 - (void)searchBarDidBeginEdit:(HBSearchBar *)searchBar {
     NSLog(@"begin");
+    [self.searchBar resignSearchBarWithFinish:NO];
+    MainSearchViewController *searchViewController = [[MainSearchViewController alloc] init];
+    [self.navigationController pushViewController:searchViewController animated:YES];
 }
 
 - (void)searchBar:(HBSearchBar *)searchBar textDidChanged:(NSString *)text {
@@ -240,12 +236,22 @@ static CGFloat const kContentInsets = 15.f;
 }
 
 -(void)searchBar:(HBSearchBar *)searchBar didFinishEdit:(NSString *)text {
+#warning todo
     [HBRequestManager sendSearchBicycleStationRequestWithOptions:text
                                                successJsonObject:^(NSDictionary *jsonDict) {
                                                    NSLog(@"%@",jsonDict);
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
                                                    NSLog(@"%@",request);
                                                }];
+}
+
+#pragma mark - UINavigationControllerDelegate
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
+    if ([fromVC isKindOfClass:[MainBicycleViewController class]] && [toVC isKindOfClass:[MainSearchViewController class]]) {
+        return [[HBSearchTransition alloc] init];
+    }else {
+        return nil;
+    }
 }
 
 #pragma mark - Notification

@@ -10,10 +10,12 @@
 
 @interface HBSearchBar()<UITextFieldDelegate> {
     struct{
+        unsigned int didTapBackButton : 1;
         unsigned int didBeginEdit : 1;
         unsigned int didEditChanged : 1;
         unsigned int didEditEnded : 1;
     }_delegateFlag;
+    HBSearchBarShowType _type;
 }
 #pragma mark - Subviews
 
@@ -21,6 +23,8 @@
  搜索栏图标
  */
 @property (nonatomic, strong) UIImageView *iconView;
+
+@property (nonatomic, strong) UIButton *backButton;
 
 /**
  搜索输入框
@@ -33,16 +37,18 @@
 static CGFloat const kInsetsNormal = 10.f;
 static CGFloat const kWidthIconView = 30.f;
 static NSString *const kPlaceholderSearch = @"请输入地址或编号";
+static NSTimeInterval const kAnimationDuration = 0.25f;
 
 @implementation HBSearchBar
 
 #pragma mark - Init
-- (instancetype)init {
+- (instancetype)initWithShowType:(HBSearchBarShowType)type {
     if (self = [super init]) {
         self.backgroundColor = [UIColor whiteColor];
         
         //设置阴影
         self.layer.cornerRadius = 5.f;
+        _type = type;
         [self setupSubViews];
     }
     return self;
@@ -67,13 +73,30 @@ static NSString *const kPlaceholderSearch = @"请输入地址或编号";
     self.searchTextField.tintColor = HB_COLOR_DARKBLUE;
     [self addSubview:self.searchTextField];
     [self.searchTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.iconView.mas_right).with.offset(kInsetsNormal);
+        make.left.equalTo(weakSelf.mas_left).with.offset(kInsetsNormal * 2 + kWidthIconView);
         make.top.equalTo(weakSelf.mas_top).with.offset(kInsetsNormal);
         make.height.mas_equalTo(@(kWidthIconView));
         make.right.equalTo(weakSelf.mas_right).with.offset(-kInsetsNormal);
     }];
     //添加输入框动作
     [self.searchTextField addTarget:self action:@selector(handleEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+    //设置返回按钮
+    self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.backButton setBackgroundImage:ImageInName(@"main_search_back_normal") forState:UIControlStateNormal];
+    [self.backButton setBackgroundImage:ImageInName(@"main_search_back_highlighted") forState:UIControlStateHighlighted];
+    self.backButton.alpha = 0;
+    [self insertSubview:self.backButton belowSubview:self.searchTextField];
+    [self.backButton addTarget:self action:@selector(handleBackButtonOnClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(weakSelf.iconView.mas_right).with.offset(kInsetsNormal);
+        make.top.equalTo(weakSelf.mas_top).with.offset(kInsetsNormal);
+        make.height.width.mas_equalTo(@(kWidthIconView));
+    }];
+    
+    if (_type == HBSearchBarShowTypeBack) {
+        [self showBackButtonWithAnimated:NO];
+    }
 
 }
 
@@ -88,6 +111,9 @@ static NSString *const kPlaceholderSearch = @"请输入地址或编号";
 #pragma mark - Setter
 - (void)setDelegate:(id<HBSearchBarDelegete>)delegate {
     _delegate = delegate;
+    if ([_delegate respondsToSelector:@selector(searchBar:backButtonOnClicked:)]) {
+        _delegateFlag.didTapBackButton = YES;
+    }
     if ([_delegate respondsToSelector:@selector(searchBarDidBeginEdit:)]) {
         _delegateFlag.didBeginEdit = YES;
     }
@@ -96,6 +122,13 @@ static NSString *const kPlaceholderSearch = @"请输入地址或编号";
     }
     if ([_delegate respondsToSelector:@selector(searchBar:didFinishEdit:)]) {
         _delegateFlag.didEditEnded = YES;
+    }
+}
+
+#pragma mark - Actions
+- (void)handleBackButtonOnClicked:(UIButton *)sender {
+    if (_delegateFlag.didTapBackButton) {
+        [_delegate searchBar:self backButtonOnClicked:sender];
     }
 }
 
@@ -115,6 +148,33 @@ static NSString *const kPlaceholderSearch = @"请输入地址或编号";
 - (void)handleEditingChanged:(UITextField *)sender {
     if (_delegateFlag.didEditChanged) {
         [_delegate searchBar:self textDidChanged:sender.text];
+    }
+}
+
+#pragma mark - Public Method
+- (void)resignSearchBarWithFinish:(BOOL)finished {
+    if ([self.searchTextField canResignFirstResponder]) {
+        [self.searchTextField resignFirstResponder];
+    }
+    if (finished) {
+        if (_delegateFlag.didEditEnded) {
+            [_delegate searchBar:self didFinishEdit:self.searchTextField.text];
+        }
+    }
+}
+
+- (void)showBackButtonWithAnimated:(BOOL)animated {
+    @WEAKSELF;
+    if (animated) {
+        [UIView animateWithDuration:kAnimationDuration animations:^{
+            weakSelf.iconView.alpha = 0;
+            weakSelf.backButton.transform = CGAffineTransformMakeTranslation(-40, 0);
+            weakSelf.backButton.alpha = 1;
+        }];
+    } else {
+        self.iconView.alpha = 0;
+        self.backButton.transform = CGAffineTransformMakeTranslation(-40, 0);
+        self.backButton.alpha = 1;
     }
 }
 /*

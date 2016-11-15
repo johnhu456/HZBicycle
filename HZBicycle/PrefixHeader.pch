@@ -16,6 +16,7 @@
 
 //视图控制器
 #import "HBBaseViewController.h"
+#import "HBSearchTransition.h"
 
 //布局
 #import <Masonry.h>

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HBSearchBar.h"
 
 @interface MainBicycleViewController : HBBaseViewController
+/**
+ 搜索栏
+ */
+@property (nonatomic, strong) HBSearchBar *searchBar;
 
 @end

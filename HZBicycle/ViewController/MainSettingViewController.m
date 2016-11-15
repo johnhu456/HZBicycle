@@ -89,7 +89,7 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"设置";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = HB_COLOR_TABLEVAIEWBACK;
     
     //设置TableView
     [self setupTableView];

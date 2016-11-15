@@ -12,6 +12,13 @@
 
 @protocol HBSearchBarDelegete <NSObject>
 
+@optional
+/**
+ 处理返回按钮点击事件
+ 
+ */
+- (void)searchBar:(HBSearchBar *)searchBar backButtonOnClicked:(UIButton *)sender;
+
 /**
  处理searchBar开始编辑
 
@@ -34,8 +41,31 @@
 
 @end
 
+
+/**
+ 初始化SearchBar类型
+ */
+typedef NS_ENUM(NSUInteger){
+    HBSearchBarShowTypeSearch = 0,//默认显示搜索图标
+    HBSearchBarShowTypeBack //返回按钮
+}HBSearchBarShowType;
+
 @interface HBSearchBar : UIView
 
 @property (nonatomic, weak) id<HBSearchBarDelegete> delegate;
 
+- (instancetype)initWithShowType:(HBSearchBarShowType)type;
+/**
+ 结束搜索编辑装填
+
+ @param finished 是否调用代理
+ */
+- (void)resignSearchBarWithFinish:(BOOL)finished;
+
+/**
+ 显示返回按钮
+
+ @param animated 是否使用动画
+ */
+- (void)showBackButtonWithAnimated:(BOOL)animated;
 @end
