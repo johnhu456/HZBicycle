@@ -11,7 +11,7 @@
 #pragma mark - RequestURL
 static NSString *const kBaseRequestURL = @"http://c.ggzxc.com.cn/wz";
 static NSString *const kNearBicycleRequestURL = @"np_getBikesByWeiXin.do";
-static NSString *const kBicycleSearchURL = @"np_findNetPointByName.do?";
+static NSString *const kBicycleSearchURL = @"np_findNetPointByName.do";
 
 #pragma mark - Requests
 @implementation HBBaseRequest

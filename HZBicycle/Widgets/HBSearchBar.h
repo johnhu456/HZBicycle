@@ -63,6 +63,11 @@ typedef NS_ENUM(NSUInteger){
 - (void)resignSearchBarWithFinish:(BOOL)finished;
 
 /**
+ 呼出键盘
+ */
+- (void)registerFirstResponder;
+
+/**
  显示返回按钮
 
  @param animated 是否使用动画

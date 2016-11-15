@@ -80,6 +80,7 @@ static NSTimeInterval const kAnimationDuration = 0.25f;
     }];
     //添加输入框动作
     [self.searchTextField addTarget:self action:@selector(handleEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    [self.searchTextField addTarget:self action:@selector(handleEditEnd:) forControlEvents:UIControlEventEditingDidEndOnExit];
     
     //设置返回按钮
     self.backButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -139,9 +140,9 @@ static NSTimeInterval const kAnimationDuration = 0.25f;
     }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
+- (void)handleEditEnd:(UITextField *)sender {
     if (_delegateFlag.didEditEnded) {
-        [_delegate searchBar:self didFinishEdit:textField.text];
+        [_delegate searchBar:self didFinishEdit:sender.text];
     }
 }
 
@@ -160,6 +161,12 @@ static NSTimeInterval const kAnimationDuration = 0.25f;
         if (_delegateFlag.didEditEnded) {
             [_delegate searchBar:self didFinishEdit:self.searchTextField.text];
         }
+    }
+}
+
+- (void)registerFirstResponder {
+    if ([self.searchTextField canBecomeFirstResponder]) {
+        [self.searchTextField becomeFirstResponder];
     }
 }
 

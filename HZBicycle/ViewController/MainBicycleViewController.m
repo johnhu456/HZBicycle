@@ -231,20 +231,6 @@ static CGFloat const kContentInsets = 15.f;
     [self.navigationController pushViewController:searchViewController animated:YES];
 }
 
-- (void)searchBar:(HBSearchBar *)searchBar textDidChanged:(NSString *)text {
-    NSLog(@"start %@ ",text);
-}
-
--(void)searchBar:(HBSearchBar *)searchBar didFinishEdit:(NSString *)text {
-#warning todo
-    [HBRequestManager sendSearchBicycleStationRequestWithOptions:text
-                                               successJsonObject:^(NSDictionary *jsonDict) {
-                                                   NSLog(@"%@",jsonDict);
-                                               } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
-                                                   NSLog(@"%@",request);
-                                               }];
-}
-
 #pragma mark - UINavigationControllerDelegate
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
     if ([fromVC isKindOfClass:[MainBicycleViewController class]] && [toVC isKindOfClass:[MainSearchViewController class]]) {

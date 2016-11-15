@@ -44,8 +44,8 @@ static NSTimeInterval const kAnimationDuration = 0.25f;
         [UIView animateWithDuration:kAnimationDuration animations:^{
             fromVC.view.alpha = 0;
         } completion:^(BOOL finished) {
-            toVC.view.alpha = 1;
             fromVC.view.alpha = 1;
+            toVC.view.alpha = 1;
             [searchBar removeFromSuperview];
             [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
         }];

@@ -37,6 +37,10 @@
 		E06DD0CA1DD9F3BC0024039D /* HBSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0C91DD9F3BC0024039D /* HBSearchBar.m */; };
 		E06DD0CD1DDAA0D00024039D /* MainSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0CC1DDAA0D00024039D /* MainSearchViewController.m */; };
 		E06DD0D11DDAAB7C0024039D /* HBSearchTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0D01DDAAB7C0024039D /* HBSearchTransition.m */; };
+		E06DD0D61DDAC16B0024039D /* HBQuickSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0D41DDAC16B0024039D /* HBQuickSearchCell.m */; };
+		E06DD0D71DDAC16B0024039D /* HBQuickSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E06DD0D51DDAC16B0024039D /* HBQuickSearchCell.xib */; };
+		E06DD0DB1DDAD6FE0024039D /* HBSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0D91DDAD6FE0024039D /* HBSearchResultCell.m */; };
+		E06DD0DC1DDAD6FE0024039D /* HBSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E06DD0DA1DDAD6FE0024039D /* HBSearchResultCell.xib */; };
 		E08DD5701DC6F90700064283 /* HBMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD56D1DC6F90700064283 /* HBMapManager.m */; };
 		E08DD5711DC6F90700064283 /* HBOfflineMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD56F1DC6F90700064283 /* HBOfflineMapManager.m */; };
 		E08DD5761DC7401900064283 /* HBLocationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD5751DC7401900064283 /* HBLocationButton.m */; };
@@ -129,6 +133,12 @@
 		E06DD0CC1DDAA0D00024039D /* MainSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainSearchViewController.m; path = ViewController/MainSearchViewController.m; sourceTree = "<group>"; };
 		E06DD0CF1DDAAB7C0024039D /* HBSearchTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBSearchTransition.h; path = Transition/HBSearchTransition.h; sourceTree = "<group>"; };
 		E06DD0D01DDAAB7C0024039D /* HBSearchTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBSearchTransition.m; path = Transition/HBSearchTransition.m; sourceTree = "<group>"; };
+		E06DD0D31DDAC16B0024039D /* HBQuickSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBQuickSearchCell.h; path = Widgets/HBQuickSearchCell.h; sourceTree = "<group>"; };
+		E06DD0D41DDAC16B0024039D /* HBQuickSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBQuickSearchCell.m; path = Widgets/HBQuickSearchCell.m; sourceTree = "<group>"; };
+		E06DD0D51DDAC16B0024039D /* HBQuickSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HBQuickSearchCell.xib; path = Widgets/HBQuickSearchCell.xib; sourceTree = "<group>"; };
+		E06DD0D81DDAD6FE0024039D /* HBSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBSearchResultCell.h; path = Widgets/HBSearchResultCell.h; sourceTree = "<group>"; };
+		E06DD0D91DDAD6FE0024039D /* HBSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBSearchResultCell.m; path = Widgets/HBSearchResultCell.m; sourceTree = "<group>"; };
+		E06DD0DA1DDAD6FE0024039D /* HBSearchResultCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HBSearchResultCell.xib; path = Widgets/HBSearchResultCell.xib; sourceTree = "<group>"; };
 		E08DD56C1DC6F90700064283 /* HBMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBMapManager.h; path = Manager/HBMapManager.h; sourceTree = "<group>"; };
 		E08DD56D1DC6F90700064283 /* HBMapManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBMapManager.m; path = Manager/HBMapManager.m; sourceTree = "<group>"; };
 		E08DD56E1DC6F90700064283 /* HBOfflineMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBOfflineMapManager.h; path = Manager/HBOfflineMapManager.h; sourceTree = "<group>"; };
@@ -383,9 +393,23 @@
 			name = Transition;
 			sourceTree = "<group>";
 		};
+		E06DD0D21DDAC1410024039D /* SearchCell */ = {
+			isa = PBXGroup;
+			children = (
+				E06DD0D31DDAC16B0024039D /* HBQuickSearchCell.h */,
+				E06DD0D41DDAC16B0024039D /* HBQuickSearchCell.m */,
+				E06DD0D51DDAC16B0024039D /* HBQuickSearchCell.xib */,
+				E06DD0D81DDAD6FE0024039D /* HBSearchResultCell.h */,
+				E06DD0D91DDAD6FE0024039D /* HBSearchResultCell.m */,
+				E06DD0DA1DDAD6FE0024039D /* HBSearchResultCell.xib */,
+			);
+			name = SearchCell;
+			sourceTree = "<group>";
+		};
 		E08DD5721DC73FDC00064283 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				E06DD0D21DDAC1410024039D /* SearchCell */,
 				E029C22D1DD19A3300FC017B /* SettingCell */,
 				E013EDDF1DCC5E03008F4259 /* Button */,
 				E013EDDB1DCC5697008F4259 /* SearchBar */,
@@ -541,8 +565,10 @@
 				E0630AAD1DB9C44C0012EA3A /* LaunchScreen.storyboard in Resources */,
 				E0630AAA1DB9C44C0012EA3A /* Assets.xcassets in Resources */,
 				E029C2321DD19A8000FC017B /* HBBicycleAccuracyCell.xib in Resources */,
+				E06DD0DC1DDAD6FE0024039D /* HBSearchResultCell.xib in Resources */,
 				E0630AA81DB9C44C0012EA3A /* Main.storyboard in Resources */,
 				E09E603B1DD1B65900956F1C /* HBOfflineMapCell.xib in Resources */,
+				E06DD0D71DDAC16B0024039D /* HBQuickSearchCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,12 +723,14 @@
 				E0630AF81DBDFE6A0012EA3A /* Foundation+Log.m in Sources */,
 				E0630AEC1DB9FA760012EA3A /* HBBicycleStationModel.m in Sources */,
 				E08DD5791DC876BB00064283 /* HBBicyclePopView.m in Sources */,
+				E06DD0D61DDAC16B0024039D /* HBQuickSearchCell.m in Sources */,
 				E09E603A1DD1B65900956F1C /* HBOfflineMapCell.m in Sources */,
 				E013EDD91DC9C3D5008F4259 /* HBBicyclePointAnnotation.m in Sources */,
 				E08DD5761DC7401900064283 /* HBLocationButton.m in Sources */,
 				E013EDE51DCC835E008F4259 /* MainSettingViewController.m in Sources */,
 				E0630AA21DB9C44C0012EA3A /* AppDelegate.m in Sources */,
 				E013EDE21DCC642F008F4259 /* UIButton+FHExtension.m in Sources */,
+				E06DD0DB1DDAD6FE0024039D /* HBSearchResultCell.m in Sources */,
 				E0630AF41DBDB41C0012EA3A /* NSDictionary+FHExtension.m in Sources */,
 				E08DD57E1DC87C3900064283 /* ViewController.m in Sources */,
 				E06DD0CD1DDAA0D00024039D /* MainSearchViewController.m in Sources */,
