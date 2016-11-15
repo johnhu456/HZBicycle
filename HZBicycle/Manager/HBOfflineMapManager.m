@@ -22,6 +22,9 @@
 
 @end
 
+#pragma mark - Constant
+NSString *const kNotificationOfflineMapFinished = @"kNotificationOfflineMapFinished";
+
 @implementation HBOfflineMapManager
 
 + (instancetype)sharedManager
@@ -79,7 +82,12 @@
         //先静默暂停一次
         [[MAOfflineMap sharedOfflineMap] pauseItem:self.selectedCity];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[MAOfflineMap sharedOfflineMap] downloadItem:self.selectedCity shouldContinueWhenAppEntersBackground:YES downloadBlock:downloadBlock];
+            [[MAOfflineMap sharedOfflineMap] downloadItem:self.selectedCity shouldContinueWhenAppEntersBackground:YES downloadBlock:^(MAOfflineItem *downloadItem, MAOfflineMapDownloadStatus downloadStatus, id info) {
+                downloadBlock(downloadItem,downloadStatus,info);
+                if (downloadStatus == MAOfflineMapDownloadStatusFinished) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationOfflineMapFinished object:downloadItem];
+                }
+            }];
         });
     }
     //判断下载对象状态:
@@ -91,11 +99,16 @@
     else if (self.selectedCity.itemStatus == MAOfflineItemStatusInstalled) {
         //下载好了
        downloadBlock(self.selectedCity,MAOfflineMapDownloadStatusCompleted,nil);
-        [[MAOfflineMap sharedOfflineMap] downloadItem:self.selectedCity shouldContinueWhenAppEntersBackground:YES downloadBlock:downloadBlock];
+       [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationOfflineMapFinished object:self.selectedCity];
     }
     else if (self.selectedCity.itemStatus == MAOfflineItemStatusCached || self.selectedCity.itemStatus == MAOfflineItemStatusNone){
         //高德支持断点续传，是否自动更新还不知道
-        [[MAOfflineMap sharedOfflineMap] downloadItem:self.selectedCity shouldContinueWhenAppEntersBackground:YES downloadBlock:downloadBlock];
+        [[MAOfflineMap sharedOfflineMap] downloadItem:self.selectedCity shouldContinueWhenAppEntersBackground:YES downloadBlock:^(MAOfflineItem *downloadItem, MAOfflineMapDownloadStatus downloadStatus, id info) {
+            downloadBlock(downloadItem,downloadStatus,info);
+            if (downloadStatus == MAOfflineMapDownloadStatusFinished) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationOfflineMapFinished object:downloadItem];
+            }
+        }];
     }
 }
 
@@ -107,5 +120,6 @@
     return [[MAOfflineMap sharedOfflineMap] isDownloadingForItem:self.selectedCity];
 }
 #pragma mark - Private Method
+
 
 @end

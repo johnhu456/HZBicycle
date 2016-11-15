@@ -22,9 +22,9 @@
 @end
 
 /**
- 转换坐标系
+ 搜索自行车站点
  */
-@interface HBCoordianteConvertRequest : HBBaseRequest
+@interface HBBicycleSearchReqeust : HBBaseRequest
 
 @end
 
@@ -53,4 +53,13 @@
                            successJsonObject:(void(^)(NSDictionary *jsonDict))success
                            failureCompletion:(YTKRequestCompletionBlock)failure;
 
+
+/**
+ 搜索地址或者编号
+
+ @param option 搜索关键字
+ */
++ (void)sendSearchBicycleStationRequestWithOptions:(NSString *)option
+                                 successJsonObject:(void(^)(NSDictionary *jsonDict))success
+                                 failureCompletion:(YTKRequestCompletionBlock)failure;
 @end

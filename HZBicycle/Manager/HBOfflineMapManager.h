@@ -9,6 +9,10 @@
 #import "HBBicycleBaseModel.h"
 
 /**
+ 完成下载的通知名
+ */
+extern NSString *const kNotificationOfflineMapFinished;
+/**
  以城市为单位进行离线下载，管理的类。
  */
 @interface HBOfflineMapManager : HBBicycleBaseModel

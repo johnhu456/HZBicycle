@@ -67,6 +67,8 @@ static CGFloat const kContentInsets = 15.f;
     [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     self.locationManager.delegate = self;
     
+    //注册通知
+    [self registerNotifications];
     //设置地图视图
     [self setupMapView];
     //设置定位按钮等
@@ -87,7 +89,14 @@ static CGFloat const kContentInsets = 15.f;
     self.navigationController.navigationBarHidden = YES;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Layout
+- (void)registerNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOfflineMapFinished:) name:kNotificationOfflineMapFinished object:nil];
+}
 - (void)setupMapView {
     //添加地图
     self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
@@ -110,7 +119,6 @@ static CGFloat const kContentInsets = 15.f;
     self.mapView.scaleOrigin = CGPointMake(self.mapView.scaleOrigin.x, self.view.frame.size.height - 40);
     
     [self.view addSubview:self.mapView];
-
 }
 - (void)setupButtons {
     @WEAKSELF;
@@ -214,6 +222,14 @@ static CGFloat const kContentInsets = 15.f;
     }
 }
 
+- (void)mapView:(MAMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate {
+    
+}
+
+- (void)offlineDataDidReload:(MAMapView *)mapView {
+    NSLog(@"OFFLINEMAP LOADED");
+}
+
 #pragma mark - HBSearchBarDelegate
 - (void)searchBarDidBeginEdit:(HBSearchBar *)searchBar {
     NSLog(@"begin");
@@ -224,8 +240,22 @@ static CGFloat const kContentInsets = 15.f;
 }
 
 -(void)searchBar:(HBSearchBar *)searchBar didFinishEdit:(NSString *)text {
-    NSLog(@"end %@",text);
+    [HBRequestManager sendSearchBicycleStationRequestWithOptions:text
+                                               successJsonObject:^(NSDictionary *jsonDict) {
+                                                   NSLog(@"%@",jsonDict);
+                                               } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
+                                                   NSLog(@"%@",request);
+                                               }];
 }
+
+#pragma mark - Notification
+- (void)handleOfflineMapFinished:(NSNotification *)notification {
+    if (self.mapView) {
+        //下载完后重新加载地图
+        [self.mapView reloadMap];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

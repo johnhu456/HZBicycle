@@ -11,7 +11,7 @@
 #pragma mark - RequestURL
 static NSString *const kBaseRequestURL = @"http://c.ggzxc.com.cn/wz";
 static NSString *const kNearBicycleRequestURL = @"np_getBikesByWeiXin.do";
-static NSString *const kCoordinateConvertRequestURL = @"np_translate.do";
+static NSString *const kBicycleSearchURL = @"np_findNetPointByName.do?";
 
 #pragma mark - Requests
 @implementation HBBaseRequest
@@ -38,13 +38,13 @@ static NSString *const kCoordinateConvertRequestURL = @"np_translate.do";
 
 @end
 
-@implementation HBCoordianteConvertRequest
+@implementation HBBicycleSearchReqeust
 - (YTKRequestMethod)requestMethod {
     return YTKRequestMethodGET;
 }
 
 - (NSString *)requestUrl {
-    return kCoordinateConvertRequestURL;
+    return kBicycleSearchURL;
 }
 
 @end
@@ -84,6 +84,21 @@ static NSString *const kCoordinateConvertRequestURL = @"np_translate.do";
     [params setObjectOrNil:len forKey:@"len"];
     nearBicycleRequest.requestArguments = params;
     [nearBicycleRequest startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
+        NSData *resposneData = request.responseData;
+        success([NSDictionary fh_dictionaryWithData:resposneData]);
+    } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
+        failure(request);
+    }];
+}
+
++ (void)sendSearchBicycleStationRequestWithOptions:(NSString *)option
+                                 successJsonObject:(void(^)(NSDictionary *jsonDict))success
+                                 failureCompletion:(YTKRequestCompletionBlock)failure {
+    HBBicycleSearchReqeust *searchRequest = [[HBBicycleSearchReqeust alloc] init];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    [params setObjectOrNil:option forKey:@"option"];
+    searchRequest.requestArguments = params;
+    [searchRequest startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
         NSData *resposneData = request.responseData;
         success([NSDictionary fh_dictionaryWithData:resposneData]);
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
