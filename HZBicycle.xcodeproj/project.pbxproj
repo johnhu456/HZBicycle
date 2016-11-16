@@ -53,6 +53,8 @@
 		E09E603B1DD1B65900956F1C /* HBOfflineMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E09E60391DD1B65900956F1C /* HBOfflineMapCell.xib */; };
 		E09E603F1DD2C1BF00956F1C /* HBDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E09E603E1DD2C1BF00956F1C /* HBDownloadButton.m */; };
 		E0CF371C1DDBF261002F9746 /* UIImage+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF371A1DDBF261002F9746 /* UIImage+FHExtension.m */; };
+		E0CF37241DDBF843002F9746 /* HBStationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF37221DDBF843002F9746 /* HBStationCell.m */; };
+		E0CF37251DDBF843002F9746 /* HBStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0CF37231DDBF843002F9746 /* HBStationCell.xib */; };
 		E0E079751DBF453E0028AB83 /* MainBicycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -166,6 +168,9 @@
 		E09E603E1DD2C1BF00956F1C /* HBDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBDownloadButton.m; path = Widgets/HBDownloadButton.m; sourceTree = "<group>"; };
 		E0CF37191DDBF261002F9746 /* UIImage+FHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FHExtension.h"; sourceTree = "<group>"; };
 		E0CF371A1DDBF261002F9746 /* UIImage+FHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FHExtension.m"; sourceTree = "<group>"; };
+		E0CF37211DDBF843002F9746 /* HBStationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBStationCell.h; path = Widgets/HBStationCell.h; sourceTree = "<group>"; };
+		E0CF37221DDBF843002F9746 /* HBStationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBStationCell.m; path = Widgets/HBStationCell.m; sourceTree = "<group>"; };
+		E0CF37231DDBF843002F9746 /* HBStationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HBStationCell.xib; path = Widgets/HBStationCell.xib; sourceTree = "<group>"; };
 		E0E079701DBF2B8D0028AB83 /* FHMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FHMarco.h; path = Util/FHMarco.h; sourceTree = "<group>"; };
 		E0E079731DBF453E0028AB83 /* MainBicycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainBicycleViewController.h; path = ViewController/MainBicycleViewController.h; sourceTree = "<group>"; };
 		E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainBicycleViewController.m; path = ViewController/MainBicycleViewController.m; sourceTree = "<group>"; };
@@ -256,9 +261,15 @@
 			name = NavigationController;
 			sourceTree = "<group>";
 		};
-		E029C22D1DD19A3300FC017B /* SettingCell */ = {
+		E029C22D1DD19A3300FC017B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				E06DD0D31DDAC16B0024039D /* HBQuickSearchCell.h */,
+				E06DD0D41DDAC16B0024039D /* HBQuickSearchCell.m */,
+				E06DD0D51DDAC16B0024039D /* HBQuickSearchCell.xib */,
+				E06DD0D81DDAD6FE0024039D /* HBSearchResultCell.h */,
+				E06DD0D91DDAD6FE0024039D /* HBSearchResultCell.m */,
+				E06DD0DA1DDAD6FE0024039D /* HBSearchResultCell.xib */,
 				E029C22E1DD19A8000FC017B /* HBBicycleAccuracyCell.h */,
 				E029C22F1DD19A8000FC017B /* HBBicycleAccuracyCell.m */,
 				E029C2301DD19A8000FC017B /* HBBicycleAccuracyCell.xib */,
@@ -267,8 +278,11 @@
 				E09E60391DD1B65900956F1C /* HBOfflineMapCell.xib */,
 				E09E603D1DD2C1BF00956F1C /* HBDownloadButton.h */,
 				E09E603E1DD2C1BF00956F1C /* HBDownloadButton.m */,
+				E0CF37211DDBF843002F9746 /* HBStationCell.h */,
+				E0CF37221DDBF843002F9746 /* HBStationCell.m */,
+				E0CF37231DDBF843002F9746 /* HBStationCell.xib */,
 			);
-			name = SettingCell;
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		E0630A911DB9C44C0012EA3A = {
@@ -404,19 +418,6 @@
 			name = Transition;
 			sourceTree = "<group>";
 		};
-		E06DD0D21DDAC1410024039D /* SearchCell */ = {
-			isa = PBXGroup;
-			children = (
-				E06DD0D31DDAC16B0024039D /* HBQuickSearchCell.h */,
-				E06DD0D41DDAC16B0024039D /* HBQuickSearchCell.m */,
-				E06DD0D51DDAC16B0024039D /* HBQuickSearchCell.xib */,
-				E06DD0D81DDAD6FE0024039D /* HBSearchResultCell.h */,
-				E06DD0D91DDAD6FE0024039D /* HBSearchResultCell.m */,
-				E06DD0DA1DDAD6FE0024039D /* HBSearchResultCell.xib */,
-			);
-			name = SearchCell;
-			sourceTree = "<group>";
-		};
 		E06DD0E01DDB314D0024039D /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,8 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				E06DD0E01DDB314D0024039D /* Layout */,
-				E06DD0D21DDAC1410024039D /* SearchCell */,
-				E029C22D1DD19A3300FC017B /* SettingCell */,
+				E029C22D1DD19A3300FC017B /* Cells */,
 				E013EDDF1DCC5E03008F4259 /* Button */,
 				E013EDDB1DCC5697008F4259 /* SearchBar */,
 				E013EDDA1DCC23BE008F4259 /* Annotation */,
@@ -591,6 +591,7 @@
 				E06DD0DC1DDAD6FE0024039D /* HBSearchResultCell.xib in Resources */,
 				E0630AA81DB9C44C0012EA3A /* Main.storyboard in Resources */,
 				E09E603B1DD1B65900956F1C /* HBOfflineMapCell.xib in Resources */,
+				E0CF37251DDBF843002F9746 /* HBStationCell.xib in Resources */,
 				E06DD0D71DDAC16B0024039D /* HBQuickSearchCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -757,6 +758,7 @@
 				E06DD0DB1DDAD6FE0024039D /* HBSearchResultCell.m in Sources */,
 				E0630AF41DBDB41C0012EA3A /* NSDictionary+FHExtension.m in Sources */,
 				E08DD57E1DC87C3900064283 /* ViewController.m in Sources */,
+				E0CF37241DDBF843002F9746 /* HBStationCell.m in Sources */,
 				E0CF371C1DDBF261002F9746 /* UIImage+FHExtension.m in Sources */,
 				E06DD0CD1DDAA0D00024039D /* MainSearchViewController.m in Sources */,
 				E029C2351DD1A74F00FC017B /* HBBaseViewController.m in Sources */,

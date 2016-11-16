@@ -15,10 +15,9 @@
 @end
 
 #pragma mark - Constant
-static CGFloat const kItemSpacing = 20.f;
-static CGFloat const kEdgeInsets = 30.f;
-static CGFloat const kGoldScale = 0.618f;
-static CGFloat const kConstantParams = 0.2; //缩放常数
+static CGFloat const kItemSpacing = 30.f;
+static CGFloat const kEdgeInsets = 60.f;
+static CGFloat const kConstantParams = 0.0; //缩放常数
 
 @implementation HBStationsFlowLayout
 
@@ -31,12 +30,12 @@ static CGFloat const kConstantParams = 0.2; //缩放常数
 }
 
 - (void)defaultInitialize {
-    CGFloat screenHight = [UIScreen mainScreen].bounds.size.height;
     CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    self.itemSize = CGSizeMake(screenWidth - 2 *kEdgeInsets, screenHight/1.8);
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    self.itemSize = CGSizeMake(screenWidth - 120, 300);
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     self.minimumLineSpacing = kItemSpacing;
-    self.sectionInset = UIEdgeInsetsMake(0, kEdgeInsets, 0, kEdgeInsets);
+    self.sectionInset = UIEdgeInsetsMake((screenHeight-300)/2.f, kEdgeInsets, (screenHeight-300)/2.f, kEdgeInsets);
 
 }
 
@@ -71,9 +70,9 @@ static CGFloat const kConstantParams = 0.2; //缩放常数
 
 -(CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity {
     if (proposedContentOffset.x > self.previousOffsetX + self.itemSize.width / 3.0) {
-        self.previousOffsetX += self.collectionView.frame.size.width - self.minimumLineSpacing* 2;
+        self.previousOffsetX += self.collectionView.frame.size.width - self.minimumLineSpacing* 3;
     } else if (proposedContentOffset.x < self.previousOffsetX  - self.itemSize.width / 3.0) {
-        self.previousOffsetX -= self.collectionView.frame.size.width - self.minimumLineSpacing* 2;
+        self.previousOffsetX -= self.collectionView.frame.size.width - self.minimumLineSpacing* 3;
     }
     proposedContentOffset.x = self.previousOffsetX;
     return proposedContentOffset;

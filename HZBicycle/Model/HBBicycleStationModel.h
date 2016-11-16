@@ -40,7 +40,7 @@
 /**值守类型*/
 @property (nonatomic, copy) NSString *guardType;
 /**可租还时间*/
-@property (nonatomic, assign) NSString *serviceType;
+@property (nonatomic, copy) NSString *serviceType;
 /**排序*/
 @property (nonatomic, assign) NSUInteger sort;
 /**值守电话1*/

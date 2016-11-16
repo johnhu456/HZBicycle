@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "HBStationsFlowLayout.h"
 
+#import "HBStationCell.h"
+
 @interface HBStationsViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 #pragma mark - Views
@@ -34,8 +36,6 @@
 @end
 
 @implementation HBStationsViewController
-
-static NSString * const reuseIdentifier = @"Cell";
 
 #pragma mark - Init
 - (instancetype)initWithStations:(HBBicycleResultModel *)stations index:(NSUInteger)index blurBackImage:(UIImage *)backImage {
@@ -69,7 +69,7 @@ static NSString * const reuseIdentifier = @"Cell";
 //    @WEAKSELF;
     UIImageView *backView = [[UIImageView alloc] initWithFrame:self.view.frame];
     backView.contentMode = UIViewContentModeScaleAspectFill;
-    backView.image = [self.blurBackImage coreBlurWithBlurLevel:1.0];
+    backView.image = [self.blurBackImage coreBlurWithBlurLevel:1.2];
     [self.view addSubview:backView];
 }
 
@@ -81,7 +81,7 @@ static NSString * const reuseIdentifier = @"Cell";
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.collectionView];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.collectionView registerNib:NibFromClass(HBStationCell) forCellWithReuseIdentifier:StrFromClass(HBStationCell)];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -97,8 +97,8 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor redColor];
+    HBStationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:StrFromClass(HBStationCell) forIndexPath:indexPath];
+    cell.station = self.resultStations.data[indexPath.row];
     // Configure the cell
     
     return cell;
