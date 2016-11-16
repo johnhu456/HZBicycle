@@ -26,6 +26,7 @@
 #import "HBMarco.h"
 #import "NSDictionary+FHExtension.h"
 #import "UIButton+FHExtension.h"
+#import "UIImage+FHExtension.h"
 
 //管理类
 #import "HBRequestManager.h"

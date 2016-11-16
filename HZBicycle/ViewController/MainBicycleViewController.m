@@ -10,6 +10,7 @@
 
 #import "MainSettingViewController.h"
 #import "MainSearchViewController.h"
+#import "HBStationsViewController.h"
 
 #import "HBLocationButton.h"
 #import "HBBicyclePointAnnotation.h"
@@ -206,12 +207,30 @@ static CGFloat const kContentInsets = 15.f;
 #pragma mark - MapViewDelegate
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id<MAAnnotation>)annotation
 {
+    @WEAKSELF;
     if ([annotation isKindOfClass:[HBBicyclePointAnnotation class]]) {
         static NSString *pointReuseIndetifier = @"pointReuseIndetifier";
     
         HBBicycleAnnotationView *annotationView = (HBBicycleAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndetifier];
         if (annotationView == nil) {
             annotationView = [[HBBicycleAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndetifier];
+            annotationView.handlePopViewTaped = ^(HBBicyclePointAnnotation *annoation) {
+                NSLog(@"%@",annoation.station.name);
+#warning Stations跳转
+                //截图提供背景
+                __block UIImage *screenshotImage = nil;
+                __block NSInteger resState = 0;
+                [weakSelf.mapView takeSnapshotInRect:weakSelf.view.frame withCompletionBlock:^(UIImage *resultImage, NSInteger state) {
+                    screenshotImage = resultImage;
+                    resState = state;
+                    if (screenshotImage && resState) {
+                        HBStationsViewController *stationsVC = [[HBStationsViewController alloc] initWithStations:weakSelf.stationResult index:0 blurBackImage:screenshotImage];
+                        [weakSelf addChildViewController:stationsVC];
+                        [weakSelf.view addSubview:stationsVC.view];
+                    }
+                }];
+
+            };
         }
         return annotationView;
     }else {

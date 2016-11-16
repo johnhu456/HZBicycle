@@ -52,6 +52,7 @@ static CGFloat const kArrorHeight = 10.f;
         self.backgroundColor = [UIColor clearColor];
         [self setupSubViews];
         [self setupLayer];
+        [self setupTapGesture];
     }
     return self;
 }
@@ -140,6 +141,11 @@ static CGFloat const kArrorHeight = 10.f;
     self.blurMaskLayer.shadowPath = maskPath.CGPath;
 }
 
+- (void)setupTapGesture {
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTaped:)];
+    [self addGestureRecognizer:tapGesture];
+}
+
 #pragma mark - Setter
 - (void)setStationModel:(HBBicycleStationModel *)stationModel {
     _stationModel = stationModel;
@@ -179,6 +185,10 @@ static CGFloat const kArrorHeight = 10.f;
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     [self setupLayer];
+}
+
+- (void)setHandleTaped:(void (^)())handleTaped {
+    _handleTaped = handleTaped;
 }
 
 #pragma mark - Icon
@@ -235,5 +245,11 @@ static CGFloat const kArrorHeight = 10.f;
             self.transform = CGAffineTransformMakeScale(1.0, 1.0);
         }];
     }];
+}
+
+- (void)handleTaped:(UIGestureRecognizer *)gesture {
+    if (self.handleTaped) {
+        self.handleTaped();
+    }
 }
 @end

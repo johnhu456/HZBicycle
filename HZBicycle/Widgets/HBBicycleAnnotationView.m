@@ -38,7 +38,11 @@ static CGFloat const kContentAdd = 70.f;
     }
     if (selected) {
         if (self.popView ==nil ) {
+            @WEAKSELF;
             self.popView = [[HBBicyclePopView alloc] initWithFrame:CGRectMake(5, 5, kPopViewWidth, kPopViewHeight)];
+            self.popView.handleTaped = ^() {
+                [weakSelf handlePopViewBeTappedMethod];
+            };
             [self addSubview:self.popView];
         }
         if ([self.annotation isKindOfClass:[HBBicyclePointAnnotation class]]) {
@@ -52,6 +56,11 @@ static CGFloat const kContentAdd = 70.f;
         self.popView = nil;
     }
     [super setSelected:selected animated:animated];
+}
+
+#pragma mark - Setter
+- (void)setHandlePopViewTaped:(void (^)(id<MAAnnotation>))handlePopViewTaped {
+    _handlePopViewTaped = handlePopViewTaped;
 }
 
 #pragma mark - Private Method
@@ -69,6 +78,24 @@ static CGFloat const kContentAdd = 70.f;
             titleSize.width = kPopViewWidth;
         }
         self.popView.frame = CGRectMake(self.popView.frame.origin.x + self.calloutOffset.x + 2 * kContentInsets, self.popView.frame.origin.y + self.calloutOffset.y, titleSize.width + kContentAdd, kPopViewHeight);
+    }
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *view = [super hitTest:point withEvent:event];
+    if (view == nil) {
+        CGPoint tempoint = [self.popView convertPoint:point fromView:self];
+        if (CGRectContainsPoint(self.popView.bounds, tempoint))
+        {
+            view = self.popView;
+        }
+    }
+    return view;
+}
+
+- (void)handlePopViewBeTappedMethod {
+    if (self.handlePopViewTaped) {
+        self.handlePopViewTaped((HBBicyclePointAnnotation *)self.annotation);
     }
 }
 @end

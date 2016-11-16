@@ -17,4 +17,9 @@
  */
 @property (nonatomic, strong, readonly) HBBicyclePopView *popView;
 
+/**
+ 点击回调
+ */
+@property (nonatomic, copy) void(^handlePopViewTaped)(id<MAAnnotation> annotation);
+
 @end
