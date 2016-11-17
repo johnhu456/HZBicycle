@@ -34,6 +34,7 @@ static NSString *const kAMapAppKey = @"46e4a0f82fe002fffd0cf4391f2b5cc9";
     [self.window setRootViewController:navigationController];
     [self.window makeKeyAndVisible];
     
+    
     return YES;
 }
 

@@ -16,7 +16,7 @@
 #import "HBBicyclePointAnnotation.h"
 #import "HBBicycleAnnotationView.h"
 
-@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete,UINavigationControllerDelegate>
+@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete,UINavigationControllerDelegate,SeachViewControllerDelegate,HBStationsViewControllerDelegate>
 
 #pragma mark - Views
 /**
@@ -173,8 +173,13 @@ static CGFloat const kContentInsets = 15.f;
                                                    [weakSelf.mapView removeAnnotations:weakSelf.mapView.annotations];
                                                    weakSelf.stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
                                                    NSLog(@"%@",weakSelf.stationResult);
-                                                   [weakSelf addBicycleStations];
+                                                   if (weakSelf.stationResult.count) {
+                                                       [weakSelf addBicycleStationsWithIndex:0];
+                                                   }else {
+#warning 提示问题 周边没有自行车
+                                                   }
                                                    [weakSelf.locationButton endActivityAnimation];
+
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
                                                    NSLog(@"%@",request);
                                                }];
@@ -185,9 +190,17 @@ static CGFloat const kContentInsets = 15.f;
 /**
  将自行车站添加到地图上
  */
-- (void)addBicycleStations {
+- (void)addBicycleStationsWithIndex:(NSUInteger)index {
+    [self.mapView removeAnnotations:self.mapView.annotations];
     for (HBBicycleStationModel *model in self.stationResult.data) {
         [self addAnnotationWithStation:model];
+    }
+    //设最近的为中心点
+    if (self.stationResult.data[index]) {
+        HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
+        [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
+    }else{
+#warning
     }
 }
 
@@ -200,8 +213,6 @@ static CGFloat const kContentInsets = 15.f;
 - (void)addAnnotationToMapView:(id<MAAnnotation>)annotation
 {
     [self.mapView addAnnotation:annotation];
-    //设为中心点
-    [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
 }
 
 #pragma mark - MapViewDelegate
@@ -220,11 +231,14 @@ static CGFloat const kContentInsets = 15.f;
                 //截图提供背景
                 __block UIImage *screenshotImage = nil;
                 __block NSInteger resState = 0;
+                @WEAK_OBJ(annoation);
                 [weakSelf.mapView takeSnapshotInRect:weakSelf.view.frame withCompletionBlock:^(UIImage *resultImage, NSInteger state) {
                     screenshotImage = resultImage;
                     resState = state;
                     if (screenshotImage && resState) {
-                        HBStationsViewController *stationsVC = [[HBStationsViewController alloc] initWithStations:weakSelf.stationResult index:0 blurBackImage:screenshotImage];
+                        HBStationsViewController *stationsVC = [[HBStationsViewController alloc] initWithStations:weakSelf.stationResult index:[weakSelf.stationResult.data indexOfObject:annoationWeak.station] blurBackImage:screenshotImage];
+#warning 不一定
+                        stationsVC.delegate = self;
                         [weakSelf addChildViewController:stationsVC];
                         [weakSelf.view addSubview:stationsVC.view];
                     }
@@ -247,7 +261,28 @@ static CGFloat const kContentInsets = 15.f;
     NSLog(@"begin");
     [self.searchBar resignSearchBarWithFinish:NO];
     MainSearchViewController *searchViewController = [[MainSearchViewController alloc] init];
+    searchViewController.delegate = self;
     [self.navigationController pushViewController:searchViewController animated:YES];
+}
+
+#pragma mark - SearchViewControllerDelegate
+- (void)searchViewController:(MainSearchViewController *)searchVC didChooseIndex:(NSUInteger)index inResults:(HBBicycleResultModel *)results {
+    if (!self.mapView.userLocation) {
+        [self reloadLocation];
+    }
+//    CLLocationCoordinate2D mylocation = self.mapView.userLocation.coordinate;
+//    //搜索返回结果没有距离，手动添加
+//    for (HBBicycleStationModel *station in results.data) {
+//        NSUInteger distance = [HBMapManager getDistanceFromPoint:mylocation toAnotherPoint:AMapCoordinateConvert(CLLocationCoordinate2DMake(station.lat, station.lon),AMapCoordinateTypeBaidu)];
+//        station.len = distance;
+//    }
+    [self showStationDetailWithStations:results stationIndex:index];
+}
+
+#pragma mark - StationsViewControllerDelegate
+- (void)stationViewController:(HBStationsViewController *)stationVC didSelectedIndex:(NSUInteger)index inStations:(HBBicycleResultModel *)stations {
+    self.stationResult = stations;
+    [self addBicycleStationsWithIndex:index];
 }
 
 #pragma mark - UINavigationControllerDelegate
@@ -270,6 +305,25 @@ static CGFloat const kContentInsets = 15.f;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Private Method
+- (void)showStationDetailWithStations:(HBBicycleResultModel *)stations stationIndex:(NSUInteger)index {
+#warning Stations跳转
+    @WEAKSELF;
+    //截图提供背景
+    __block UIImage *screenshotImage = nil;
+    __block NSInteger resState = 0;
+    [self.mapView takeSnapshotInRect:weakSelf.view.frame withCompletionBlock:^(UIImage *resultImage, NSInteger state) {
+        screenshotImage = resultImage;
+        resState = state;
+        if (screenshotImage && resState) {
+            HBStationsViewController *stationsVC = [[HBStationsViewController alloc] initWithStations:stations index:index blurBackImage:screenshotImage];
+            stationsVC.delegate = self;
+            [weakSelf addChildViewController:stationsVC];
+            [weakSelf.view addSubview:stationsVC.view];
+        }
+    }];
 }
 
 /*

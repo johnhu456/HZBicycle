@@ -24,6 +24,15 @@
     return CLLocationCoordinate2DMake(30.252096, 120.163452);
 }
 
++ (NSUInteger)getDistanceFromPoint:(CLLocationCoordinate2D)point toAnotherPoint:(CLLocationCoordinate2D)anotherPoint {
+    //1.将两个经纬度点转成投影点
+    MAMapPoint point1 = MAMapPointForCoordinate(point);
+    MAMapPoint point2 = MAMapPointForCoordinate(anotherPoint);
+    //2.计算距离
+    CLLocationDistance distance = MAMetersBetweenMapPoints(point1,point2);
+    return (NSUInteger)distance;
+}
+
 @end
 
 #define LAT_OFFSET_0(x,y) -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * sqrt(fabs(x))

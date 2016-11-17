@@ -543,8 +543,8 @@
 				TargetAttributes = {
 					E0630A991DB9C44C0012EA3A = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = H3MEX3W3VV;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = 8RG52VJRN9;
+						ProvisioningStyle = Manual;
 					};
 					E0630AB21DB9C44C0012EA3A = {
 						CreatedOnToolsVersion = 8.0;
@@ -851,6 +851,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: XIANG HU (8RG52VJRN9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -898,6 +899,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: XIANG HU (8RG52VJRN9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -923,14 +925,17 @@
 			baseConfigurationReference = 65143C83E9D15029B55E1BAF /* Pods-HZBicycle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = H3MEX3W3VV;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8RG52VJRN9;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "/Users/HU/Documents/IOS开发/Github托管/HZBicycle/HZBicycle/PrefixHeader.pch";
 				INFOPLIST_FILE = HZBicycle/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.MADAO.HZBicycle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MADAO.HXBicycle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e461177e-3bed-44d8-b941-61f68e19bc3e";
+				PROVISIONING_PROFILE_SPECIFIER = "胡翔的iPhone6S证书";
 			};
 			name = Debug;
 		};
@@ -939,14 +944,17 @@
 			baseConfigurationReference = 0CBA75B2B4F8B78B4418E98B /* Pods-HZBicycle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = H3MEX3W3VV;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 8RG52VJRN9;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "/Users/HU/Documents/IOS开发/Github托管/HZBicycle/HZBicycle/PrefixHeader.pch";
 				INFOPLIST_FILE = HZBicycle/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.MADAO.HZBicycle;
+				PRODUCT_BUNDLE_IDENTIFIER = com.MADAO.HXBicycle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e461177e-3bed-44d8-b941-61f68e19bc3e";
+				PROVISIONING_PROFILE_SPECIFIER = "胡翔的iPhone6S证书";
 			};
 			name = Release;
 		};

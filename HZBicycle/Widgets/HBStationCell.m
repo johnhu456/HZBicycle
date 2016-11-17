@@ -72,6 +72,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     //设置字体
+    self.lblName.adjustsFontSizeToFitWidth = YES;
     self.lblAdress.adjustsFontSizeToFitWidth = YES;
     [self setupFonts];
     //设置圆角及阴影

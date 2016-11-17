@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@class HBStationsViewController;
+@protocol HBStationsViewControllerDelegate <NSObject>
+
+
+/**
+ 站点详情页面点击代理
+
+ @param stationVC 站点详情页面
+ @param index     点击的Index
+ @param stations  总站点 
+ */
+- (void)stationViewController:(HBStationsViewController *)stationVC
+             didSelectedIndex:(NSUInteger)index
+                   inStations:(HBBicycleResultModel *)stations;
+
+@end
 @interface HBStationsViewController : HBBaseViewController
 
 /**
@@ -20,4 +36,7 @@
 - (instancetype)initWithStations:(HBBicycleResultModel *)stations
                            index:(NSUInteger)index
                     blurBackImage:(UIImage *)backImage;
+
+@property (nonatomic, weak) id<HBStationsViewControllerDelegate> delegate;
+
 @end

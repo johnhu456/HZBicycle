@@ -12,7 +12,9 @@
 
 #import "HBStationCell.h"
 
-@interface HBStationsViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface HBStationsViewController () <UICollectionViewDelegate, UICollectionViewDataSource> {
+    NSUInteger _cardIndex;
+}
 
 #pragma mark - Views
 
@@ -40,6 +42,7 @@
 #pragma mark - Init
 - (instancetype)initWithStations:(HBBicycleResultModel *)stations index:(NSUInteger)index blurBackImage:(UIImage *)backImage {
     if (self = [super init]) {
+        _cardIndex = index;
         self.blurBackImage = backImage;
         self.resultStations = stations;
     }
@@ -56,12 +59,14 @@
     
 //    设置collectionView
     [self setupCollectionView];
-    
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    
-    // Do any additional setup after loading the view.
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    [super didMoveToParentViewController:parent];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 #pragma mark - UserInterface
@@ -82,6 +87,7 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.collectionView];
     [self.collectionView registerNib:NibFromClass(HBStationCell) forCellWithReuseIdentifier:StrFromClass(HBStationCell)];
+    [self.collectionView setContentOffset:CGPointMake((self.collectionView.frame.size.width - 30 * 3) *_cardIndex, self.collectionView.contentOffset.y) animated:NO];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -107,10 +113,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self.view removeFromSuperview];
     [self removeFromParentViewController];
+    if ([self.delegate respondsToSelector:@selector(stationViewController:didSelectedIndex:inStations:)]){
+        [self.delegate stationViewController:self didSelectedIndex:indexPath.row inStations:self.resultStations];
+    }
 }
-#pragma mark <UICollectionViewDelegate>
-
-#pragma mark - SnapShotView
 
 
 /*

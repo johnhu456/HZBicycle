@@ -20,6 +20,10 @@ NSString *const kSearchDistanceKey = @"kSearchDistanceKey";
 #pragma mark - Getter
 + (CGFloat)searchDistance {
     NSNumber *searchDistance = [[NSUserDefaults standardUserDefaults] objectForKey:kSearchDistanceKey];
+    if (searchDistance == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(800) forKey:kSearchDistanceKey];
+        return 800;
+    }
     return [searchDistance floatValue];
 }
 @end

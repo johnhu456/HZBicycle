@@ -23,6 +23,11 @@
  获取杭州的中心点坐标
  */
 + (CLLocationCoordinate2D)hangZhouCenter;
+
+/**
+ 计算两个坐标点之间距离，单位为米
+ */
++ (NSUInteger)getDistanceFromPoint:(CLLocationCoordinate2D)point toAnotherPoint:(CLLocationCoordinate2D)anotherPoint;
 @end
 
 /**
