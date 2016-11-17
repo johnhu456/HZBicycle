@@ -11,6 +11,7 @@
 //Cells
 #import "HBBicycleAccuracyCell.h"
 #import "HBOfflineMapCell.h"
+#import "HBDefaultSettingCell.h"
 
 @interface MainSettingViewController ()<UITableViewDelegate,UITableViewDataSource,PKDownloadButtonDelegate>
 
@@ -24,6 +25,7 @@
 
 static CGFloat const kAccuracyCellHeight = 115.f;
 static CGFloat const kOfflineCellHeight = 135.f;
+static CGFloat const kOffcialContactCellHeight = 59.f;
 static CGFloat const kSizeAdapter = 1024.f * 1024.f;
 
 @implementation MainSettingViewController
@@ -54,7 +56,7 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
             }else{
                 //可下载状态
                 self.downloadButton.state = kPKDownloadButtonState_StartDownload;
-                self.offlineMapCell.lblSize.text = [NSString stringWithFormat:@"%.2f/ MB",offlineItem.size/kSizeAdapter];
+                self.offlineMapCell.lblSize.text = [NSString stringWithFormat:@"%.2f MB",offlineItem.size/kSizeAdapter];
             }
             break;
         case MAOfflineItemStatusCached: {
@@ -113,35 +115,73 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning  to change;
-    return 2;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        HBBicycleAccuracyCell *accuaryCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBBicycleAccuracyCell)];
-        accuaryCell.handleSldValueChanged = ^(NSInteger intValue){
-            [HBUserDefultsManager setSearchDistance:intValue];
-        };
-        accuaryCell.searchDistance = [HBUserDefultsManager searchDistance];
-        return accuaryCell;
-    }else {
-        HBOfflineMapCell *offlineMapCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBOfflineMapCell)];
-        offlineMapCell.pkDownLoadButton.delegate = self;
-        self.downloadButton = offlineMapCell.pkDownLoadButton;
-        self.offlineMapCell = offlineMapCell;
-        //设置下载按钮的显示状态
-        [self setupDownloadButtonState];
-        return offlineMapCell;
+    switch (indexPath.row) {
+        case 0:
+        {
+            HBBicycleAccuracyCell *accuaryCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBBicycleAccuracyCell)];
+            accuaryCell.handleSldValueChanged = ^(NSInteger intValue){
+                [HBUserDefultsManager setSearchDistance:intValue];
+            };
+            accuaryCell.searchDistance = [HBUserDefultsManager searchDistance];
+            return accuaryCell;
+        }
+            break;
+        case 1:
+        {
+            HBOfflineMapCell *offlineMapCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBOfflineMapCell)];
+            offlineMapCell.pkDownLoadButton.delegate = self;
+            self.downloadButton = offlineMapCell.pkDownLoadButton;
+            self.offlineMapCell = offlineMapCell;
+            //设置下载按钮的显示状态
+            [self setupDownloadButtonState];
+            return offlineMapCell;
+        }
+            break;
+        case 2:
+        {
+            HBDefaultSettingCell *officialContactCell = [[HBDefaultSettingCell alloc] initWithTitle:@"客服" icon:ImageInName(@"main_setting_dial") cellType:HBSettintCellTypeTop];
+            return officialContactCell;
+        }
+            break;
+        case 3:
+        {
+            HBDefaultSettingCell *feedBackCell = [[HBDefaultSettingCell alloc] initWithTitle:@"意见反馈" icon:ImageInName(@"main_setting_dial") cellType:HBSettintCellTypeDefault];
+            return feedBackCell;
+        }
+            break;
+        case 4:
+        {
+            HBDefaultSettingCell *aboutMeCell = [[HBDefaultSettingCell alloc] initWithTitle:@"关于PBicycles" icon:ImageInName(@"main_setting_dial") cellType:HBSettintCellTypeBottom];
+            return aboutMeCell;
+        }
+            break;
+        default:
+            return nil;
+            break;
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return kAccuracyCellHeight;
-    }else {
-        return kOfflineCellHeight;
+    switch (indexPath.row) {
+        case 0:
+            return kAccuracyCellHeight;
+            break;
+        case 1:
+            return kOfflineCellHeight;
+            break;
+        case 2:
+            return kOffcialContactCellHeight;
+            break;
+        case 3: case 4:
+            return kOffcialContactCellHeight - 10 ;
+        default:
+            return DBL_EPSILON;
+            break;
     }
-
 }
 
 #pragma mark - PKDownloadButtonDelegate
@@ -165,10 +205,8 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
             [[HBOfflineMapManager sharedManager] stopDownload];
             break;
         case kPKDownloadButtonState_Downloaded:
-            //清空地图数据
-#warning 做个弹窗
-            self.downloadButton.state = kPKDownloadButtonState_StartDownload;
-            [[HBOfflineMapManager sharedManager] clearMap];
+            //处理删除按钮点击
+            [self handleDeleteButtonOnClicked];
             break;
         default:
             NSAssert(NO, @"unsupported state");
@@ -201,6 +239,22 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
             });
         }
     }];
+}
+
+- (void)handleDeleteButtonOnClicked {
+    @WEAKSELF;
+    UIAlertController *tipAlert = [UIAlertController alertControllerWithTitle:@"提示" message:@"删除后下次使用地图将会消耗流量哦~" preferredStyle:UIAlertControllerStyleAlert];
+    @WEAK_OBJ(tipAlert);
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [tipAlertWeak dismissViewControllerAnimated:YES completion:nil];
+    }];
+    UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        weakSelf.downloadButton.state = kPKDownloadButtonState_StartDownload;
+        [[HBOfflineMapManager sharedManager] clearMap];
+    }];
+    [tipAlert addAction:cancel];
+    [tipAlert addAction:confirm];
+    [self presentViewController:tipAlert animated:YES completion:nil];
 }
 
 - (void)dealloc {

@@ -33,6 +33,8 @@
 @end
 @interface HBBicycleAccuracyCell()
 
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+
 /**
  距离显示标签
  */
@@ -49,6 +51,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.lblTitle.font = HB_FONT_MEDIUM_SIZE(19);
+    self.lblResult.font = HB_FONT_MEDIUM_SIZE(17);
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     //设置控件颜色
     self.sldDistance.minimumTrackTintColor = HB_COLOR_SLDMIN;

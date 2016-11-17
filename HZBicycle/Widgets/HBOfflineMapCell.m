@@ -10,10 +10,18 @@
 #import <UIColor+PKDownloadButton.h>
 #import <UIImage+PKDownloadButton.h>
 
+@interface HBOfflineMapCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+
+
+@end
+
 @implementation HBOfflineMapCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.lblTitle.font = HB_FONT_MEDIUM_SIZE(19);
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     //设置下载按钮
     self.pkDownLoadButton.tintColor = [UIColor whiteColor];

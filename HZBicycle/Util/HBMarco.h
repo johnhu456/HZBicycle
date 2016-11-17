@@ -14,7 +14,7 @@
 #define HB_FONT_MEDIUM_SIZE(x) [UIFont fontWithName:@"STHeitiSC-Medium" size:x]
 
 //颜色
-#define HB_COLOR_DARKBLUE FHColorWithHexRGB(0x3F5874)
+#define HB_COLOR_DARKBLUE FHColorWithHexRGB(0x4F6C87)
 #define HB_COLOR_SOFTGREEN FHColorWithHexRGB(0xB3D66E)
 #define HB_COLOR_SOFTORANGE FHColorWithHexRGB(0xF8931D)
 #define HB_COLOR_TABLEVAIEWBACK FHColorWithHexRGB(0x8a8a8a)
