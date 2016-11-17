@@ -442,6 +442,8 @@
 		E0E079711DBF45030028AB83 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E08DD57C1DC87C3900064283 /* ViewController.h */,
+				E08DD57D1DC87C3900064283 /* ViewController.m */,
 				E029C2331DD1A74F00FC017B /* HBBaseViewController.h */,
 				E029C2341DD1A74F00FC017B /* HBBaseViewController.m */,
 				E0E079731DBF453E0028AB83 /* MainBicycleViewController.h */,
@@ -450,8 +452,6 @@
 				E06DD0CC1DDAA0D00024039D /* MainSearchViewController.m */,
 				E013EDE31DCC835E008F4259 /* MainSettingViewController.h */,
 				E013EDE41DCC835E008F4259 /* MainSettingViewController.m */,
-				E08DD57C1DC87C3900064283 /* ViewController.h */,
-				E08DD57D1DC87C3900064283 /* ViewController.m */,
 				E06DD0DD1DDB22310024039D /* HBStationsViewController.h */,
 				E06DD0DE1DDB22310024039D /* HBStationsViewController.m */,
 			);

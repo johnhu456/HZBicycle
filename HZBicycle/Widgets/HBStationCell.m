@@ -69,6 +69,13 @@
 
 @implementation HBStationCell
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        self.bounds = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, [UIScreen mainScreen].bounds.size.width -120 , 300 );
+    }
+    return self;
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     //设置字体
@@ -94,7 +101,16 @@
 }
 
 - (void)setupMaskLayer {
-    self.layer.cornerRadius = 5.f;
+//    self.layer.cornerRadius = 5.f; 渲染容易卡顿，弃用
+    CGRect shadowRect = CGRectMake(0, 0, self.bounds.size.width - 8, self.bounds.size.height - 8);
+    UIBezierPath *roundRectPath = [UIBezierPath bezierPathWithRoundedRect:shadowRect cornerRadius:5.f];
+    CAShapeLayer *maskLayer = [CAShapeLayer layer];
+    maskLayer.path = roundRectPath.CGPath;
+    maskLayer.frame = shadowRect;
+    maskLayer.shadowColor = [UIColor blackColor].CGColor;
+    maskLayer.shadowOpacity = 0.8;
+    maskLayer.shadowOffset = CGSizeMake(2, 2);
+    self.layer.mask = maskLayer;
 }
 
 #pragma mark - Setter 

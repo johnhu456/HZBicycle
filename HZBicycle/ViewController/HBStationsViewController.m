@@ -83,7 +83,7 @@
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.showsHorizontalScrollIndicator = YES;
     self.collectionView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.collectionView];
     [self.collectionView registerNib:NibFromClass(HBStationCell) forCellWithReuseIdentifier:StrFromClass(HBStationCell)];

@@ -54,6 +54,7 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
             }else{
                 //可下载状态
                 self.downloadButton.state = kPKDownloadButtonState_StartDownload;
+                self.offlineMapCell.lblSize.text = [NSString stringWithFormat:@"%.2f/ MB",offlineItem.size/kSizeAdapter];
             }
             break;
         case MAOfflineItemStatusCached: {

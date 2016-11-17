@@ -52,6 +52,7 @@
 static CGFloat const kButtonWidth = 50.f;
 static CGFloat const kContentInsets = 15.f;
 
+static CGFloat const kMapZoomLevel = 15;
 
 @implementation MainBicycleViewController
 
@@ -61,7 +62,7 @@ static CGFloat const kContentInsets = 15.f;
     self.view.backgroundColor = [UIColor whiteColor];
     //设置定位精度
     self.locationManager = [[AMapLocationManager alloc] init];
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
     self.locationManager.delegate = self;
     
     //注册通知
@@ -99,6 +100,7 @@ static CGFloat const kContentInsets = 15.f;
     //添加地图
     self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
     [self.mapView setUserTrackingMode:MAUserTrackingModeFollowWithHeading];
+    self.mapView.desiredAccuracy = kCLLocationAccuracyBest;
     self.mapView.zoomLevel = 15;
     //无法调整角度
     self.mapView.rotateCameraEnabled = NO;
@@ -121,7 +123,6 @@ static CGFloat const kContentInsets = 15.f;
 - (void)setupButtons {
     @WEAKSELF;
     self.locationButton = [[HBLocationButton alloc] initWithIconImage:ImageInName(@"main_location") clickBlock:^{
-        [weakSelf.locationButton startActivityAnimation];
         [weakSelf reloadLocation];
     }];
     [self.view addSubview:self.locationButton];
@@ -162,6 +163,7 @@ static CGFloat const kContentInsets = 15.f;
  */
 - (void)reloadLocation {
     @WEAKSELF;
+    [weakSelf.locationButton startActivityAnimation];
     [self.locationManager requestLocationWithReGeocode:NO completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
         if (location) {
             [weakSelf.mapView setCenterCoordinate:location.coordinate animated:YES];
@@ -182,6 +184,7 @@ static CGFloat const kContentInsets = 15.f;
 
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
                                                    NSLog(@"%@",request);
+                                                   [weakSelf.locationButton endActivityAnimation];
                                                }];
         }
     }];
@@ -199,6 +202,9 @@ static CGFloat const kContentInsets = 15.f;
     if (self.stationResult.data[index]) {
         HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
         [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
+        if (self.mapView.zoomLevel != kMapZoomLevel) {
+            [self.mapView setZoomLevel:kMapZoomLevel animated:YES];
+        }
     }else{
 #warning
     }
@@ -281,8 +287,20 @@ static CGFloat const kContentInsets = 15.f;
 
 #pragma mark - StationsViewControllerDelegate
 - (void)stationViewController:(HBStationsViewController *)stationVC didSelectedIndex:(NSUInteger)index inStations:(HBBicycleResultModel *)stations {
-    self.stationResult = stations;
-    [self addBicycleStationsWithIndex:index];
+    if (self.stationResult == stations) {
+        if (self.mapView.annotations[index]) {
+            [self.mapView selectAnnotation:self.mapView.annotations[index] animated:YES];
+            HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
+            [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
+            if (self.mapView.zoomLevel != kMapZoomLevel) {
+                [self.mapView setZoomLevel:kMapZoomLevel animated:YES];
+            }
+        }
+
+    } else {
+        self.stationResult = stations;
+        [self addBicycleStationsWithIndex:index];
+    }
 }
 
 #pragma mark - UINavigationControllerDelegate

@@ -172,7 +172,7 @@
                 <outlet property="lblReturnableNumber" destination="9TY-8j-cZ0" id="1Uk-6w-e5s"/>
                 <outlet property="lblServiceTime" destination="Arj-Sq-nbF" id="JcW-JY-Mgv"/>
             </connections>
-            <point key="canvasLocation" x="-154.5" y="67"/>
+            <point key="canvasLocation" x="-472" y="-102"/>
         </collectionViewCell>
     </objects>
     <resources>
