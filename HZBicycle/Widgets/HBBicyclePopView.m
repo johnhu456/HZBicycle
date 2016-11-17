@@ -154,11 +154,12 @@ static CGFloat const kArrorHeight = 10.f;
     //生成圆点图片
     NSTextAttachment *rentAttach = [[NSTextAttachment alloc] init];
     rentAttach.bounds = CGRectMake(13, -12, 32, 32);
-    rentAttach.image = [self convertViewToImage:[self iconViewWithColor:HB_COLOR_SOFTGREEN]];
+//    rentAttach.image = [self convertViewToImage:[self iconViewWithColor:HB_COLOR_SOFTGREEN]];
+    rentAttach.image = [UIImage roundSingleColorImageWithColor:HB_COLOR_SOFTGREEN];
     
     NSTextAttachment *returnAttach = [[NSTextAttachment alloc] init];
     returnAttach.bounds = CGRectMake(13, -12, 32, 32);
-    returnAttach.image = [self convertViewToImage:[self iconViewWithColor:HB_COLOR_SOFTORANGE]];
+    returnAttach.image = [UIImage roundSingleColorImageWithColor:HB_COLOR_SOFTORANGE];
     
     //合成字符串
     NSMutableAttributedString *rentString = [[NSMutableAttributedString attributedStringWithAttachment:rentAttach] mutableCopy];
@@ -192,7 +193,7 @@ static CGFloat const kArrorHeight = 10.f;
 }
 
 #pragma mark - Icon
--(UIImage* )convertViewToImage:(UIView*)view {
+- (UIImage* )convertViewToImage:(UIView*)view {
     
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0);
     
@@ -204,21 +205,6 @@ static CGFloat const kArrorHeight = 10.f;
     
     return image;
 }
-
-- (UIImage *)snapShot:(UIView *)view {
-    UIGraphicsBeginImageContextWithOptions(view.bounds.size, YES, 0.0);
-    
-    if ([view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
-        [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
-    }
-    else{
-        [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    }
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
-
 
 - (UIView *)iconViewWithColor:(UIColor *)color {
     UIView *iconView = [[UIView alloc] initWithFrame:CGRectMake(-10, 0, 32, 32)];

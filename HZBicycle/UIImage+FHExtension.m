@@ -71,4 +71,33 @@
     CGImageRelease(outImage);
     return blurImage;
 }
+
++ (UIImage* )roundSingleColorImageWithColor:(UIColor *)color {
+    
+    UIView *colorView = [self iconViewWithColor:color];
+    UIGraphicsBeginImageContextWithOptions(colorView.bounds.size, NO, 0);
+    
+    [colorView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+#pragma mark - Private Method
+
++ (UIView *)iconViewWithColor:(UIColor *)color {
+    UIView *iconView = [[UIView alloc] initWithFrame:CGRectMake(-10, 0, 32, 32)];
+    UIBezierPath *roundBezierPath = [UIBezierPath bezierPath];
+    [roundBezierPath addArcWithCenter:iconView.center radius:2.5f startAngle:0 endAngle:2* M_PI clockwise:YES];
+    CAShapeLayer *roundLayer = [CAShapeLayer layer];
+    roundLayer.path = roundBezierPath.CGPath;
+    roundLayer.strokeColor               = [color CGColor];
+    roundLayer.fillColor                 = [[UIColor clearColor]CGColor];
+    roundLayer.lineWidth                 = 5.f;
+    [iconView.layer addSublayer:roundLayer];
+    return iconView;
+}
 @end

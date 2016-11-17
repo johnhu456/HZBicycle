@@ -198,10 +198,11 @@ static CGFloat const kMapZoomLevel = 15;
     for (HBBicycleStationModel *model in self.stationResult.data) {
         [self addAnnotationWithStation:model];
     }
-    //设最近的为中心点
+    //设最近的或者选中的为中心点
     if (self.stationResult.data[index]) {
-        HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
+        HBBicyclePointAnnotation *annotation = self.mapView.annotations[index];
         [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
+        [self.mapView selectAnnotation:annotation animated:YES];
         if (self.mapView.zoomLevel != kMapZoomLevel) {
             [self.mapView setZoomLevel:kMapZoomLevel animated:YES];
         }
@@ -232,6 +233,7 @@ static CGFloat const kMapZoomLevel = 15;
         if (annotationView == nil) {
             annotationView = [[HBBicycleAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndetifier];
             annotationView.handlePopViewTaped = ^(HBBicyclePointAnnotation *annoation) {
+                [weakSelf.mapView deselectAnnotation:annotation animated:YES];
                 NSLog(@"%@",annoation.station.name);
 #warning Stations跳转
                 //截图提供背景
@@ -288,19 +290,14 @@ static CGFloat const kMapZoomLevel = 15;
 #pragma mark - StationsViewControllerDelegate
 - (void)stationViewController:(HBStationsViewController *)stationVC didSelectedIndex:(NSUInteger)index inStations:(HBBicycleResultModel *)stations {
     if (self.stationResult == stations) {
-        if (self.mapView.annotations[index]) {
-            [self.mapView selectAnnotation:self.mapView.annotations[index] animated:YES];
-            HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
-            [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
-            if (self.mapView.zoomLevel != kMapZoomLevel) {
-                [self.mapView setZoomLevel:kMapZoomLevel animated:YES];
-            }
-        }
-
+        [self.mapView selectAnnotation:self.mapView.annotations[index] animated:YES];
+        HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
+        [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
     } else {
         self.stationResult = stations;
         [self addBicycleStationsWithIndex:index];
     }
+
 }
 
 #pragma mark - UINavigationControllerDelegate

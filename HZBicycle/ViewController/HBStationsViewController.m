@@ -12,7 +12,7 @@
 
 #import "HBStationCell.h"
 
-@interface HBStationsViewController () <UICollectionViewDelegate, UICollectionViewDataSource> {
+@interface HBStationsViewController () <UICollectionViewDelegate, UICollectionViewDataSource,UIGestureRecognizerDelegate> {
     NSUInteger _cardIndex;
 }
 
@@ -22,6 +22,8 @@
  毛玻璃背景
  */
 @property (nonatomic, strong) UIImage *blurBackImage;
+
+@property (nonatomic, strong) UIImageView *blurView;
 
 /**
  CollectionView
@@ -54,15 +56,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor clearColor];
+    
     //设置模糊背景
     [self setupBlurView];
     
 //    设置collectionView
     [self setupCollectionView];
-}
+    
+    //设置点击手势
+    [self setupTapGestureRecognizer];
 
-- (void)didMoveToParentViewController:(UIViewController *)parent {
-    [super didMoveToParentViewController:parent];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,10 +75,10 @@
 #pragma mark - UserInterface
 - (void)setupBlurView {
 //    @WEAKSELF;
-    UIImageView *backView = [[UIImageView alloc] initWithFrame:self.view.frame];
-    backView.contentMode = UIViewContentModeScaleAspectFill;
-    backView.image = [self.blurBackImage coreBlurWithBlurLevel:1.2];
-    [self.view addSubview:backView];
+    self.blurView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    self.blurView.contentMode = UIViewContentModeScaleAspectFill;
+    self.blurView.image = [self.blurBackImage coreBlurWithBlurLevel:1.2];
+    [self.view addSubview:self.blurView];
 }
 
 - (void)setupCollectionView {
@@ -88,6 +91,12 @@
     [self.view addSubview:self.collectionView];
     [self.collectionView registerNib:NibFromClass(HBStationCell) forCellWithReuseIdentifier:StrFromClass(HBStationCell)];
     [self.collectionView setContentOffset:CGPointMake((self.collectionView.frame.size.width - 30 * 3) *_cardIndex, self.collectionView.contentOffset.y) animated:NO];
+}
+
+- (void)setupTapGestureRecognizer {
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture:)];
+    tapGes.delegate = self;
+    [self.collectionView addGestureRecognizer:tapGes];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -111,13 +120,54 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [self.view removeFromSuperview];
-    [self removeFromParentViewController];
-    if ([self.delegate respondsToSelector:@selector(stationViewController:didSelectedIndex:inStations:)]){
-        [self.delegate stationViewController:self didSelectedIndex:indexPath.row inStations:self.resultStations];
-    }
+    //ACTionsheet 选择
+    HBBicycleStationModel *station = self.resultStations.data[indexPath.row];
+    NSString *phone1 = [[station.stationPhone mutableCopy] substringFromIndex:13];
+    NSString *phone2 = [[station.stationPhone2 mutableCopy] substringFromIndex:14];
+#warning todo
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *show = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([self.delegate respondsToSelector:@selector(stationViewController:didSelectedIndex:inStations:)]){
+            [self.delegate stationViewController:self didSelectedIndex:indexPath.row inStations:self.resultStations];
+        }
+        [self handleDismiss];
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [alertController dismissViewControllerAnimated:YES completion:nil];
+    }];
+    UIAlertAction *callPhone1 = [UIAlertAction actionWithTitle:@"联系(白天)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phone1]];
+        [[UIApplication sharedApplication] openURL:url];
+    }];
+    UIAlertAction *callPhone2 = [UIAlertAction actionWithTitle:@"联系(晚上)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phone2]];
+        [[UIApplication sharedApplication] openURL:url];
+    }];
+    [alertController addAction:cancel];
+    [alertController addAction:show];
+    [alertController addAction:callPhone1];
+    [alertController addAction:callPhone2];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
+#pragma mark - Private Method 
+- (void)handleTapGesture:(UITapGestureRecognizer *)tap {
+    [self handleDismiss];
+}
+
+//从父视图移除
+- (void)handleDismiss {
+    [self.view removeFromSuperview];
+    [self removeFromParentViewController];
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if (touch.view != self.collectionView) {
+        return NO;
+    }
+    return YES;
+}
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking

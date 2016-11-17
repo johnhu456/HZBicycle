@@ -72,6 +72,8 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     if (self = [super initWithCoder:aDecoder]) {
         self.bounds = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, [UIScreen mainScreen].bounds.size.width -120 , 300 );
+        //设置圆角及阴影
+        [self setupMaskLayer];
     }
     return self;
 }
@@ -82,8 +84,6 @@
     self.lblName.adjustsFontSizeToFitWidth = YES;
     self.lblAdress.adjustsFontSizeToFitWidth = YES;
     [self setupFonts];
-    //设置圆角及阴影
-    [self setupMaskLayer];
 }
 
 - (void)setupFonts {
@@ -121,10 +121,43 @@
     self.lblDistance.text = [NSString stringWithFormat:@"距离%d米",(int)station.len];
     self.lblAdress.text = station.address;
     self.lblManagerType.text = station.guardType;
-    self.lblPhoneFirst.text = station.stationPhone;
+    NSMutableString *mutaPhoneFirstString = [[NSMutableString alloc] initWithString:station.stationPhone];
+    [mutaPhoneFirstString insertString:@"0" atIndex:1];
+    self.lblPhoneFirst.text = [mutaPhoneFirstString copy];
     self.lblPhoneSecond.text = station.stationPhone2;
     self.lblServiceTime.text = station.serviceType;
-#warning 可还可借
+    
+    //可还可以借
+    //生成圆点图片
+    NSTextAttachment *rentAttach = [[NSTextAttachment alloc] init];
+    rentAttach.bounds = CGRectMake(13, -12, 32, 32);
+    //    rentAttach.image = [self convertViewToImage:[self iconViewWithColor:HB_COLOR_SOFTGREEN]];
+    rentAttach.image = [UIImage roundSingleColorImageWithColor:HB_COLOR_SOFTGREEN];
+    
+    NSTextAttachment *returnAttach = [[NSTextAttachment alloc] init];
+    returnAttach.bounds = CGRectMake(13, -12, 32, 32);
+    returnAttach.image = [UIImage roundSingleColorImageWithColor:HB_COLOR_SOFTORANGE];
+    
+    //合成字符串
+    NSMutableAttributedString *rentString = [[NSMutableAttributedString attributedStringWithAttachment:rentAttach] mutableCopy];
+    
+    
+    
+    
+    NSMutableAttributedString *returnString = [[NSAttributedString attributedStringWithAttachment:returnAttach] mutableCopy];
+    
+    [rentString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"可借：%lu",(unsigned long)station.rentcount]
+                                                                              attributes:@{
+                                                                                           NSFontAttributeName:HB_FONT_MEDIUM_SIZE(15)
+                                                                                           }]];
+    
+    [returnString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"可还：%lu",(unsigned long)station.restorecount]
+                                                                                attributes:@{
+                                                                                             NSFontAttributeName:HB_FONT_MEDIUM_SIZE(15)
+                                                                                             }]];
+    [self.lblRentableNumber setAttributedText:rentString];
+    [self.lblReturnableNumber setAttributedText:returnString];
+
     
 }
 @end

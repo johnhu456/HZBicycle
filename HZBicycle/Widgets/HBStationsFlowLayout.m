@@ -17,7 +17,7 @@
 #pragma mark - Constant
 static CGFloat const kItemSpacing = 30.f;
 static CGFloat const kEdgeInsets = 60.f;
-static CGFloat const kConstantParams = 0.0; //缩放常数
+static CGFloat const kConstantParams = 0.2; //缩放常数
 
 @implementation HBStationsFlowLayout
 
@@ -58,7 +58,7 @@ static CGFloat const kConstantParams = 0.0; //缩放常数
         //缩放
         CGFloat scaleForDistance = distance / self.itemSize.height;
         // 0.2可调整，值越大，显示就越大
-        CGFloat scaleForCell = 1 + kConstantParams * (1 - fabs(scaleForDistance));
+        CGFloat scaleForCell = 0.8 + kConstantParams * (1 - fabs(scaleForDistance));
         
         attribute.transform3D = CATransform3DMakeScale(1, scaleForCell, 1);
         attribute.zIndex = 1;

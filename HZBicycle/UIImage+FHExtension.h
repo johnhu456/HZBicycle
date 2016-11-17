@@ -31,7 +31,7 @@
 /**
  Get screenshots of the view
 
- @param The UIView object to take a screenshot
+ @param view The UIView object to take a screenshot
 
  @return The screenshot,its size is same as the view's
  */
@@ -45,4 +45,15 @@
  @return the blured image
  */
 - (UIImage *)coreBlurWithBlurLevel:(CGFloat)blur;
+
+
+/**
+ 
+ Generates a monochrome circular image
+
+ @param color Image color
+
+ @return the monochrome circular image
+ */
++ (UIImage* )roundSingleColorImageWithColor:(UIColor *)color;
 @end

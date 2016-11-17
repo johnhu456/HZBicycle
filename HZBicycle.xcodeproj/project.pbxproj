@@ -55,6 +55,7 @@
 		E0CF371C1DDBF261002F9746 /* UIImage+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF371A1DDBF261002F9746 /* UIImage+FHExtension.m */; };
 		E0CF37241DDBF843002F9746 /* HBStationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF37221DDBF843002F9746 /* HBStationCell.m */; };
 		E0CF37251DDBF843002F9746 /* HBStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0CF37231DDBF843002F9746 /* HBStationCell.xib */; };
+		E0CF37281DDD7C9F002F9746 /* HBPresentStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF37271DDD7C9F002F9746 /* HBPresentStationViewController.m */; };
 		E0E079751DBF453E0028AB83 /* MainBicycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -171,6 +172,8 @@
 		E0CF37211DDBF843002F9746 /* HBStationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBStationCell.h; path = Widgets/HBStationCell.h; sourceTree = "<group>"; };
 		E0CF37221DDBF843002F9746 /* HBStationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBStationCell.m; path = Widgets/HBStationCell.m; sourceTree = "<group>"; };
 		E0CF37231DDBF843002F9746 /* HBStationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HBStationCell.xib; path = Widgets/HBStationCell.xib; sourceTree = "<group>"; };
+		E0CF37261DDD7C9F002F9746 /* HBPresentStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBPresentStationViewController.h; path = ViewController/HBPresentStationViewController.h; sourceTree = "<group>"; };
+		E0CF37271DDD7C9F002F9746 /* HBPresentStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBPresentStationViewController.m; path = ViewController/HBPresentStationViewController.m; sourceTree = "<group>"; };
 		E0E079701DBF2B8D0028AB83 /* FHMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FHMarco.h; path = Util/FHMarco.h; sourceTree = "<group>"; };
 		E0E079731DBF453E0028AB83 /* MainBicycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainBicycleViewController.h; path = ViewController/MainBicycleViewController.h; sourceTree = "<group>"; };
 		E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainBicycleViewController.m; path = ViewController/MainBicycleViewController.m; sourceTree = "<group>"; };
@@ -454,6 +457,8 @@
 				E013EDE41DCC835E008F4259 /* MainSettingViewController.m */,
 				E06DD0DD1DDB22310024039D /* HBStationsViewController.h */,
 				E06DD0DE1DDB22310024039D /* HBStationsViewController.m */,
+				E0CF37261DDD7C9F002F9746 /* HBPresentStationViewController.h */,
+				E0CF37271DDD7C9F002F9746 /* HBPresentStationViewController.m */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -770,6 +775,7 @@
 				E08DD5711DC6F90700064283 /* HBOfflineMapManager.m in Sources */,
 				E0630ADA1DB9F04A0012EA3A /* HBRequestManager.m in Sources */,
 				E0630AE61DB9F1710012EA3A /* HBBicycleBaseModel.m in Sources */,
+				E0CF37281DDD7C9F002F9746 /* HBPresentStationViewController.m in Sources */,
 				E06DD0E31DDB31980024039D /* HBStationsFlowLayout.m in Sources */,
 				E0630AD71DB9F0220012EA3A /* HBBaseDataModel.m in Sources */,
 				E029C22C1DD199A700FC017B /* UINavigationBar+Awesome.m in Sources */,
