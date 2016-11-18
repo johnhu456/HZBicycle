@@ -48,6 +48,12 @@ static CGFloat const kContentInsets = 15.f;
     [self.searchBar registerFirstResponder];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.view.backgroundColor = [UIColor clearColor];
+    }];
+}
+
 #pragma mark - Layout
 - (void)setupSearchBar {
     @WEAKSELF;

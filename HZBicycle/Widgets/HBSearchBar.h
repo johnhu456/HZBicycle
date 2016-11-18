@@ -73,4 +73,11 @@ typedef NS_ENUM(NSUInteger){
  @param animated 是否使用动画
  */
 - (void)showBackButtonWithAnimated:(BOOL)animated;
+
+/**
+ 显示搜索ICON
+
+ @param animated 是否使用动画
+ */
+- (void)showSearchIconWithAnimated:(BOOL)animated;
 @end

@@ -50,5 +50,30 @@ static NSTimeInterval const kAnimationDuration = 0.25f;
             [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
         }];
     }
+    
+    //Pop
+    if ([fromVC isKindOfClass:[MainSearchViewController class]]) {
+        //做一个假搜索框
+        [containerView addSubview:fromVC.view];
+        HBSearchBar *searchBar = [[HBSearchBar alloc] initWithShowType:HBSearchBarShowTypeSearch];
+        [containerView addSubview:searchBar];
+        @weakify(containerView);
+        [searchBar mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(containerView.mas_top).with.offset(35.f);
+            make.height.mas_equalTo(@50);
+            make.left.equalTo(weak_containerView.mas_left).with.offset(15);
+            make.right.equalTo(weak_containerView.mas_right).with.offset(-15);
+        }];
+        [containerView addSubview:toVC.view];
+        toVC.view.alpha = 0;
+        [searchBar showSearchIconWithAnimated:YES];
+        [UIView animateWithDuration:kAnimationDuration animations:^{
+            toVC.view.alpha = 1;
+        } completion:^(BOOL finished) {
+            fromVC.view.alpha = 0;
+            [searchBar removeFromSuperview];
+            [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
+        }];
+    }
 }
 @end

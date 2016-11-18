@@ -80,12 +80,13 @@ static CGFloat const kMapZoomLevel = 15;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.navigationController.delegate = self;
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     //隐藏导航栏
-    self.navigationController.navigationBarHidden = YES;
+//    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)dealloc {
@@ -300,7 +301,8 @@ static CGFloat const kMapZoomLevel = 15;
 
 #pragma mark - UINavigationControllerDelegate
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController animationControllerForOperation:(UINavigationControllerOperation)operation fromViewController:(UIViewController *)fromVC toViewController:(UIViewController *)toVC {
-    if ([fromVC isKindOfClass:[MainBicycleViewController class]] && [toVC isKindOfClass:[MainSearchViewController class]]) {
+    if (([fromVC isKindOfClass:[MainBicycleViewController class]] && [toVC isKindOfClass:[MainSearchViewController class]]) ||
+        ([fromVC isKindOfClass:[MainSearchViewController class]] && [toVC isKindOfClass:[MainBicycleViewController class]])) {
         return [[HBSearchTransition alloc] init];
     }else {
         return nil;

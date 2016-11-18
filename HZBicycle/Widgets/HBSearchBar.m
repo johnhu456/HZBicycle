@@ -184,6 +184,21 @@ static NSTimeInterval const kAnimationDuration = 0.25f;
         self.backButton.alpha = 1;
     }
 }
+
+- (void)showSearchIconWithAnimated:(BOOL)animated {
+    @WEAKSELF;
+    if (animated) {
+        [UIView animateWithDuration:kAnimationDuration animations:^{
+            weakSelf.backButton.transform = CGAffineTransformMakeTranslation(0, 0);
+            weakSelf.iconView.alpha = 1;
+            weakSelf.backButton.alpha = 0;
+        }];
+    } else {
+        weakSelf.backButton.transform = CGAffineTransformMakeTranslation(0, 0);
+        weakSelf.iconView.alpha = 1;
+        weakSelf.backButton.alpha = 0;
+    }
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

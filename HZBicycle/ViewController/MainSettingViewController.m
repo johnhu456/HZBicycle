@@ -13,6 +13,8 @@
 #import "HBOfflineMapCell.h"
 #import "HBDefaultSettingCell.h"
 
+#import "HBAboutBicycleViewController.h"
+
 @interface MainSettingViewController ()<UITableViewDelegate,UITableViewDataSource,PKDownloadButtonDelegate,MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -89,6 +91,13 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
 }
 
 #pragma mark - LifeCycle
+
+- (void)loadView {
+    [super loadView];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    return;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"设置";
@@ -100,7 +109,6 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -179,6 +187,10 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
             break;
         case 4:
             //关于页面
+        {
+            HBAboutBicycleViewController *aboutVC = [[HBAboutBicycleViewController alloc] init];
+            [self.navigationController pushViewController:aboutVC animated:YES];
+        }
             break;
         default:
             break;
