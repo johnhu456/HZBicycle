@@ -178,7 +178,8 @@ static CGFloat const kMapZoomLevel = 15;
                                                    if (weakSelf.stationResult.count) {
                                                        [weakSelf addBicycleStationsWithIndex:0];
                                                    }else {
-#warning 提示问题 周边没有自行车
+                                                       //提示周围没有自行车
+                                                       [HBHUDManager showBicycleSearchResult];
                                                    }
                                                    [weakSelf.locationButton endActivityAnimation];
 
@@ -234,8 +235,6 @@ static CGFloat const kMapZoomLevel = 15;
             annotationView = [[HBBicycleAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndetifier];
             annotationView.handlePopViewTaped = ^(HBBicyclePointAnnotation *annoation) {
                 [weakSelf.mapView deselectAnnotation:annotation animated:YES];
-                NSLog(@"%@",annoation.station.name);
-#warning Stations跳转
                 //截图提供背景
                 __block UIImage *screenshotImage = nil;
                 __block NSInteger resState = 0;
@@ -245,7 +244,6 @@ static CGFloat const kMapZoomLevel = 15;
                     resState = state;
                     if (screenshotImage && resState) {
                         HBStationsViewController *stationsVC = [[HBStationsViewController alloc] initWithStations:weakSelf.stationResult index:[weakSelf.stationResult.data indexOfObject:annoationWeak.station] blurBackImage:screenshotImage];
-#warning 不一定
                         stationsVC.delegate = self;
                         [weakSelf addChildViewController:stationsVC];
                         [weakSelf.view addSubview:stationsVC.view];
@@ -324,7 +322,6 @@ static CGFloat const kMapZoomLevel = 15;
 
 #pragma mark - Private Method
 - (void)showStationDetailWithStations:(HBBicycleResultModel *)stations stationIndex:(NSUInteger)index {
-#warning Stations跳转
     @WEAKSELF;
     //截图提供背景
     __block UIImage *screenshotImage = nil;

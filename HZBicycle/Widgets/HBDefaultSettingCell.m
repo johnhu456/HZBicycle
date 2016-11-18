@@ -34,7 +34,7 @@
 #pragma mark - Constant
 static CGFloat const kDefaultInsets = 10.f;
 static CGFloat const kTitleInsets = 15.f;
-static CGFloat const kIconWidth = 30.f;
+static CGFloat const kIconWidth = 24.f;
 
 static NSString *const kReuseIdentifier = @"staticReuseIdentifier";
 
@@ -49,6 +49,7 @@ static NSString *const kReuseIdentifier = @"staticReuseIdentifier";
         _title = title;
         _icon = image;
         _type = type;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
         //设置子视图
         [self setupSubViews];
     }
@@ -101,6 +102,7 @@ static NSString *const kReuseIdentifier = @"staticReuseIdentifier";
     
     self.iconView = [[UIImageView alloc] init];
     self.iconView.image = _icon;
+    self.iconView.contentMode = UIViewContentModeScaleAspectFill;
     [self.backView addSubview:self.iconView];
     [self.iconView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(@(kIconWidth));

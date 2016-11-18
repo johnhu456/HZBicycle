@@ -33,10 +33,12 @@
 #import "HBMapManager.h"
 #import "HBOfflineMapManager.h"
 #import "HBUserDefultsManager.h"
+#import "HBHUDManager.h"
 
 //模型
 #import "HBBicycleStationModel.h"
 #import "HBBicycleResultModel.h"
+
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

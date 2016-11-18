@@ -124,7 +124,6 @@
     HBBicycleStationModel *station = self.resultStations.data[indexPath.row];
     NSString *phone1 = [[station.stationPhone mutableCopy] substringFromIndex:13];
     NSString *phone2 = [[station.stationPhone2 mutableCopy] substringFromIndex:14];
-#warning todo
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *show = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if ([self.delegate respondsToSelector:@selector(stationViewController:didSelectedIndex:inStations:)]){

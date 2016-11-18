@@ -85,12 +85,10 @@ static CGFloat const kContentInsets = 15.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning 待定
     return self.searchResult.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-#warning 待定
     HBSearchResultCell *searchResultCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBSearchResultCell)];
     searchResultCell.stationModel = self.searchResult.data[indexPath.row];
     searchResultCell.topCornered = indexPath.row == 0 ? YES: NO;
@@ -101,6 +99,7 @@ static CGFloat const kContentInsets = 15.f;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     @WEAKSELF;
     //第二次请求选中目的地周围的自行车
+    [HBHUDManager showWaitProgress];
     HBBicycleStationModel *selectedStation = self.searchResult.data[indexPath.row];
     CLLocationCoordinate2D wgs84Coordinate = [DFLocationConverter bd09ToWgs84:CLLocationCoordinate2DMake(selectedStation.lat, selectedStation.lon)];
     [HBRequestManager sendNearBicycleRequestWithLatitude:@(wgs84Coordinate.latitude)

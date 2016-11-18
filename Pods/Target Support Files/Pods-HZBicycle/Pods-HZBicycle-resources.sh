@@ -82,10 +82,12 @@ EOM
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "AMap3DMap/MAMapKit.framework/AMap.bundle"
   install_resource "$PODS_CONFIGURATION_BUILD_DIR/DownloadButton/DownloadButton.bundle"
+  install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "AMap3DMap/MAMapKit.framework/AMap.bundle"
   install_resource "$PODS_CONFIGURATION_BUILD_DIR/DownloadButton/DownloadButton.bundle"
+  install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

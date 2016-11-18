@@ -26,6 +26,8 @@ static NSString *const kAMapAppKey = @"46e4a0f82fe002fffd0cf4391f2b5cc9";
     [HBRequestManager config];
     //初始化下载中心,默认杭州
     [[HBOfflineMapManager sharedManager] config];
+    //初始化HUD风格
+    [HBHUDManager config];
 
     //创建根视图控制器
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

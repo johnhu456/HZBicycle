@@ -23,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-#warning 单独分理出下载功能
+#warning 弃用
     [[HBOfflineMapManager sharedManager] startDownloadWithBlock:^(MAOfflineItem *downloadItem, MAOfflineMapDownloadStatus downloadStatus, id info) {
         NSLog(@"%@",downloadItem);
         NSLog(@"%ld",(long)downloadStatus);

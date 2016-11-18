@@ -7,13 +7,13 @@
 //
 
 #import "MainSettingViewController.h"
-
+#import <MessageUI/MessageUI.h>
 //Cells
 #import "HBBicycleAccuracyCell.h"
 #import "HBOfflineMapCell.h"
 #import "HBDefaultSettingCell.h"
 
-@interface MainSettingViewController ()<UITableViewDelegate,UITableViewDataSource,PKDownloadButtonDelegate>
+@interface MainSettingViewController ()<UITableViewDelegate,UITableViewDataSource,PKDownloadButtonDelegate,MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -114,7 +114,6 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning  to change;
     return 5;
 }
 
@@ -143,19 +142,19 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
             break;
         case 2:
         {
-            HBDefaultSettingCell *officialContactCell = [[HBDefaultSettingCell alloc] initWithTitle:@"客服" icon:ImageInName(@"main_setting_dial") cellType:HBSettintCellTypeTop];
+            HBDefaultSettingCell *officialContactCell = [[HBDefaultSettingCell alloc] initWithTitle:@"联系客服" icon:ImageInName(@"main_setting_dial") cellType:HBSettintCellTypeTop];
             return officialContactCell;
         }
             break;
         case 3:
         {
-            HBDefaultSettingCell *feedBackCell = [[HBDefaultSettingCell alloc] initWithTitle:@"意见反馈" icon:ImageInName(@"main_setting_dial") cellType:HBSettintCellTypeDefault];
+            HBDefaultSettingCell *feedBackCell = [[HBDefaultSettingCell alloc] initWithTitle:@"意见反馈" icon:ImageInName(@"main_setting_feedback") cellType:HBSettintCellTypeDefault];
             return feedBackCell;
         }
             break;
         case 4:
         {
-            HBDefaultSettingCell *aboutMeCell = [[HBDefaultSettingCell alloc] initWithTitle:@"关于PBicycles" icon:ImageInName(@"main_setting_dial") cellType:HBSettintCellTypeBottom];
+            HBDefaultSettingCell *aboutMeCell = [[HBDefaultSettingCell alloc] initWithTitle:@"关于PBicycles" icon:ImageInName(@"main_setting_about") cellType:HBSettintCellTypeBottom];
             return aboutMeCell;
         }
             break;
@@ -165,6 +164,27 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0: case 1:
+            return;
+            break;
+        case 2:
+            //联系客服
+            [self dialServiceCall];
+            break;
+        case 3:
+            //意见反馈
+            [self gotFeedBack];
+            break;
+        case 4:
+            //关于页面
+            break;
+        default:
+            break;
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.row) {
         case 0:
@@ -214,6 +234,20 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
     }
 }
 
+#pragma mark - MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    
+    if (result == MFMailComposeResultCancelled) {
+        NSLog(@"取消");
+    } else if (result == MFMailComposeResultSent) {
+        NSLog(@"成功");
+    } else if (result == MFMailComposeResultFailed){
+        NSLog(@"失败");
+    } else {
+        NSLog(@"保存");
+    }
+}
 #pragma mark - Private Method
 - (void)startDownloadTask {
     @WEAKSELF;
@@ -257,7 +291,32 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
     [self presentViewController:tipAlert animated:YES completion:nil];
 }
 
-- (void)dealloc {
-    NSLog(@"dealloced");
+- (void)dialServiceCall {
+    //联系客服
+    UIAlertController *tipAlert = [UIAlertController alertControllerWithTitle:@"联系客服" message:@"0571-85331122" preferredStyle:UIAlertControllerStyleAlert];
+    @WEAK_OBJ(tipAlert);
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [tipAlertWeak dismissViewControllerAnimated:YES completion:nil];
+    }];
+    UIAlertAction *dial = [UIAlertAction actionWithTitle:@"呼叫" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *phoneUrl = @"tel://0571-85331122";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneUrl]];
+    }];
+    [tipAlert addAction:cancel];
+    [tipAlert addAction:dial];
+    [self presentViewController:tipAlert animated:YES completion:nil];
+}
+
+- (void)gotFeedBack {
+    //意见反馈
+    if (![MFMailComposeViewController canSendMail]) {
+        [HBHUDManager showMailSettingError];
+        return;
+    }
+    MFMailComposeViewController *vc = [[MFMailComposeViewController alloc] init];
+    //邮箱先写死
+    [vc setToRecipients:@[@"johnhu456@163.com"]];
+    vc.mailComposeDelegate = self;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 @end

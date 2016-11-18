@@ -19,6 +19,9 @@ target 'HZBicycle' do
   #DownloadButton
   pod 'DownloadButton','~>0.1.0'
   
+  #SVProgressHUD
+  pod 'SVProgressHUD','~>2.0.3'
+  
   target 'HZBicycleTests' do
     inherit! :search_paths
     pod 'YTKNetwork','~>2.0.1'

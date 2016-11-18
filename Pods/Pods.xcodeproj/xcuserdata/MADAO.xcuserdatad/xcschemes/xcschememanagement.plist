@@ -44,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SVProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>YTKNetwork.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,6 +57,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>07D94369F82FDE12C1547361609F48BF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>0F189C39EFE18F007B36D8A04AF55D26</key>
 		<dict>
 			<key>primary</key>
@@ -67,12 +77,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>50DD76973FD2D1794CBAECFC51A4D292</key>
+		<key>4DE38A5AAED4F9BDF51AADEDBEA2600E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6E4305ACCD53229F221C9A5F5F657BBD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -88,11 +103,6 @@
 			<true/>
 		</dict>
 		<key>9EAB3E42EF957541E6C3C76D35FD008E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BFADBD7670641F553EC4657DC55E8667</key>
 		<dict>
 			<key>primary</key>
 			<true/>

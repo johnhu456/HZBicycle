@@ -57,6 +57,7 @@
 		E0CF37251DDBF843002F9746 /* HBStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0CF37231DDBF843002F9746 /* HBStationCell.xib */; };
 		E0CF37281DDD7C9F002F9746 /* HBPresentStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF37271DDD7C9F002F9746 /* HBPresentStationViewController.m */; };
 		E0CF37311DDDA598002F9746 /* HBDefaultSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF372F1DDDA598002F9746 /* HBDefaultSettingCell.m */; };
+		E0CF37351DDEBF03002F9746 /* HBHUDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF37341DDEBF03002F9746 /* HBHUDManager.m */; };
 		E0E079751DBF453E0028AB83 /* MainBicycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -177,6 +178,8 @@
 		E0CF37271DDD7C9F002F9746 /* HBPresentStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBPresentStationViewController.m; path = ViewController/HBPresentStationViewController.m; sourceTree = "<group>"; };
 		E0CF372E1DDDA598002F9746 /* HBDefaultSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBDefaultSettingCell.h; path = Widgets/HBDefaultSettingCell.h; sourceTree = "<group>"; };
 		E0CF372F1DDDA598002F9746 /* HBDefaultSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBDefaultSettingCell.m; path = Widgets/HBDefaultSettingCell.m; sourceTree = "<group>"; };
+		E0CF37331DDEBF03002F9746 /* HBHUDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBHUDManager.h; path = Manager/HBHUDManager.h; sourceTree = "<group>"; };
+		E0CF37341DDEBF03002F9746 /* HBHUDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBHUDManager.m; path = Manager/HBHUDManager.m; sourceTree = "<group>"; };
 		E0E079701DBF2B8D0028AB83 /* FHMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FHMarco.h; path = Util/FHMarco.h; sourceTree = "<group>"; };
 		E0E079731DBF453E0028AB83 /* MainBicycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainBicycleViewController.h; path = ViewController/MainBicycleViewController.h; sourceTree = "<group>"; };
 		E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainBicycleViewController.m; path = ViewController/MainBicycleViewController.m; sourceTree = "<group>"; };
@@ -413,6 +416,8 @@
 				E08DD56F1DC6F90700064283 /* HBOfflineMapManager.m */,
 				E06DD0C51DD9CB000024039D /* HBUserDefultsManager.h */,
 				E06DD0C61DD9CB000024039D /* HBUserDefultsManager.m */,
+				E0CF37331DDEBF03002F9746 /* HBHUDManager.h */,
+				E0CF37341DDEBF03002F9746 /* HBHUDManager.m */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -761,6 +766,7 @@
 				E06DD0D61DDAC16B0024039D /* HBQuickSearchCell.m in Sources */,
 				E09E603A1DD1B65900956F1C /* HBOfflineMapCell.m in Sources */,
 				E013EDD91DC9C3D5008F4259 /* HBBicyclePointAnnotation.m in Sources */,
+				E0CF37351DDEBF03002F9746 /* HBHUDManager.m in Sources */,
 				E08DD5761DC7401900064283 /* HBLocationButton.m in Sources */,
 				E06DD0DF1DDB22310024039D /* HBStationsViewController.m in Sources */,
 				E013EDE51DCC835E008F4259 /* MainSettingViewController.m in Sources */,
