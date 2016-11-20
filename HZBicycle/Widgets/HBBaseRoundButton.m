@@ -36,6 +36,7 @@ CGFloat const kHBRoundButtonContentInsets = 10.f;
 
 - (instancetype)initWithIconImage:(UIImage *)image clickBlock:(void(^)())block {
     if (self = [super init]) {
+        self.bounds = CGRectMake(0, 0, 50, 50);
         self.buttonClickBlock = block;
         self.layer.shadowColor = [UIColor blackColor].CGColor;
         self.iconImage = image;

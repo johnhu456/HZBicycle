@@ -27,19 +27,17 @@
 #import "YTKBatchRequest.h"
 #import "YTKChainRequest.h"
 #import "YTKNetworkAgent.h"
-
-@class AFHTTPSessionManager;
+#import "YTKNetworkConfig.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT void YTKLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 
-@interface YTKNetworkPrivate : NSObject
+@class AFHTTPSessionManager;
 
-+ (BOOL)checkJson:(id)json withValidator:(id)validatorJson;
+@interface YTKNetworkUtils : NSObject
 
-+ (NSString *)urlStringWithOriginUrlString:(NSString *)originUrlString
-                          appendParameters:(NSDictionary<NSString *, NSString *> *)parameters;
++ (BOOL)validateJSON:(id)json withValidator:(id)jsonValidator;
 
 + (void)addDoNotBackupAttribute:(NSString *)path;
 
@@ -49,7 +47,7 @@ FOUNDATION_EXPORT void YTKLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 
 + (NSStringEncoding)stringEncodingWithRequest:(YTKBaseRequest *)request;
 
-+ (BOOL)isResumeDataValid:(NSData *)data;
++ (BOOL)validateResumeData:(NSData *)data;
 
 @end
 

@@ -25,6 +25,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+FOUNDATION_EXPORT NSString *const YTKRequestValidationErrorDomain;
+
+NS_ENUM(NSInteger) {
+    YTKRequestValidationErrorInvalidStatusCode = -8,
+    YTKRequestValidationErrorInvalidJSONFormat = -9,
+};
+
 ///  HTTP Request method.
 typedef NS_ENUM(NSInteger, YTKRequestMethod) {
     YTKRequestMethodGET = 0,
@@ -152,7 +159,7 @@ typedef void(^YTKRequestCompletionBlock)(__kindof YTKBaseRequest *request);
 ///  `YTKResponseSerializerType`. Note this value can be nil if request failed.
 ///
 ///  @discussion If `resumableDownloadPath` and DownloadTask is using, this value will
-///              be the path to which file is successfully saved (NSURL).
+///              be the path to which file is successfully saved (NSURL), or nil if request failed.
 @property (nonatomic, strong, readonly, nullable) id responseObject;
 
 ///  If you use `YTKResponseSerializerTypeJSON`, this is a convenience (and sematic) getter
@@ -204,9 +211,11 @@ typedef void(^YTKRequestCompletionBlock)(__kindof YTKBaseRequest *request);
 
 ///  This value is used to perform resumable download request. Default is nil.
 ///
-///  @discussion NSURLSessionDownloadTask is used when this value is not nil. If request succeed, file will
-///              be saved to this path automatically. For this to work, server must support `Range` and response
-///              with proper `If-Modified-Since` and/or `Etag`. See `NSURLSessionDownloadTask` for more detail.
+///  @discussion NSURLSessionDownloadTask is used when this value is not nil.
+///              The exist file at the path will be removed before the request starts. If request succeed, file will
+///              be saved to this path automatically, otherwise the response will be saved to `responseData`
+///              and `responseString`. For this to work, server must support `Range` and response with
+///              proper `Last-Modified` and/or `Etag`. See `NSURLSessionDownloadTask` for more detail.
 @property (nonatomic, strong, nullable) NSString *resumableDownloadPath;
 
 ///  You can use this block to track the download progress. See also `resumableDownloadPath`.
@@ -261,14 +270,23 @@ typedef void(^YTKRequestCompletionBlock)(__kindof YTKBaseRequest *request);
 ///  Called on the main thread when request failed.
 - (void)requestFailedFilter;
 
-///  The URL of request.
+///  The baseURL of request. This should only contain the host part of URL, e.g., http://www.example.com.
+///  See also `requestUrl`
+- (NSString *)baseUrl;
+
+///  The URL path of request. This should only contain the path part of URL, e.g., /v1/user. See alse `baseUrl`.
+///
+///  @discussion This will be concated with `baseUrl` using [NSURL URLWithString:relativeToURL].
+///              Because of this, it is recommended that the usage should stick to rules stated above.
+///              Otherwise the result URL may not be correctly formed. See also `URLString:relativeToURL`
+///              for more information.
+///
+///              Additionaly, if `requestUrl` itself is a valid URL, it will be used as the result URL and
+///              `baseUrl` will be ignored.
 - (NSString *)requestUrl;
 
 ///  Optional CDN URL for request.
 - (NSString *)cdnUrl;
-
-///  The baseURL of request.
-- (NSString *)baseUrl;
 
 ///  Requset timeout interval. Default is 60s.
 ///

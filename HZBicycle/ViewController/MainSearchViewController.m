@@ -148,6 +148,9 @@ static CGFloat const kContentInsets = 15.f;
                                                    weakSelf.searchResult = [[HBBicycleResultModel alloc] init];
                                                    weakSelf.searchResult.data = [result copy];
                                                    weakSelf.searchResult.count = result.count;
+                                                   if (weakSelf.searchResult.data.count == 0) {
+                                                       [HBHUDManager showNoSearchResult];
+                                                   }
                                                    [weakSelf.tableView reloadData];
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
                                                    NSLog(@"%@",request);

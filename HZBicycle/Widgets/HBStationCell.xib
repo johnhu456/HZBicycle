@@ -1,8 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +20,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="信诚路江南大道口东南" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXb-KB-vP1">
+                        <rect key="frame" x="15" y="39" width="285" height="17"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="n9s-DS-BQS"/>
                         </constraints>
@@ -25,6 +29,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO:6279" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHQ-ty-pch">
+                        <rect key="frame" x="15" y="15" width="285" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="7Pj-63-iaS"/>
                         </constraints>
@@ -33,12 +38,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_station_distance" translatesAutoresizingMaskIntoConstraints="NO" id="Aiz-dB-q7k">
+                        <rect key="frame" x="14" y="66" width="26" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="26" id="5wB-Gc-4bt"/>
                             <constraint firstAttribute="height" constant="20" id="g1B-V1-OEQ"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="距离628米" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kk2-qN-1B9">
+                        <rect key="frame" x="48" y="69.5" width="252" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13" id="lbh-5D-DYa"/>
                         </constraints>
@@ -47,18 +54,21 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_station_adress" translatesAutoresizingMaskIntoConstraints="NO" id="cFJ-4U-Y8e">
+                        <rect key="frame" x="15" y="96" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="8nh-EY-QLh"/>
                             <constraint firstAttribute="height" constant="20" id="kEz-cY-SFj"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_station_manager" translatesAutoresizingMaskIntoConstraints="NO" id="BTx-wZ-yfJ">
+                        <rect key="frame" x="17" y="126" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="3vh-4o-3ng"/>
                             <constraint firstAttribute="width" constant="20" id="O2t-N0-k5f"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="无人值守" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tB-e9-c82">
+                        <rect key="frame" x="48" y="129.5" width="252" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13" id="tCh-My-Uir"/>
                         </constraints>
@@ -67,6 +77,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="联系电话：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hja-sd-G4P">
+                        <rect key="frame" x="48" y="157.5" width="252" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="Amd-Yj-wEg"/>
                         </constraints>
@@ -75,17 +86,22 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13750870574（7：00-19：00）" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDd-9o-wPU">
+                        <rect key="frame" x="48" y="179.5" width="252" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13282157669（19：00-24：00）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dvn-zH-dhQ">
+                        <rect key="frame" x="48" y="201.5" width="252" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_station_time" translatesAutoresizingMaskIntoConstraints="NO" id="L52-XQ-TYv"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_station_time" translatesAutoresizingMaskIntoConstraints="NO" id="L52-XQ-TYv">
+                        <rect key="frame" x="17" y="221" width="20" height="20"/>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="租还时间：5：00-21：00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Arj-Sq-nbF">
+                        <rect key="frame" x="48" y="224.5" width="252" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13" id="o6D-68-m8F"/>
                         </constraints>
@@ -94,11 +110,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可借：12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xao-0M-phS">
+                        <rect key="frame" x="17" y="251" width="157.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="信诚路江南大道口东南" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XER-n0-Edr">
+                        <rect key="frame" x="48" y="99.5" width="252" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13" id="Rnx-BO-ftr"/>
                         </constraints>
@@ -107,6 +125,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="可还：20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9TY-8j-cZ0">
+                        <rect key="frame" x="142.5" y="251" width="157.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>

@@ -22,6 +22,11 @@
 + (void)showBicycleSearchResult;
 
 /**
+ 提示没有搜索结果
+ */
++ (void)showNoSearchResult;
+
+/**
  提示网络不好
  */
 + (void)showNetworkError;

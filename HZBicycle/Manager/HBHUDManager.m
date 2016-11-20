@@ -9,6 +9,7 @@
 #import "HBHUDManager.h"
 
 static NSString *const kNoBicycleSearchResult = @"当前范围没有搜索到租赁点";
+static NSString *const kNoSearchResult = @"没有搜索到结果";
 static NSString *const kBadNetwork = @"网络错误，请检查网络";
 static NSString *const kMailSettingError = @"请先在手机上设置邮箱";
 
@@ -44,6 +45,10 @@ static NSString *const kMailSettingError = @"请先在手机上设置邮箱";
 }
 + (void)showBicycleSearchResult {
     [SVProgressHUD showErrorWithStatus:kNoBicycleSearchResult];
+}
+
++ (void)showNoSearchResult {
+    [SVProgressHUD showErrorWithStatus:kNoSearchResult];
 }
 
 + (void)showNetworkError {

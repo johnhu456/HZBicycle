@@ -31,6 +31,8 @@
 #import "AFNetworking.h"
 #endif
 
+NSString *const YTKRequestValidationErrorDomain = @"com.yuantiku.request.validation";
+
 @interface YTKBaseRequest ()
 
 @property (nonatomic, strong, readwrite) NSURLSessionTask *requestTask;
@@ -197,11 +199,7 @@
 
 - (BOOL)statusCodeValidator {
     NSInteger statusCode = [self responseStatusCode];
-    if (statusCode >= 200 && statusCode <=299) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return (statusCode >= 200 && statusCode <= 299);
 }
 
 #pragma mark - NSObject

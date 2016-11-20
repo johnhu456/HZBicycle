@@ -139,6 +139,14 @@
     returnAttach.image = [UIImage roundSingleColorImageWithColor:HB_COLOR_SOFTORANGE];
     
     //合成字符串
+    //屏幕过小的话需要调整字体大小
+    CGFloat fontSize;
+    if ([UIScreen mainScreen].bounds.size.width == 320) {
+        fontSize = 12;
+    } else {
+        fontSize = 15;
+    }
+    
     NSMutableAttributedString *rentString = [[NSMutableAttributedString attributedStringWithAttachment:rentAttach] mutableCopy];
     
     
@@ -148,12 +156,12 @@
     
     [rentString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"可借：%lu",(unsigned long)station.rentcount]
                                                                               attributes:@{
-                                                                                           NSFontAttributeName:HB_FONT_MEDIUM_SIZE(15)
+                                                                                           NSFontAttributeName:HB_FONT_MEDIUM_SIZE(fontSize)
                                                                                            }]];
     
     [returnString appendAttributedString:[[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"可还：%lu",(unsigned long)station.restorecount]
                                                                                 attributes:@{
-                                                                                             NSFontAttributeName:HB_FONT_MEDIUM_SIZE(15)
+                                                                                             NSFontAttributeName:HB_FONT_MEDIUM_SIZE(fontSize)
                                                                                              }]];
     [self.lblRentableNumber setAttributedText:rentString];
     [self.lblReturnableNumber setAttributedText:returnString];

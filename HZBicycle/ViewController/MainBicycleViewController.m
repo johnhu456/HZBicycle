@@ -127,22 +127,28 @@ static CGFloat const kMapZoomLevel = 15;
         [weakSelf reloadLocation];
     }];
     [self.view addSubview:self.locationButton];
-    [self.locationButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(kButtonWidth);
-        make.bottom.equalTo(weakSelf.view.mas_bottom).with.offset( -kButtonWidth * 2);
-        make.right.equalTo(weakSelf.view.mas_right).with.offset(-kContentInsets);
-    }];
     
     self.settingButton = [[HBBaseRoundButton alloc] initWithIconImage:ImageInName(@"main_setting") clickBlock:^{
         MainSettingViewController *settingVC = [[MainSettingViewController alloc] init];
         [weakSelf.navigationController pushViewController:settingVC animated:YES];
     }];
     [self.view addSubview:self.settingButton];
-    [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.height.mas_equalTo(kButtonWidth);
-        make.top.equalTo(weakSelf.locationButton.mas_bottom).with.offset(kContentInsets);
-        make.right.equalTo(weakSelf.locationButton.mas_right);
-    }];
+    //布局有bug，iOS8下面崩溃
+    if (kCFCoreFoundationVersionNumber > kCFCoreFoundationVersionNumber_iOS_9_0) {
+        [self.locationButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo(kButtonWidth);
+            make.bottom.equalTo(weakSelf.view.mas_bottom).with.offset( -kButtonWidth * 2);
+            make.right.equalTo(weakSelf.view.mas_right).with.offset(-kContentInsets);
+        }];
+        [self.settingButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.height.mas_equalTo(kButtonWidth);
+            make.top.equalTo(weakSelf.locationButton.mas_bottom).with.offset(kContentInsets);
+            make.right.equalTo(weakSelf.locationButton.mas_right);
+        }];
+    } else {
+        self.locationButton.frame = CGRectMake(self.view.frame.size.width - kButtonWidth - kContentInsets, self.view.frame.size.height - 2 * kButtonWidth - 2*kContentInsets, kButtonWidth, kButtonWidth);
+        self.settingButton.frame = CGRectMake(self.view.frame.size.width - kButtonWidth - kContentInsets, self.view.frame.size.height - kButtonWidth - kContentInsets, kButtonWidth, kButtonWidth);
+    }
 }
 
 - (void)setupSearchBar {
