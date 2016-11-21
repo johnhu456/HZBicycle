@@ -251,13 +251,13 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
     [controller dismissViewControllerAnimated:YES completion:nil];
     
     if (result == MFMailComposeResultCancelled) {
-        NSLog(@"取消");
+        //取消
     } else if (result == MFMailComposeResultSent) {
-        NSLog(@"成功");
+        //成功
     } else if (result == MFMailComposeResultFailed){
-        NSLog(@"失败");
+        //失败
     } else {
-        NSLog(@"保存");
+        
     }
 }
 #pragma mark - Private Method

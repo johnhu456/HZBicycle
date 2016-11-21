@@ -23,16 +23,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-#warning 弃用
-    [[HBOfflineMapManager sharedManager] startDownloadWithBlock:^(MAOfflineItem *downloadItem, MAOfflineMapDownloadStatus downloadStatus, id info) {
-        NSLog(@"%@",downloadItem);
-        NSLog(@"%ld",(long)downloadStatus);
-        NSLog(@"%@",info);
-        NSLog(@"======");
-        if (downloadStatus == MAOfflineMapDownloadStatusFinished) {
-            [self.mapView reloadMap];
-        }
-    }];
     
     
    }

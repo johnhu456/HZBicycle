@@ -171,6 +171,7 @@ static CGFloat const kMapZoomLevel = 15;
 - (void)reloadLocation {
     @WEAKSELF;
     [weakSelf.locationButton startActivityAnimation];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [self.locationManager requestLocationWithReGeocode:NO completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
         if (location) {
             [weakSelf.mapView setCenterCoordinate:location.coordinate animated:YES];
@@ -181,7 +182,6 @@ static CGFloat const kMapZoomLevel = 15;
                                                successJsonObject:^(NSDictionary *jsonDict) {
                                                    [weakSelf.mapView removeAnnotations:weakSelf.mapView.annotations];
                                                    weakSelf.stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
-                                                   NSLog(@"%@",weakSelf.stationResult);
                                                    if (weakSelf.stationResult.count) {
                                                        [weakSelf addBicycleStationsWithIndex:0];
                                                    }else {
@@ -189,10 +189,10 @@ static CGFloat const kMapZoomLevel = 15;
                                                        [HBHUDManager showBicycleSearchResult];
                                                    }
                                                    [weakSelf.locationButton endActivityAnimation];
-
+                                                   [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
-                                                   NSLog(@"%@",request);
                                                    [weakSelf.locationButton endActivityAnimation];
+                                                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                }];
         }
     }];
@@ -266,12 +266,11 @@ static CGFloat const kMapZoomLevel = 15;
 }
 
 - (void)offlineDataDidReload:(MAMapView *)mapView {
-    NSLog(@"OFFLINEMAP LOADED");
+
 }
 
 #pragma mark - HBSearchBarDelegate
 - (void)searchBarDidBeginEdit:(HBSearchBar *)searchBar {
-    NSLog(@"begin");
     [self.searchBar resignSearchBarWithFinish:NO];
     MainSearchViewController *searchViewController = [[MainSearchViewController alloc] init];
     searchViewController.delegate = self;
@@ -334,6 +333,7 @@ static CGFloat const kMapZoomLevel = 15;
     //截图提供背景
     __block UIImage *screenshotImage = nil;
     __block NSInteger resState = 0;
+    [HBHUDManager showWaitProgress];
     [self.mapView takeSnapshotInRect:weakSelf.view.frame withCompletionBlock:^(UIImage *resultImage, NSInteger state) {
         screenshotImage = resultImage;
         resState = state;
@@ -343,6 +343,7 @@ static CGFloat const kMapZoomLevel = 15;
             [weakSelf addChildViewController:stationsVC];
             [weakSelf.view addSubview:stationsVC.view];
         }
+        [HBHUDManager dismissWaitProgress];
     }];
 }
 

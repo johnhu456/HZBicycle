@@ -60,10 +60,12 @@ static NSString *const kMailSettingError = @"请先在手机上设置邮箱";
 }
 
 + (void)showWaitProgress {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [SVProgressHUD show];
 }
 
 + (void)dismissWaitProgress {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [SVProgressHUD dismiss];
 }
 @end

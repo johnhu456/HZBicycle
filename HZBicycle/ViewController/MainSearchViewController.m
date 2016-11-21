@@ -132,7 +132,7 @@ static CGFloat const kContentInsets = 15.f;
 }
 
 - (void)searchBar:(HBSearchBar *)searchBar textDidChanged:(NSString *)text {
-    NSLog(@"start %@ ",text);
+   
 }
 
 -(void)searchBar:(HBSearchBar *)searchBar didFinishEdit:(NSString *)text {
@@ -153,7 +153,7 @@ static CGFloat const kContentInsets = 15.f;
                                                    }
                                                    [weakSelf.tableView reloadData];
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
-                                                   NSLog(@"%@",request);
+
                                                }];
 }
 
