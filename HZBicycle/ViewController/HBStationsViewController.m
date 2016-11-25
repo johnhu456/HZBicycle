@@ -39,6 +39,9 @@
 
 @end
 
+#pragma mark - Constant
+static NSString *const kDistrictNumber = @"0571-";
+
 @implementation HBStationsViewController
 
 #pragma mark - Init
@@ -114,7 +117,6 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     HBStationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:StrFromClass(HBStationCell) forIndexPath:indexPath];
     cell.station = self.resultStations.data[indexPath.row];
-    // Configure the cell
     
     return cell;
 }
@@ -122,8 +124,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     //ACTionsheet 选择
     HBBicycleStationModel *station = self.resultStations.data[indexPath.row];
-    NSString *phone1 = [[station.stationPhone mutableCopy] substringFromIndex:13];
-    NSString *phone2 = [[station.stationPhone2 mutableCopy] substringFromIndex:14];
+    NSString *phone1 = [self getDistrictNumberWithPhone:[[station.stationPhone mutableCopy] substringFromIndex:13]];
+    NSString *phone2 = [self getDistrictNumberWithPhone:[[station.stationPhone2 mutableCopy] substringFromIndex:14]];
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *show = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if ([self.delegate respondsToSelector:@selector(stationViewController:didSelectedIndex:inStations:)]){
@@ -134,18 +136,29 @@
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         [alertController dismissViewControllerAnimated:YES completion:nil];
     }];
-    UIAlertAction *callPhone1 = [UIAlertAction actionWithTitle:@"联系(白天)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phone1]];
-        [[UIApplication sharedApplication] openURL:url];
-    }];
-    UIAlertAction *callPhone2 = [UIAlertAction actionWithTitle:@"联系(晚上)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phone2]];
-        [[UIApplication sharedApplication] openURL:url];
-    }];
+
     [alertController addAction:cancel];
     [alertController addAction:show];
-    [alertController addAction:callPhone1];
-    [alertController addAction:callPhone2];
+    if (phone2) {
+        //Phone2有时候不存在
+        UIAlertAction *callPhone1 = [UIAlertAction actionWithTitle:@"联系(白天)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phone1]];
+            [[UIApplication sharedApplication] openURL:url];
+        }];
+        
+        UIAlertAction *callPhone2 = [UIAlertAction actionWithTitle:@"联系(晚上)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phone2]];
+            [[UIApplication sharedApplication] openURL:url];
+        }];
+        [alertController addAction:callPhone1];
+        [alertController addAction:callPhone2];
+    } else {
+        UIAlertAction *callPhone1 = [UIAlertAction actionWithTitle:@"联系(全天)" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"tel://%@",phone1]];
+            [[UIApplication sharedApplication] openURL:url];
+        }];
+        [alertController addAction:callPhone1];
+    }
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
@@ -158,6 +171,16 @@
 - (void)handleDismiss {
     [self.view removeFromSuperview];
     [self removeFromParentViewController];
+}
+
+//添加电话区号
+- (NSString *)getDistrictNumberWithPhone:(NSString *)phoneNumber {
+    if (phoneNumber.length == 8) {
+        NSString *resultNumber = [[kDistrictNumber mutableCopy] stringByAppendingString:phoneNumber];
+        return resultNumber;
+    }else {
+        return phoneNumber;
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate
