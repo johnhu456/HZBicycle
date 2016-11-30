@@ -34,6 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL screenAlwaysBright;
 
 /**
+ *  指定定位是否会被系统自动暂停。默认为YES。
+ */
+@property(nonatomic, assign) BOOL pausesLocationUpdatesAutomatically;
+
+/**
  *  是否允许后台定位.默认为NO(只在iOS 9.0及以后版本起作用).
  *
  *  注意:设置为YES的时候必须保证 Background Modes 中的 Location updates 处于选中状态,否则会抛出异常.

@@ -13,7 +13,7 @@
 #ifndef AMapNaviVersion_h
 #define AMapNaviVersion_h
 
-#define AMapNaviVersionNumber                   20201
+#define AMapNaviVersionNumber                   20300
 #define AMapNaviFoundationVersionMinRequired    10200
 #define AMapNavi3DMapVersionMinRequired         40200
 
