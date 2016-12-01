@@ -32,6 +32,7 @@
 #import "HBRequestManager.h"
 #import "HBMapManager.h"
 #import "HBOfflineMapManager.h"
+#import "HBNaviManager.h"
 #import "HBUserDefultsManager.h"
 #import "HBHUDManager.h"
 
