@@ -8,16 +8,16 @@
 
 #import "HBNaviManager.h"
 
-@interface HBNaviManager()<AMapNaviWalkManagerDelegate,AMapNaviRideManagerDelegate>
-
+@interface HBNaviManager()<AMapNaviWalkManagerDelegate,AMapNaviRideManagerDelegate>{
+    struct {
+        unsigned int finishFlag : 1;
+    }_delegateteFlag;
+}
 @property (nonatomic, strong, readwrite) AMapNaviBaseManager *naviManager;
 
 @end
 
 @implementation HBNaviManager
-
-#pragma mark - Initialize
-
 + (instancetype)sharedManager {
     static HBNaviManager *_hbNaviManager;
     static dispatch_once_t onceToken;
@@ -26,6 +26,19 @@
     });
     return _hbNaviManager;
 }
+
++ (MAPolyline *)getPolylineFromRoutes:(AMapNaviRoute *)route {
+    NSInteger count = route.routeCoordinates.count;
+    CLLocationCoordinate2D commonPolylineCoords[count];
+    NSInteger index = 0;
+    for (AMapNaviPoint *naviPoint in route.routeCoordinates) {
+        commonPolylineCoords[index] = CLLocationCoordinate2DMake(naviPoint.latitude, naviPoint.longitude);
+        index ++;
+    }
+    return [MAPolyline polylineWithCoordinates:commonPolylineCoords count:count];
+}
+
+#pragma mark - Initialize
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -60,6 +73,13 @@
             }
                 break;
         }
+    }
+}
+
+- (void)setDelegate:(id<HBNaviDelegate>)delegate {
+    _delegate = delegate;
+    if ([_delegate respondsToSelector:@selector(finishCalculatedRouteInType:route:error:)]) {
+        _delegateteFlag.finishFlag = YES;
     }
 }
 
@@ -98,29 +118,45 @@
     }
 }
 
+- (void)recalculate {
+    [self setNaviType:_naviType withRecalculate:YES];
+}
+
 #pragma mark - AMapNaviWalkManagerDelegate 
 - (void)walkManagerOnCalculateRouteSuccess:(AMapNaviWalkManager *)walkManager {
-    NSLog(@"%@",walkManager.naviRoute);
+    if (_delegateteFlag.finishFlag) {
+        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:walkManager.naviRoute error:nil];
+    }
 }
 
 - (void)walkManager:(AMapNaviWalkManager *)walkManager error:(NSError *)error {
-    NSLog(@"%@",error);
+    if (_delegateteFlag.finishFlag) {
+        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:walkManager.naviRoute error:error];
+    }
 }
 
 -(void)walkManager:(AMapNaviWalkManager *)walkManager onCalculateRouteFailure:(NSError *)error  {
-    NSLog(@"%@",error);
+    if (_delegateteFlag.finishFlag) {
+        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:walkManager.naviRoute error:error];
+    }
 }
 
 #pragma mark - AMapNaviRideManagerDelegate
 - (void)rideManagerOnCalculateRouteSuccess:(AMapNaviRideManager *)rideManager {
-    NSLog(@"%@",rideManager.naviRoute);
+    if (_delegateteFlag.finishFlag) {
+        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:rideManager.naviRoute error:nil];
+    }
 }
 
 - (void)rideManager:(AMapNaviRideManager *)rideManager error:(NSError *)error {
-    NSLog(@"%@",error);
+    if (_delegateteFlag.finishFlag) {
+        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:rideManager.naviRoute error:error];
+    }
 }
 
 - (void)rideManager:(AMapNaviRideManager *)rideManager onCalculateRouteFailure:(NSError *)error {
-    NSLog(@"%@",error);
+    if (_delegateteFlag.finishFlag) {
+        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:rideManager.naviRoute error:error];
+    }
 }
 @end

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AMapNaviKit/AMapNaviKit.h>
+#import <AMap3DMap/MAMapKit/MAMapKit.h>
 
 /**
  导航类型
@@ -19,6 +20,22 @@ typedef NS_ENUM(NSUInteger, HBNaviType){
     HBNaviTypeWalk = 0,
     HBNaviTypeRide
 };
+
+#pragma mark - Protocol
+@protocol HBNaviDelegate<NSObject>
+
+/**
+ 路线计算完成后的回调
+ 
+ @param type 当前导航类型
+ @param route 计算的路线结果
+ @param error 错误，发生错误是不为nil
+ */
+- (void)finishCalculatedRouteInType:(HBNaviType)type
+                              route:(AMapNaviRoute *)route
+                              error:(NSError *)error;
+
+@end
 
 @interface HBNaviManager : NSObject
 #pragma mark - Property
@@ -42,11 +59,24 @@ typedef NS_ENUM(NSUInteger, HBNaviType){
  */
 @property (nonatomic, strong) AMapNaviPoint *endPoint;
 
+/**
+ 代理
+ */
+@property (nonatomic, weak) id<HBNaviDelegate>delegate;
+
 #pragma mark - Class Method
 /**
  单例
  */
 + (instancetype)sharedManager;
+
+/**
+ 将路线中的路径点转换会MAPolyLine
+
+ @param route 路线
+ @return 可绘制的线段
+ */
++ (MAPolyline *)getPolylineFromRoutes:(AMapNaviRoute *)route;
 
 #pragma mark - Instance Method
 /**
@@ -69,4 +99,9 @@ typedef NS_ENUM(NSUInteger, HBNaviType){
  */
 - (void)setNaviType:(HBNaviType)naviType
     withRecalculate:(BOOL)recalculate;
+
+/**
+ 重新计算路径
+ */
+- (void)recalculate;
 @end
