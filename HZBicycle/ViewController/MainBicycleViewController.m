@@ -275,13 +275,12 @@ static CGFloat const kMapZoomLevel = 15;
 - (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay {
     if ([overlay isKindOfClass:[MAPolyline class]])
     {
-        MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:overlay];
-        
+        MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:(MAPolyline *)overlay];
         polylineRenderer.lineWidth    = 8.f;
-        polylineRenderer.strokeColor  = [UIColor colorWithRed:0 green:1 blue:0 alpha:0.6];
+        polylineRenderer.strokeColor  = HB_COLOR_DARKBLUE;
         polylineRenderer.lineJoinType = kMALineJoinRound;
         polylineRenderer.lineCapType  = kMALineCapRound;
-        
+#warning color may needs to adjust
         return polylineRenderer;
     }
     return nil;
@@ -319,9 +318,11 @@ static CGFloat const kMapZoomLevel = 15;
         [self.mapView selectAnnotation:self.mapView.annotations[index] animated:YES];
         HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
         [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
+        
         //处理导航
         HBBicycleStationModel *targetStation = self.stationResult.data[index];
-        [[HBNaviManager sharedManager] getRouteWithStartCoordinate:CLLocationCoordinate2DMake(30.3, 120.3) endCoordinate:CLLocationCoordinate2DMake(targetStation.lat, targetStation.lon) naviType:HBNaviTypeRide];
+        CLLocationCoordinate2D  realCoordinate = AMapCoordinateConvert(CLLocationCoordinate2DMake(targetStation.lat, targetStation.lon),AMapCoordinateTypeBaidu);
+        [[HBNaviManager sharedManager] getRouteWithStartCoordinate:self.mapView.userLocation.coordinate endCoordinate:realCoordinate naviType:HBNaviTypeRide];
         
     } else {
         self.stationResult = stations;
