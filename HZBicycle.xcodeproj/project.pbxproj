@@ -20,6 +20,8 @@
 		E029C2311DD19A8000FC017B /* HBBicycleAccuracyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E029C22F1DD19A8000FC017B /* HBBicycleAccuracyCell.m */; };
 		E029C2321DD19A8000FC017B /* HBBicycleAccuracyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E029C2301DD19A8000FC017B /* HBBicycleAccuracyCell.xib */; };
 		E029C2351DD1A74F00FC017B /* HBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E029C2341DD1A74F00FC017B /* HBBaseViewController.m */; };
+		E040861E1DF685F800457E23 /* MainNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E040861D1DF685F800457E23 /* MainNaviViewController.m */; };
+		E04086211DF6A05A00457E23 /* HBBaseMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = E04086201DF6A05A00457E23 /* HBBaseMapView.m */; };
 		E0630A9F1DB9C44C0012EA3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630A9E1DB9C44C0012EA3A /* main.m */; };
 		E0630AA21DB9C44C0012EA3A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AA11DB9C44C0012EA3A /* AppDelegate.m */; };
 		E0630AA81DB9C44C0012EA3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0630AA61DB9C44C0012EA3A /* Main.storyboard */; };
@@ -110,6 +112,10 @@
 		E029C2301DD19A8000FC017B /* HBBicycleAccuracyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HBBicycleAccuracyCell.xib; path = Widgets/HBBicycleAccuracyCell.xib; sourceTree = "<group>"; };
 		E029C2331DD1A74F00FC017B /* HBBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBaseViewController.h; path = ViewController/HBBaseViewController.h; sourceTree = "<group>"; };
 		E029C2341DD1A74F00FC017B /* HBBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBBaseViewController.m; path = ViewController/HBBaseViewController.m; sourceTree = "<group>"; };
+		E040861C1DF685F800457E23 /* MainNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainNaviViewController.h; path = ViewController/MainNaviViewController.h; sourceTree = "<group>"; };
+		E040861D1DF685F800457E23 /* MainNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainNaviViewController.m; path = ViewController/MainNaviViewController.m; sourceTree = "<group>"; };
+		E040861F1DF6A05A00457E23 /* HBBaseMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBaseMapView.h; path = Widgets/HBBaseMapView.h; sourceTree = "<group>"; };
+		E04086201DF6A05A00457E23 /* HBBaseMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBBaseMapView.m; path = Widgets/HBBaseMapView.m; sourceTree = "<group>"; };
 		E0630A9A1DB9C44C0012EA3A /* HZBicycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZBicycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0630A9E1DB9C44C0012EA3A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E0630AA01DB9C44C0012EA3A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -461,6 +467,8 @@
 				E013EDDF1DCC5E03008F4259 /* Button */,
 				E013EDDB1DCC5697008F4259 /* SearchBar */,
 				E013EDDA1DCC23BE008F4259 /* Annotation */,
+				E040861F1DF6A05A00457E23 /* HBBaseMapView.h */,
+				E04086201DF6A05A00457E23 /* HBBaseMapView.m */,
 			);
 			name = Widgets;
 			sourceTree = "<group>";
@@ -478,6 +486,8 @@
 				E06DD0CC1DDAA0D00024039D /* MainSearchViewController.m */,
 				E013EDE31DCC835E008F4259 /* MainSettingViewController.h */,
 				E013EDE41DCC835E008F4259 /* MainSettingViewController.m */,
+				E040861C1DF685F800457E23 /* MainNaviViewController.h */,
+				E040861D1DF685F800457E23 /* MainNaviViewController.m */,
 				E06DD0DD1DDB22310024039D /* HBStationsViewController.h */,
 				E06DD0DE1DDB22310024039D /* HBStationsViewController.m */,
 				E0CF37261DDD7C9F002F9746 /* HBPresentStationViewController.h */,
@@ -790,6 +800,7 @@
 				E08DD5701DC6F90700064283 /* HBMapManager.m in Sources */,
 				E0CF37311DDDA598002F9746 /* HBDefaultSettingCell.m in Sources */,
 				E0630AE91DB9F9550012EA3A /* HBBicycleResultModel.m in Sources */,
+				E04086211DF6A05A00457E23 /* HBBaseMapView.m in Sources */,
 				E0E079751DBF453E0028AB83 /* MainBicycleViewController.m in Sources */,
 				E06DD0C71DD9CB000024039D /* HBUserDefultsManager.m in Sources */,
 				E0630AF81DBDFE6A0012EA3A /* Foundation+Log.m in Sources */,
@@ -797,6 +808,7 @@
 				E0CA66AD1DF655BC0048E4C0 /* NSDate+FHExtension.m in Sources */,
 				E08DD5791DC876BB00064283 /* HBBicyclePopView.m in Sources */,
 				E06DD0D61DDAC16B0024039D /* HBQuickSearchCell.m in Sources */,
+				E040861E1DF685F800457E23 /* MainNaviViewController.m in Sources */,
 				E09E603A1DD1B65900956F1C /* HBOfflineMapCell.m in Sources */,
 				E013EDD91DC9C3D5008F4259 /* HBBicyclePointAnnotation.m in Sources */,
 				E0CF37351DDEBF03002F9746 /* HBHUDManager.m in Sources */,
@@ -914,6 +926,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = /Users/madao/Documents/iOSDevelop/GithubRepositories/HZBicycle/HZBicycle/PrefixHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -961,6 +975,8 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = /Users/madao/Documents/iOSDevelop/GithubRepositories/HZBicycle/HZBicycle/PrefixHeader.pch;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

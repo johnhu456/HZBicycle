@@ -148,23 +148,29 @@ static NSString *const kTipSearchResult = @"搜索结果";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    @WEAKSELF;
-    //第二次请求选中目的地周围的自行车
-    [HBHUDManager showWaitProgress];
-    HBBicycleStationModel *selectedStation = self.searchResult.data[indexPath.row];
-    CLLocationCoordinate2D wgs84Coordinate = [DFLocationConverter bd09ToWgs84:CLLocationCoordinate2DMake(selectedStation.lat, selectedStation.lon)];
-    [HBRequestManager sendNearBicycleRequestWithLatitude:@(wgs84Coordinate.latitude)
-                                              longtitude:@(wgs84Coordinate.longitude)
-                                                  length:@([HBUserDefultsManager searchDistance])
-                                       successJsonObject:^(NSDictionary *jsonDict) {
-                                           [weakSelf.navigationController popViewControllerAnimated:YES];
-                                           HBBicycleResultModel *stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
-                                           if ([weakSelf.delegate respondsToSelector:@selector(searchViewController:didChooseIndex:inResults:)]) {
-                                               [weakSelf.delegate searchViewController:self didChooseIndex:0 inResults:stationResult];
-                                           }
-                                       } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
+    //分最近搜索还是战士搜索结果
+    if (_showRecentSearch) {
+        NSDictionary *recentSearch = self.recentSearch[indexPath.row];
+        [self searchBar:self.searchBar didFinishEdit:recentSearch[kRecentSearchContent]];
+    }else {
+        @WEAKSELF;
+        //第二次请求选中目的地周围的自行车
+        [HBHUDManager showWaitProgress];
+        HBBicycleStationModel *selectedStation = self.searchResult.data[indexPath.row];
+        CLLocationCoordinate2D wgs84Coordinate = [DFLocationConverter bd09ToWgs84:CLLocationCoordinate2DMake(selectedStation.lat, selectedStation.lon)];
+        [HBRequestManager sendNearBicycleRequestWithLatitude:@(wgs84Coordinate.latitude)
+                                                  longtitude:@(wgs84Coordinate.longitude)
+                                                      length:@([HBUserDefultsManager searchDistance])
+                                           successJsonObject:^(NSDictionary *jsonDict) {
+                                               [weakSelf.navigationController popViewControllerAnimated:YES];
+                                               HBBicycleResultModel *stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
+                                               if ([weakSelf.delegate respondsToSelector:@selector(searchViewController:didChooseIndex:inResults:)]) {
+                                                   [weakSelf.delegate searchViewController:self didChooseIndex:0 inResults:stationResult];
+                                               }
+                                           } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
 #warning 错误处理。
-                                       }];
+                                           }];
+    }
 }
 
 #pragma mark - HBSearchBarDelegate
