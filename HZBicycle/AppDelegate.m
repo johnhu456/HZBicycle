@@ -22,6 +22,10 @@ static NSString *const kAMapAppKey = @"46e4a0f82fe002fffd0cf4391f2b5cc9";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //注册高德地图
     [AMapServices sharedServices].apiKey = kAMapAppKey;
+    //改用Https
+#warning enable https after 2017.1.1
+//    [[AMapServices sharedServices] setEnableHTTPS:YES]; 暂时不开启：http://lbs.amap.com/api/ios-navi-sdk/guide/create-project/https-guide/#enable-https
+    
     //初始化请求中心
     [HBRequestManager config];
     //初始化下载中心,默认杭州
@@ -36,10 +40,8 @@ static NSString *const kAMapAppKey = @"46e4a0f82fe002fffd0cf4391f2b5cc9";
     [self.window setRootViewController:navigationController];
     [self.window makeKeyAndVisible];
     
-    
     return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

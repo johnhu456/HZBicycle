@@ -7,17 +7,18 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <YTKRequest.h>
+#import "HBNaviManager.h"
 
 @interface HZBicycleTests : XCTestCase
 
+@property (nonatomic, strong) HBNaviManager *manager;
 @end
 
 @implementation HZBicycleTests
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    self.manager = [HBNaviManager sharedManager];
 }
 
 - (void)tearDown {
@@ -26,6 +27,9 @@
 }
 
 - (void)testExample {
+    [[HBNaviManager sharedManager] getRouteWithStartCoordinate:CLLocationCoordinate2DMake(30.2, 120.3) endCoordinate:CLLocationCoordinate2DMake(30.6, 120.5) naviType:HBNaviTypeRide];
+    [[HBNaviManager sharedManager] setNaviType:HBNaviTypeWalk withRecalculate:YES];
+
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
 }

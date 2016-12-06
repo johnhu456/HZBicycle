@@ -16,7 +16,7 @@
 #import "HBBicyclePointAnnotation.h"
 #import "HBBicycleAnnotationView.h"
 
-@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete,UINavigationControllerDelegate,SeachViewControllerDelegate,HBStationsViewControllerDelegate>
+@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete,UINavigationControllerDelegate,SeachViewControllerDelegate,HBStationsViewControllerDelegate,HBNaviDelegate>
 
 #pragma mark - Views
 /**
@@ -67,6 +67,8 @@ static CGFloat const kMapZoomLevel = 15;
     
     //注册通知
     [self registerNotifications];
+    //注册导航代理
+    [self registerNaviDelegate];
     //设置地图视图
     [self setupMapView];
     //设置定位按钮等
@@ -97,6 +99,11 @@ static CGFloat const kMapZoomLevel = 15;
 - (void)registerNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOfflineMapFinished:) name:kNotificationOfflineMapFinished object:nil];
 }
+
+- (void)registerNaviDelegate {
+    [HBNaviManager sharedManager].delegate = self;
+}
+
 - (void)setupMapView {
     //添加地图
     self.mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
@@ -265,6 +272,20 @@ static CGFloat const kMapZoomLevel = 15;
     }
 }
 
+- (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay {
+    if ([overlay isKindOfClass:[MAPolyline class]])
+    {
+        MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:(MAPolyline *)overlay];
+        polylineRenderer.lineWidth    = 8.f;
+        polylineRenderer.strokeColor  = HB_COLOR_DARKBLUE;
+        polylineRenderer.lineJoinType = kMALineJoinRound;
+        polylineRenderer.lineCapType  = kMALineCapRound;
+#warning color may needs to adjust
+        return polylineRenderer;
+    }
+    return nil;
+}
+
 - (void)offlineDataDidReload:(MAMapView *)mapView {
 
 }
@@ -297,6 +318,12 @@ static CGFloat const kMapZoomLevel = 15;
         [self.mapView selectAnnotation:self.mapView.annotations[index] animated:YES];
         HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
         [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
+        
+        //处理导航
+        HBBicycleStationModel *targetStation = self.stationResult.data[index];
+        CLLocationCoordinate2D  realCoordinate = AMapCoordinateConvert(CLLocationCoordinate2DMake(targetStation.lat, targetStation.lon),AMapCoordinateTypeBaidu);
+        [[HBNaviManager sharedManager] getRouteWithStartCoordinate:self.mapView.userLocation.coordinate endCoordinate:realCoordinate naviType:HBNaviTypeRide];
+        
     } else {
         self.stationResult = stations;
         [self addBicycleStationsWithIndex:index];
@@ -312,6 +339,11 @@ static CGFloat const kMapZoomLevel = 15;
     }else {
         return nil;
     }
+}
+
+#pragma mark - HBNaviManagerDelegate
+- (void)finishCalculatedRouteInType:(HBNaviType)type route:(AMapNaviRoute *)route error:(NSError *)error {
+    [self.mapView addOverlay:[HBNaviManager getPolylineFromRoutes:route]];
 }
 
 #pragma mark - Notification

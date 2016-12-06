@@ -137,6 +137,7 @@ static CGFloat const kContentInsets = 15.f;
 
 -(void)searchBar:(HBSearchBar *)searchBar didFinishEdit:(NSString *)text {
     @WEAKSELF;
+    [HBUserDefultsManager addSearchText:text];
     [HBRequestManager sendSearchBicycleStationRequestWithOptions:text
                                                successJsonObject:^(NSDictionary *jsonDict) {
                                                    //因为返回结构不一致 需要做转换。
@@ -155,6 +156,7 @@ static CGFloat const kContentInsets = 15.f;
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
 
                                                }];
+    NSLog(@"%@",[HBUserDefultsManager recentSearchs]);
 }
 
 

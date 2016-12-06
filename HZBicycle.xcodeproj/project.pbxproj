@@ -10,6 +10,7 @@
 		72699032092EF5060AD07906 /* libPods-HZBicycle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B01E247077F86EF4D76FA10E /* libPods-HZBicycle.a */; };
 		9B946B667AAB42B3DCC29299 /* libPods-HZBicycleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BCE6ED818D3F0560B76B9A0 /* libPods-HZBicycleTests.a */; };
 		DFD2BB5A8813F20C23AF93B6 /* libPods-HZBicycleUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B762FBC5FC15352A619AC8 /* libPods-HZBicycleUITests.a */; };
+		E001D0661DEE7D3C00CCE77F /* HBNaviManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E001D0651DEE7D3C00CCE77F /* HBNaviManager.m */; };
 		E013EDD91DC9C3D5008F4259 /* HBBicyclePointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E013EDD81DC9C3D5008F4259 /* HBBicyclePointAnnotation.m */; };
 		E013EDDE1DCC5B90008F4259 /* HBBaseRoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E013EDDD1DCC5B8F008F4259 /* HBBaseRoundButton.m */; };
 		E013EDE21DCC642F008F4259 /* UIButton+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E013EDE11DCC642F008F4259 /* UIButton+FHExtension.m */; };
@@ -52,6 +53,7 @@
 		E09E603A1DD1B65900956F1C /* HBOfflineMapCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E09E60381DD1B65900956F1C /* HBOfflineMapCell.m */; };
 		E09E603B1DD1B65900956F1C /* HBOfflineMapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E09E60391DD1B65900956F1C /* HBOfflineMapCell.xib */; };
 		E09E603F1DD2C1BF00956F1C /* HBDownloadButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E09E603E1DD2C1BF00956F1C /* HBDownloadButton.m */; };
+		E0CA66AD1DF655BC0048E4C0 /* NSDate+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CA66AC1DF655BC0048E4C0 /* NSDate+FHExtension.m */; };
 		E0CF371C1DDBF261002F9746 /* UIImage+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF371A1DDBF261002F9746 /* UIImage+FHExtension.m */; };
 		E0CF37241DDBF843002F9746 /* HBStationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF37221DDBF843002F9746 /* HBStationCell.m */; };
 		E0CF37251DDBF843002F9746 /* HBStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0CF37231DDBF843002F9746 /* HBStationCell.xib */; };
@@ -89,6 +91,8 @@
 		C5C57AC82A4FB62BFD3D11CF /* Pods-HZBicycleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycleUITests/Pods-HZBicycleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C9B3D3E98A72296CAC18F66B /* Pods-HZBicycleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycleTests/Pods-HZBicycleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D38ED513A0D7E76B230AB75F /* Pods-HZBicycleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycleTests/Pods-HZBicycleTests.release.xcconfig"; sourceTree = "<group>"; };
+		E001D0641DEE7D3C00CCE77F /* HBNaviManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBNaviManager.h; path = Manager/HBNaviManager.h; sourceTree = "<group>"; };
+		E001D0651DEE7D3C00CCE77F /* HBNaviManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBNaviManager.m; path = Manager/HBNaviManager.m; sourceTree = "<group>"; };
 		E013EDD71DC9C3D5008F4259 /* HBBicyclePointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBicyclePointAnnotation.h; path = Widgets/HBBicyclePointAnnotation.h; sourceTree = "<group>"; };
 		E013EDD81DC9C3D5008F4259 /* HBBicyclePointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBBicyclePointAnnotation.m; path = Widgets/HBBicyclePointAnnotation.m; sourceTree = "<group>"; };
 		E013EDDC1DCC5B8F008F4259 /* HBBaseRoundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBaseRoundButton.h; path = Widgets/HBBaseRoundButton.h; sourceTree = "<group>"; };
@@ -170,6 +174,8 @@
 		E09E60391DD1B65900956F1C /* HBOfflineMapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HBOfflineMapCell.xib; path = Widgets/HBOfflineMapCell.xib; sourceTree = "<group>"; };
 		E09E603D1DD2C1BF00956F1C /* HBDownloadButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBDownloadButton.h; path = Widgets/HBDownloadButton.h; sourceTree = "<group>"; };
 		E09E603E1DD2C1BF00956F1C /* HBDownloadButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBDownloadButton.m; path = Widgets/HBDownloadButton.m; sourceTree = "<group>"; };
+		E0CA66AB1DF655BC0048E4C0 /* NSDate+FHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FHExtension.h"; sourceTree = "<group>"; };
+		E0CA66AC1DF655BC0048E4C0 /* NSDate+FHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FHExtension.m"; sourceTree = "<group>"; };
 		E0CF37191DDBF261002F9746 /* UIImage+FHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FHExtension.h"; sourceTree = "<group>"; };
 		E0CF371A1DDBF261002F9746 /* UIImage+FHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FHExtension.m"; sourceTree = "<group>"; };
 		E0CF37211DDBF843002F9746 /* HBStationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBStationCell.h; path = Widgets/HBStationCell.h; sourceTree = "<group>"; };
@@ -402,6 +408,8 @@
 				E0630AF71DBDFE6A0012EA3A /* Foundation+Log.m */,
 				E0630AF21DBDB41C0012EA3A /* NSDictionary+FHExtension.h */,
 				E0630AF31DBDB41C0012EA3A /* NSDictionary+FHExtension.m */,
+				E0CA66AB1DF655BC0048E4C0 /* NSDate+FHExtension.h */,
+				E0CA66AC1DF655BC0048E4C0 /* NSDate+FHExtension.m */,
 				E013EDE01DCC642F008F4259 /* UIButton+FHExtension.h */,
 				E013EDE11DCC642F008F4259 /* UIButton+FHExtension.m */,
 				E0CF37191DDBF261002F9746 /* UIImage+FHExtension.h */,
@@ -417,6 +425,8 @@
 				E08DD56D1DC6F90700064283 /* HBMapManager.m */,
 				E08DD56E1DC6F90700064283 /* HBOfflineMapManager.h */,
 				E08DD56F1DC6F90700064283 /* HBOfflineMapManager.m */,
+				E001D0641DEE7D3C00CCE77F /* HBNaviManager.h */,
+				E001D0651DEE7D3C00CCE77F /* HBNaviManager.m */,
 				E06DD0C51DD9CB000024039D /* HBUserDefultsManager.h */,
 				E06DD0C61DD9CB000024039D /* HBUserDefultsManager.m */,
 				E0CF37331DDEBF03002F9746 /* HBHUDManager.h */,
@@ -784,6 +794,7 @@
 				E06DD0C71DD9CB000024039D /* HBUserDefultsManager.m in Sources */,
 				E0630AF81DBDFE6A0012EA3A /* Foundation+Log.m in Sources */,
 				E0630AEC1DB9FA760012EA3A /* HBBicycleStationModel.m in Sources */,
+				E0CA66AD1DF655BC0048E4C0 /* NSDate+FHExtension.m in Sources */,
 				E08DD5791DC876BB00064283 /* HBBicyclePopView.m in Sources */,
 				E06DD0D61DDAC16B0024039D /* HBQuickSearchCell.m in Sources */,
 				E09E603A1DD1B65900956F1C /* HBOfflineMapCell.m in Sources */,
@@ -808,6 +819,7 @@
 				E0630A9F1DB9C44C0012EA3A /* main.m in Sources */,
 				E08DD5711DC6F90700064283 /* HBOfflineMapManager.m in Sources */,
 				E0630ADA1DB9F04A0012EA3A /* HBRequestManager.m in Sources */,
+				E001D0661DEE7D3C00CCE77F /* HBNaviManager.m in Sources */,
 				E0630AE61DB9F1710012EA3A /* HBBicycleBaseModel.m in Sources */,
 				E0CF37281DDD7C9F002F9746 /* HBPresentStationViewController.m in Sources */,
 				E06DD0E31DDB31980024039D /* HBStationsFlowLayout.m in Sources */,

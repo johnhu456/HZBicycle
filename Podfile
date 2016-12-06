@@ -6,6 +6,7 @@ target 'HZBicycle' do
   pod 'AMapFoundation','~>1.3.1'
   pod 'AMap3DMap','~>4.3.0'
   pod 'AMapLocation','~>2.1.1'
+  pod 'AMapNavi','~>2.3.0'
 
   #YTKNetwork
   pod 'YTKNetwork','~>2.0.1'

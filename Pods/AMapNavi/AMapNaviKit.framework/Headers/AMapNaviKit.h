@@ -19,8 +19,11 @@
 #import <AMapNaviKit/AMapNaviDriveDataRepresentable.h>
 #import <AMapNaviKit/AMapNaviWalkManager.h>
 #import <AMapNaviKit/AMapNaviWalkDataRepresentable.h>
+#import <AMapNaviKit/AMapNaviRideManager.h>
+#import <AMapNaviKit/AMapNaviRideDataRepresentable.h>
 
 #import <AMapNaviKit/AMapNaviDriveView.h>
 #import <AMapNaviKit/AMapNaviWalkView.h>
+#import <AMapNaviKit/AMapNaviRideView.h>
 #import <AMapNaviKit/AMapNaviHUDView.h>
 #import <AMapNaviKit/AMapNaviRoutePolylineOption.h>
