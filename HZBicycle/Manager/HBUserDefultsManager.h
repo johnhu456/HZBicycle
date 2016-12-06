@@ -10,6 +10,8 @@
 
 extern NSString *const kSearchDistanceKey;  //查找范围Key;
 extern NSString *const kSearchRecentKey; //最近搜索Key;
+
+extern NSString *const kRecentSearchContent; //搜索内容key
 /**
  管理UserDefaults
  */

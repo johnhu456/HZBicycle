@@ -25,4 +25,9 @@
  */
 @property (assign, nonatomic) BOOL topCornered;
 
+/**
+ 设置最近搜索内容
+ */
+- (void)setRecentSearchText:(NSString *)text;
+
 @end

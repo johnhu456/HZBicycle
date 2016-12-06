@@ -39,6 +39,10 @@
     self.lblTitle.text = title;
 }
 
+- (void)setRecentSearchText:(NSString *)text {
+    self.lblTitle.text = text;
+}
+
 - (void)setBottomCornered:(BOOL)bottomCornered {
     _bottomCornered = bottomCornered;
     if (_bottomCornered) {
