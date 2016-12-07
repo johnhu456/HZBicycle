@@ -10,4 +10,11 @@
 
 @interface HBNaviMenuView : UIView
 
+/**
+ 路线模型
+ */
+@property (nonatomic, weak) AMapNaviRoute *route;
+
+@property (nonatomic, weak) HBBicycleStationModel *station;
+
 @end

@@ -8,6 +8,8 @@
 
 #import "MainNaviViewController.h"
 
+#import "HBNaviMenuView.h"
+
 @interface MainNaviViewController ()<AMapNaviDriveViewDelegate,MAMapViewDelegate,HBNaviDelegate>
 
 @property (nonatomic, strong) AMapNaviDriveView *naviDriveView;
@@ -20,8 +22,10 @@
 
 @property (nonatomic, strong) HBBaseMapView *mapView;
 
+@property (nonatomic, strong) HBNaviMenuView *naviMenuView;
 @end
 
+static CGFloat const kHeightMenuView = 200.f;        //菜单栏高度
 @implementation MainNaviViewController
 
 #pragma mark - Initialize
@@ -69,7 +73,13 @@
 }
 
 - (void)setupMenuView {
-    
+    @WEAKSELF;
+    self.naviMenuView = [[HBNaviMenuView alloc] init];
+    [self.view addSubview:self.naviMenuView];
+    [self.naviMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(weakSelf.view);
+        make.height.mas_equalTo(kHeightMenuView);
+    }];
 }
 
 - (void)setupNaviRoute {
@@ -116,6 +126,9 @@
         //设置中心点
         //显示路径
         [self.mapView addOverlay:[HBNaviManager getPolylineFromRoutes:route]];
+        //设置菜单
+        self.naviMenuView.route = route;
+        self.naviMenuView.station = _stationResult.data[_targetIndex];
     } else {
         //路径规划错误，请重试
         [HBHUDManager showNaviCalculateError];
