@@ -19,8 +19,19 @@ static CGFloat const kMapZoomLevel = 15;
 
 @implementation HBBaseMapView
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self  = [super initWithFrame:frame]) {
+        [self setUserTrackingMode:MAUserTrackingModeFollowWithHeading];
+        self.desiredAccuracy = kCLLocationAccuracyBest;
+        self.zoomLevel = 15;
+        //无法调整角度
+        self.rotateCameraEnabled = NO;
+    }
+    return self;
+}
 - (void)addBicycleStations:(HBBicycleResultModel *)stations
-                 WithIndex:(NSUInteger)index {
+                 withIndex:(NSUInteger)index
+                  animated:(BOOL)animated{
     [self removeAnnotations:self.annotations];
     self.stationResult = stations;
     for (HBBicycleStationModel *model in self.stationResult.data) {
@@ -29,10 +40,10 @@ static CGFloat const kMapZoomLevel = 15;
     //设最近的或者选中的为中心点
     if (self.stationResult.data[index]) {
         HBBicyclePointAnnotation *annotation = self.annotations[index];
-        [self setCenterCoordinate:annotation.coordinate animated:YES];
-        [self selectAnnotation:annotation animated:YES];
+        [self setCenterCoordinate:annotation.coordinate animated:animated];
+        [self selectAnnotation:annotation animated:animated];
         if (self.zoomLevel != kMapZoomLevel) {
-            [self setZoomLevel:kMapZoomLevel animated:YES];
+            [self setZoomLevel:kMapZoomLevel animated:animated];
         }else {
 #warning
         }

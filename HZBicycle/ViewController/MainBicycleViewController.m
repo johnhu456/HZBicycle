@@ -103,11 +103,6 @@ static CGFloat const kContentInsets = 15.f;
 - (void)setupMapView {
     //添加地图
     self.mapView = [[HBBaseMapView alloc] initWithFrame:self.view.bounds];
-    [self.mapView setUserTrackingMode:MAUserTrackingModeFollowWithHeading];
-    self.mapView.desiredAccuracy = kCLLocationAccuracyBest;
-    self.mapView.zoomLevel = 15;
-    //无法调整角度
-    self.mapView.rotateCameraEnabled = NO;
     self.mapView.delegate = self;
     
     //设置中心点
@@ -186,7 +181,7 @@ static CGFloat const kContentInsets = 15.f;
                                                    [weakSelf.mapView removeAnnotations:weakSelf.mapView.annotations];
                                                    weakSelf.stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
                                                    if (weakSelf.stationResult.count) {
-                                                       [weakSelf.mapView addBicycleStations:weakSelf.stationResult WithIndex:0];
+                                                       [weakSelf.mapView addBicycleStations:weakSelf.stationResult withIndex:0 animated:YES];
                                                    }else {
                                                        //提示周围没有自行车
                                                        [HBHUDManager showBicycleSearchResult];
@@ -236,20 +231,6 @@ static CGFloat const kContentInsets = 15.f;
     }
 }
 
-- (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay {
-    if ([overlay isKindOfClass:[MAPolyline class]])
-    {
-        MAPolylineRenderer *polylineRenderer = [[MAPolylineRenderer alloc] initWithPolyline:(MAPolyline *)overlay];
-        polylineRenderer.lineWidth    = 8.f;
-        polylineRenderer.strokeColor  = HB_COLOR_DARKBLUE;
-        polylineRenderer.lineJoinType = kMALineJoinRound;
-        polylineRenderer.lineCapType  = kMALineCapRound;
-#warning color may needs to adjust
-        return polylineRenderer;
-    }
-    return nil;
-}
-
 - (void)offlineDataDidReload:(MAMapView *)mapView {
     [mapView reloadMap];
 }
@@ -264,16 +245,15 @@ static CGFloat const kContentInsets = 15.f;
 
 #pragma mark - SearchViewControllerDelegate
 - (void)searchViewController:(MainSearchViewController *)searchVC didChooseIndex:(NSUInteger)index inResults:(HBBicycleResultModel *)results {
-    if (!self.mapView.userLocation) {
-        [self reloadLocation];
-    }
 //    CLLocationCoordinate2D mylocation = self.mapView.userLocation.coordinate;
 //    //搜索返回结果没有距离，手动添加
 //    for (HBBicycleStationModel *station in results.data) {
 //        NSUInteger distance = [HBMapManager getDistanceFromPoint:mylocation toAnotherPoint:AMapCoordinateConvert(CLLocationCoordinate2DMake(station.lat, station.lon),AMapCoordinateTypeBaidu)];
 //        station.len = distance;
 //    }
-    [self showStationDetailWithStations:results stationIndex:index];
+//    [self showStationDetailWithStations:results stationIndex:index];
+    self.stationResult = results;
+    [self.mapView addBicycleStations:results withIndex:index animated:YES];
 }
 
 #pragma mark - StationsViewControllerDelegate
@@ -283,15 +263,12 @@ static CGFloat const kContentInsets = 15.f;
         HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
         [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
         
-#warning to push navi vc with station
-        //处理导航
-        HBBicycleStationModel *targetStation = self.stationResult.data[index];
-        CLLocationCoordinate2D  realCoordinate = AMapCoordinateConvert(CLLocationCoordinate2DMake(targetStation.lat, targetStation.lon),AMapCoordinateTypeBaidu);
-        [[HBNaviManager sharedManager] getRouteWithStartCoordinate:self.mapView.userLocation.coordinate endCoordinate:realCoordinate naviType:HBNaviTypeRide];
-        
+#warning to push navi vc with station 
+        MainNaviViewController *naviViewController = [[MainNaviViewController alloc] initWithStations:self.stationResult targetIndex:index location:self.mapView.userLocation.location];
+        [self.navigationController pushViewController:naviViewController animated:YES];
     } else {
         self.stationResult = stations;
-        [self.mapView addBicycleStations:self.stationResult WithIndex:index];
+        [self.mapView addBicycleStations:self.stationResult withIndex:index animated:YES];
     }
 
 }
@@ -304,11 +281,6 @@ static CGFloat const kContentInsets = 15.f;
     }else {
         return nil;
     }
-}
-
-#pragma mark - HBNaviManagerDelegate
-- (void)finishCalculatedRouteInType:(HBNaviType)type route:(AMapNaviRoute *)route error:(NSError *)error {
-    [self.mapView addOverlay:[HBNaviManager getPolylineFromRoutes:route]];
 }
 
 #pragma mark - Notification

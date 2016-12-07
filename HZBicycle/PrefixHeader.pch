@@ -17,6 +17,7 @@
 //视图控制器
 #import "HBBaseMapView.h"
 #import "HBBaseViewController.h"
+#import "MainNaviViewController.h"
 #import "HBSearchTransition.h"
 
 //布局

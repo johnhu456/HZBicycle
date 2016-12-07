@@ -22,8 +22,10 @@
 
  @param stations 站点信息
  @param index 下标
+ @param animated 是否使用动画
  */
 - (void)addBicycleStations:(HBBicycleResultModel *)stations
-                 WithIndex:(NSUInteger)index;
+                 withIndex:(NSUInteger)index
+                  animated:(BOOL)animated;
 
 @end

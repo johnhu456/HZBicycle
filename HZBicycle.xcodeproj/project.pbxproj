@@ -22,6 +22,7 @@
 		E029C2351DD1A74F00FC017B /* HBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E029C2341DD1A74F00FC017B /* HBBaseViewController.m */; };
 		E040861E1DF685F800457E23 /* MainNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E040861D1DF685F800457E23 /* MainNaviViewController.m */; };
 		E04086211DF6A05A00457E23 /* HBBaseMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = E04086201DF6A05A00457E23 /* HBBaseMapView.m */; };
+		E04086251DF7DA4500457E23 /* HBNaviMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = E04086241DF7DA4500457E23 /* HBNaviMenuView.m */; };
 		E0630A9F1DB9C44C0012EA3A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630A9E1DB9C44C0012EA3A /* main.m */; };
 		E0630AA21DB9C44C0012EA3A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AA11DB9C44C0012EA3A /* AppDelegate.m */; };
 		E0630AA81DB9C44C0012EA3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0630AA61DB9C44C0012EA3A /* Main.storyboard */; };
@@ -116,6 +117,8 @@
 		E040861D1DF685F800457E23 /* MainNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainNaviViewController.m; path = ViewController/MainNaviViewController.m; sourceTree = "<group>"; };
 		E040861F1DF6A05A00457E23 /* HBBaseMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBaseMapView.h; path = Widgets/HBBaseMapView.h; sourceTree = "<group>"; };
 		E04086201DF6A05A00457E23 /* HBBaseMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBBaseMapView.m; path = Widgets/HBBaseMapView.m; sourceTree = "<group>"; };
+		E04086231DF7DA4500457E23 /* HBNaviMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBNaviMenuView.h; path = Widgets/HBNaviMenuView.h; sourceTree = "<group>"; };
+		E04086241DF7DA4500457E23 /* HBNaviMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBNaviMenuView.m; path = Widgets/HBNaviMenuView.m; sourceTree = "<group>"; };
 		E0630A9A1DB9C44C0012EA3A /* HZBicycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZBicycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0630A9E1DB9C44C0012EA3A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E0630AA01DB9C44C0012EA3A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -311,6 +314,15 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		E04086221DF7DA1500457E23 /* Navi */ = {
+			isa = PBXGroup;
+			children = (
+				E04086231DF7DA4500457E23 /* HBNaviMenuView.h */,
+				E04086241DF7DA4500457E23 /* HBNaviMenuView.m */,
+			);
+			name = Navi;
+			sourceTree = "<group>";
+		};
 		E0630A911DB9C44C0012EA3A = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +474,7 @@
 		E08DD5721DC73FDC00064283 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				E04086221DF7DA1500457E23 /* Navi */,
 				E06DD0E01DDB314D0024039D /* Layout */,
 				E029C22D1DD19A3300FC017B /* Cells */,
 				E013EDDF1DCC5E03008F4259 /* Button */,
@@ -811,6 +824,7 @@
 				E040861E1DF685F800457E23 /* MainNaviViewController.m in Sources */,
 				E09E603A1DD1B65900956F1C /* HBOfflineMapCell.m in Sources */,
 				E013EDD91DC9C3D5008F4259 /* HBBicyclePointAnnotation.m in Sources */,
+				E04086251DF7DA4500457E23 /* HBNaviMenuView.m in Sources */,
 				E0CF37351DDEBF03002F9746 /* HBHUDManager.m in Sources */,
 				E08DD5761DC7401900064283 /* HBLocationButton.m in Sources */,
 				E06DD0DF1DDB22310024039D /* HBStationsViewController.m in Sources */,

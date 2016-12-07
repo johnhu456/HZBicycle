@@ -78,7 +78,7 @@ static NSString *const kRecentSearchTimestamp = @"kRecentSearchTimestamp";
 
 + (NSArray *)recentSearchs {
     NSMutableArray *recentSearch = [[NSUserDefaults standardUserDefaults] mutableArrayValueForKey:kSearchRecentKey];
-    if (recentSearch == nil) {
+    if (recentSearch.count == 0 ) {
         return recentSearch;
     } else {
         //排序

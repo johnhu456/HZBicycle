@@ -18,5 +18,6 @@
  @return MainNaviViewController
  */
 - (instancetype)initWithStations:(HBBicycleResultModel *)staion
-                     targetIndex:(NSUInteger)index;
+                     targetIndex:(NSUInteger)index
+                        location:(CLLocation *)location;
 @end

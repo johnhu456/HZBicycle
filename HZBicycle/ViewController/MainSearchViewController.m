@@ -148,7 +148,7 @@ static NSString *const kTipSearchResult = @"搜索结果";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //分最近搜索还是战士搜索结果
+    //分最近搜索还是搜索结果
     if (_showRecentSearch) {
         NSDictionary *recentSearch = self.recentSearch[indexPath.row];
         [self searchBar:self.searchBar didFinishEdit:recentSearch[kRecentSearchContent]];
