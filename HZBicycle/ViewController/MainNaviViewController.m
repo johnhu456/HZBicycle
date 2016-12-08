@@ -74,7 +74,14 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
 
 - (void)setupMenuView {
     @WEAKSELF;
-    self.naviMenuView = [[HBNaviMenuView alloc] init];
+    self.naviMenuView = [[HBNaviMenuView alloc] initWithButtonClick:^(UIButton *sender) {
+        if (sender.selected) {
+            [weakSelf setupNaviRoute];
+        }else {
+#warning push new Navi
+            [weakSelf setupNaviRoute];
+        }
+    }];
     [self.view addSubview:self.naviMenuView];
     [self.naviMenuView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(weakSelf.view);
@@ -130,8 +137,10 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
         //设置菜单
         self.naviMenuView.route = route;
         self.naviMenuView.station = _stationResult.data[_targetIndex];
+        [self.naviMenuView setFailure:NO];
     } else {
         //路径规划错误，请重试
+        [self.naviMenuView setFailure:YES];
         [HBHUDManager showNaviCalculateError];
     }
 

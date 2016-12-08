@@ -35,6 +35,20 @@
  */
 @property (nonatomic, strong) UIButton *btnStartNavi;
 
+/**
+ 加载指示器
+ */
+@property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
+
+@property (nonatomic, strong) NSMutableAttributedString *selectedTitle; //Weak不好用
+
+@property (nonatomic, strong) NSMutableAttributedString *normalTitle;
+
+/**
+ 按钮回调
+ */
+@property (nonatomic, copy) void(^buttonClicked)(UIButton *sender);
+
 @end
 
 #pragma mark - Constant
@@ -51,14 +65,47 @@ static NSString *const kTitleStartNavi = @"开始导航";        //导航按钮�
 static NSString *const kTitleRetry = @"重试";               //重试提示
 
 @implementation HBNaviMenuView
+#pragma mark - Lazy Init
+- (NSMutableAttributedString *)selectedTitle {
+    if (_selectedTitle == nil) {
+        NSTextAttachment *retryAttachment = [[NSTextAttachment alloc] init];
+        retryAttachment.image = ImageInName(@"navi_menu_retry");
+        retryAttachment.bounds = CGRectMake(0, -6, 30.f, 30.f);
+        NSMutableAttributedString *retryAttachString = [[NSAttributedString attributedStringWithAttachment:retryAttachment] mutableCopy];
+        NSAttributedString *retryTitle = [[NSMutableAttributedString alloc] initWithString:kTitleRetry attributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],NSFontAttributeName : HB_FONT_LIGHT_SIZE(25)}];
+        [retryAttachString appendAttributedString:retryTitle];
+        _selectedTitle = retryAttachString;
+    }
+    return _selectedTitle;
+}
+
+- (NSMutableAttributedString *)normalTitle {
+    if (_normalTitle == nil) {
+        NSTextAttachment *naviAttachment = [[NSTextAttachment alloc] init];
+        naviAttachment.image = ImageInName(@"navi_menu_navi");
+        naviAttachment.bounds = CGRectMake(0, -6, 30.f, 30.f);
+        NSMutableAttributedString *naviAttachString = [[NSAttributedString attributedStringWithAttachment:naviAttachment] mutableCopy];
+        NSAttributedString *naviStartTitle = [[NSMutableAttributedString alloc] initWithString:kTitleStartNavi attributes:@{NSForegroundColorAttributeName : HB_COLOR_DARKBLUE,NSFontAttributeName : HB_FONT_LIGHT_SIZE(25)}];
+        [naviAttachString appendAttributedString:naviStartTitle];
+        _normalTitle = naviAttachString;
+    }
+    return _normalTitle;
+}
+
 #pragma mark - Initialize
 - (instancetype)init {
+    [[NSException exceptionWithName:@"Initialize Error" reason:@"Use initWithButtonClick: instead" userInfo:nil] raise];
+    return nil;
+}
+
+- (instancetype)initWithButtonClick:(void (^)(UIButton *))block {
     if (self = [super init]) {
         self.backgroundColor = HB_COLOR_DARKBLUE;
         _failure = NO;
         self.bounds = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, kHeight);
         [self setupSubViews];
         [self setupCorners];
+        self.buttonClicked = block;
     }
     return self;
 }
@@ -93,10 +140,17 @@ static NSString *const kTitleRetry = @"重试";               //重试提示
     self.btnStartNavi = [UIButton buttonWithType:UIButtonTypeCustom];
     [self.btnStartNavi fh_setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.btnStartNavi fh_setBackgroundColor:[UIColor colorWithRed:0.6409 green:0.3155 blue:0.3177 alpha:1] forState:UIControlStateSelected];
+    [self.btnStartNavi addTarget:self action:@selector(handleHeightState:) forControlEvents:UIControlEventTouchDown];
     [self.btnStartNavi addTarget:self action:@selector(handleNaviButtonOnClicked:) forControlEvents:UIControlEventTouchUpInside];
     self.btnStartNavi.layer.cornerRadius = 5.f;
     self.btnStartNavi.layer.masksToBounds = YES;
     [self addSubview:self.btnStartNavi];
+    
+    self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.indicatorView startAnimating];
+    self.indicatorView.userInteractionEnabled = NO;
+    self.indicatorView.hidden = YES;
+    [self.btnStartNavi addSubview:self.indicatorView];
     //约束
     [self makeConstraints];
     //设置按钮标题
@@ -110,21 +164,6 @@ static NSString *const kTitleRetry = @"重试";               //重试提示
     maskLayer.path = maskPath.CGPath;
     self.layer.mask = maskLayer;
 }
-
-//- (void)layoutIfNeeded {
-//    [super layoutIfNeeded];
-//
-//}
-//
-//- (void)setNeedsLayout {
-//    [super setNeedsLayout];
-//    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerTopRight) cornerRadii:CGSizeMake(5,5)];//圆角大小
-//    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
-//    maskLayer.frame = self.bounds;
-//    maskLayer.path = maskPath.CGPath;
-//    self.layer.mask = maskLayer;
-//    self.layer.masksToBounds = YES;
-//}
 
 - (void)makeConstraints {
     @WEAKSELF;
@@ -159,6 +198,11 @@ static NSString *const kTitleRetry = @"重试";               //重试提示
         make.height.mas_equalTo(kHeightButton);
         make.bottom.equalTo(weakSelf.mas_bottom).with.offset(-kInsetsLeft);
     }];
+    
+    [self.indicatorView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.centerY.equalTo(weakSelf.btnStartNavi);
+        make.width.height.mas_equalTo(30.f);
+    }];
 }
 
 #pragma mark - Setter
@@ -177,28 +221,23 @@ static NSString *const kTitleRetry = @"重试";               //重试提示
 
 - (void)setFailure:(BOOL)failure {
     _failure = failure;
-    //更改按钮标题
     [self setupButtonTitle];
+    self.btnStartNavi.selected = failure;
+    self.indicatorView.hidden = YES;
+    if (_failure) {
+        //设置数据显示
+#warning has space to improve
+        self.lblDistance.text = @"";
+        self.lblTime.text = @"";
+    }
 }
 
 #pragma mark - Private Method
 
 - (void)setupButtonTitle {
-    NSTextAttachment *naviAttachment = [[NSTextAttachment alloc] init];
-    naviAttachment.image = ImageInName(@"navi_menu_navi");
-    naviAttachment.bounds = CGRectMake(0, -6, 30.f, 30.f);
-    NSMutableAttributedString *naviAttachString = [[NSAttributedString attributedStringWithAttachment:naviAttachment] mutableCopy];
-    NSAttributedString *naviStartTitle = [[NSMutableAttributedString alloc] initWithString:kTitleStartNavi attributes:@{NSForegroundColorAttributeName : HB_COLOR_DARKBLUE,NSFontAttributeName : HB_FONT_LIGHT_SIZE(25)}];
-    [naviAttachString appendAttributedString:naviStartTitle];
-    [self.btnStartNavi setAttributedTitle:naviAttachString forState:UIControlStateNormal];
-    
-    NSTextAttachment *retryAttachment = [[NSTextAttachment alloc] init];
-    retryAttachment.image = ImageInName(@"navi_menu_retry");
-    retryAttachment.bounds = CGRectMake(0, -6, 30.f, 30.f);
-    NSMutableAttributedString *retryAttachString = [[NSAttributedString attributedStringWithAttachment:retryAttachment] mutableCopy];
-    NSAttributedString *retryTitle = [[NSMutableAttributedString alloc] initWithString:kTitleRetry attributes:@{NSForegroundColorAttributeName : [UIColor whiteColor],NSFontAttributeName : HB_FONT_LIGHT_SIZE(25)}];
-    [retryAttachString appendAttributedString:retryTitle];
-    [self.btnStartNavi setAttributedTitle:retryAttachString forState:UIControlStateSelected];
+    [self.btnStartNavi setAttributedTitle:self.normalTitle forState:UIControlStateNormal];
+    [self.btnStartNavi setAttributedTitle:self.selectedTitle forState:UIControlStateSelected];
+    [self.btnStartNavi setAttributedTitle:[[NSAttributedString alloc] initWithString:@" "] forState:UIControlStateHighlighted];
 }
 
 - (NSString *)getDistanceDescriptionWithLength:(NSInteger)length {
@@ -218,8 +257,29 @@ static NSString *const kTitleRetry = @"重试";               //重试提示
     }
 }
 
+- (void)handleHeightState:(UIButton *)sender {
+    if (sender.selected) {
+        //MARK:Have to do this maybe has another way,like GCD;
+        [self.btnStartNavi setAttributedTitle:[[NSAttributedString alloc] initWithString:@" "] forState:UIControlStateNormal];
+        self.btnStartNavi.highlighted = YES;
+    }
+}
+
 - (void)handleNaviButtonOnClicked:(UIButton *)sender {
-    sender.selected = !sender.selected;
+    if (sender.selected) {
+        //显示加载
+        [self.btnStartNavi setAttributedTitle:[[NSAttributedString alloc] initWithString:@" "] forState:UIControlStateSelected];
+        [self.btnStartNavi setAttributedTitle:[[NSAttributedString alloc] initWithString:@" "] forState:UIControlStateNormal];
+        sender.selected = YES;
+        self.indicatorView.hidden = NO;
+    }else {
+        sender.selected = NO;
+        self.indicatorView.hidden = NO;
+    }
+    //执行block
+    if (self.buttonClicked) {
+        self.buttonClicked(sender);
+    }
 }
 
 /*

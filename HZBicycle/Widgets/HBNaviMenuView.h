@@ -25,5 +25,13 @@
  */
 @property (nonatomic, assign) BOOL failure;
 
+/**
+ 初始化方法
+ 
+ (按钮不可用时需调用一次setFailure:恢复状态)
+
+ @param block 按钮点击回调
+ */
+- (instancetype)initWithButtonClick:(void(^)(UIButton *sender))block;
 
 @end
