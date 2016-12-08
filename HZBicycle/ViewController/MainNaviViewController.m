@@ -25,7 +25,7 @@
 @property (nonatomic, strong) HBNaviMenuView *naviMenuView;
 @end
 
-static CGFloat const kHeightMenuView = 200.f;        //菜单栏高度
+static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
 @implementation MainNaviViewController
 
 #pragma mark - Initialize
@@ -124,6 +124,7 @@ static CGFloat const kHeightMenuView = 200.f;        //菜单栏高度
 - (void)finishCalculatedRouteInType:(HBNaviType)type route:(AMapNaviRoute *)route error:(NSError *)error {
     if (!error) {
         //设置中心点
+        [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(route.routeCenterPoint.latitude, route.routeCenterPoint.longitude)];
         //显示路径
         [self.mapView addOverlay:[HBNaviManager getPolylineFromRoutes:route]];
         //设置菜单

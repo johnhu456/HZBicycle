@@ -15,6 +15,15 @@
  */
 @property (nonatomic, weak) AMapNaviRoute *route;
 
+/**
+ 站点模型
+ */
 @property (nonatomic, weak) HBBicycleStationModel *station;
+
+/**
+ 是否失败（set会改变按钮状态）
+ */
+@property (nonatomic, assign) BOOL failure;
+
 
 @end
