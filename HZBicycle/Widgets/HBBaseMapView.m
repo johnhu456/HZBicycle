@@ -60,4 +60,16 @@ static CGFloat const kMapZoomLevel = 15;
 {
     [self addAnnotation:annotation];
 }
+
+- (void)setNaviRoute:(AMapNaviRoute *)route
+    withStationIndex:(NSUInteger)index {
+    //设置中心点
+    [self setCenterCoordinate:CLLocationCoordinate2DMake(route.routeCenterPoint.latitude, route.routeCenterPoint.longitude)];
+    HBBicyclePointAnnotation *annotation = self.annotations[index];
+    [self selectAnnotation:annotation animated:NO];
+    //设置显示区域
+    [self setRegion:[HBMapManager getRegionFromNaviRoute:route] animated:YES];
+    //显示路径
+    [self addOverlay:[HBNaviManager getPolylineFromRoutes:route]];
+}
 @end

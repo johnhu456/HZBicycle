@@ -60,6 +60,7 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
 #pragma mark - User Interface
 
 - (void)setupMapView {
+    @WEAKSELF;
     self.mapView = [[HBBaseMapView alloc] initWithFrame:self.view.bounds];
     self.mapView.delegate = self;
     if (_location) {
@@ -68,6 +69,11 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
         [self.mapView setCenterCoordinate:[HBMapManager hangZhouCenter]];
     }
     [self.view addSubview:self.mapView];
+    [self.mapView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.mas_topLayoutGuideBottom);
+        make.left.right.equalTo(weakSelf.view);
+        make.bottom.equalTo(weakSelf.mas_bottomLayoutGuideTop).with.offset(- kHeightMenuView + 5.f);
+    }];
     //添加自行车站点数据
     [self.mapView addBicycleStations:self.stationResult withIndex:_targetIndex animated:NO];
 }
@@ -130,10 +136,7 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
 #pragma mark - HBNaviManagerDelegate
 - (void)finishCalculatedRouteInType:(HBNaviType)type route:(AMapNaviRoute *)route error:(NSError *)error {
     if (!error) {
-        //设置中心点
-        [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(route.routeCenterPoint.latitude, route.routeCenterPoint.longitude)];
-        //显示路径
-        [self.mapView addOverlay:[HBNaviManager getPolylineFromRoutes:route]];
+        [self.mapView setNaviRoute:route withStationIndex:_targetIndex];
         //设置菜单
         self.naviMenuView.route = route;
         self.naviMenuView.station = _stationResult.data[_targetIndex];

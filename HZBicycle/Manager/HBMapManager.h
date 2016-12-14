@@ -28,6 +28,14 @@
  计算两个坐标点之间距离，单位为米
  */
 + (NSUInteger)getDistanceFromPoint:(CLLocationCoordinate2D)point toAnotherPoint:(CLLocationCoordinate2D)anotherPoint;
+    
+/**
+ 通过导航路径获取地图范围
+
+ @param route 路径
+ @return 地图范围
+ */
++ (MACoordinateRegion)getRegionFromNaviRoute:(AMapNaviRoute *)route;
 @end
 
 /**

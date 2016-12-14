@@ -7,6 +7,7 @@
 //
 
 #import <MAMapKit/MAMapKit.h>
+#import <AMapNavi/AMapNaviKit/AMapNaviRoute.h>
 #import "HBBicyclePointAnnotation.h"
 #import "HBBicycleAnnotationView.h"
 #import "HBBicycleResultModel.h"
@@ -28,4 +29,11 @@
                  withIndex:(NSUInteger)index
                   animated:(BOOL)animated;
 
+/**
+ 设置导航路径更新地图显示
+
+ @param route 导航路径
+ */
+- (void)setNaviRoute:(AMapNaviRoute *)route
+    withStationIndex:(NSUInteger)index;
 @end
