@@ -9,6 +9,7 @@
 #import "MainNaviViewController.h"
 
 #import "HBNaviMenuView.h"
+#import "HBNaviTitleView.h"
 
 @interface MainNaviViewController ()<AMapNaviDriveViewDelegate,MAMapViewDelegate,HBNaviDelegate>
 
@@ -48,13 +49,17 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"导航";
+    @WEAKSELF;
     //设置地图
     [self setupMapView];
     //获取导航路径
-    [self setupNaviRoute];
+    [self setupNaviRouteWithType:HBNaviTypeWalk];
     //设置菜单页面
     [self setupMenuView];
+    HBNaviTitleView *test = [[HBNaviTitleView alloc] initWithButtonOnClicked:^(NSUInteger buttonIndex) {
+        [weakSelf setupNaviRouteWithType:buttonIndex == 0 ? HBNaviTypeWalk : HBNaviTypeRide];
+    }];
+    self.navigationItem.titleView = test;
 }
 
 #pragma mark - User Interface
@@ -82,10 +87,10 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
     @WEAKSELF;
     self.naviMenuView = [[HBNaviMenuView alloc] initWithButtonClick:^(UIButton *sender) {
         if (sender.selected) {
-            [weakSelf setupNaviRoute];
+            [weakSelf setupNaviRouteWithType:[HBNaviManager sharedManager].naviType];
         }else {
 #warning push new Navi
-            [weakSelf setupNaviRoute];
+            [weakSelf setupNaviRouteWithType:[HBNaviManager sharedManager].naviType];
         }
     }];
     [self.view addSubview:self.naviMenuView];
@@ -95,12 +100,13 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
     }];
 }
 
-- (void)setupNaviRoute {
+- (void)setupNaviRouteWithType:(HBNaviType)type {
     //处理导航
+    [self.naviMenuView startLoading];
     HBBicycleStationModel *targetStation = self.stationResult.data[_targetIndex];
     CLLocationCoordinate2D  realCoordinate = AMapCoordinateConvert(CLLocationCoordinate2DMake(targetStation.lat, targetStation.lon),AMapCoordinateTypeBaidu);
     [HBNaviManager sharedManager].delegate = self;
-    [[HBNaviManager sharedManager] getRouteWithStartCoordinate:_location.coordinate endCoordinate:realCoordinate naviType:HBNaviTypeRide];
+    [[HBNaviManager sharedManager] getRouteWithStartCoordinate:_location.coordinate endCoordinate:realCoordinate naviType:type];
 }
 
 #pragma mark - MapViewDelegate
@@ -140,10 +146,10 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
         //设置菜单
         self.naviMenuView.route = route;
         self.naviMenuView.station = _stationResult.data[_targetIndex];
-        [self.naviMenuView setFailure:NO];
+        [self.naviMenuView endLoadingWithSuccess:YES];
     } else {
         //路径规划错误，请重试
-        [self.naviMenuView setFailure:YES];
+        [self.naviMenuView endLoadingWithSuccess:NO];
         [HBHUDManager showNaviCalculateError];
     }
 

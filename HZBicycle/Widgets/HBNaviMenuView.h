@@ -21,9 +21,16 @@
 @property (nonatomic, weak) HBBicycleStationModel *station;
 
 /**
- 是否失败（set会改变按钮状态）
+ 开始加载状态
  */
-@property (nonatomic, assign) BOOL failure;
+- (void)startLoading;
+
+/**
+ 结束加载
+
+ @param success 结果失败还是成功
+ */
+- (void)endLoadingWithSuccess:(BOOL)success;
 
 /**
  初始化方法

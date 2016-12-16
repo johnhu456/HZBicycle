@@ -58,18 +58,18 @@
         switch (_naviType) {
             case HBNaviTypeWalk:
             {
-                _naviManager = nil;
+                self.naviManager = nil;
                 AMapNaviWalkManager *naviWalkManager = [[AMapNaviWalkManager alloc] init];
                 naviWalkManager.delegate = self;
-                _naviManager = naviWalkManager;
+                self.naviManager = naviWalkManager;
             }
                 break;
             default:
             {
-                _naviManager = nil;
+                self.naviManager = nil;
                 AMapNaviRideManager *naviRideManager = [[AMapNaviRideManager alloc] init];
                 naviRideManager.delegate = self;
-                _naviManager = naviRideManager;
+                self.naviManager = naviRideManager;
             }
                 break;
         }
@@ -115,6 +115,8 @@
             }
                 break;
         }
+    }else {
+        _naviType = naviType;
     }
 }
 
@@ -144,19 +146,19 @@
 #pragma mark - AMapNaviRideManagerDelegate
 - (void)rideManagerOnCalculateRouteSuccess:(AMapNaviRideManager *)rideManager {
     if (_delegateteFlag.finishFlag) {
-        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:rideManager.naviRoute error:nil];
+        [_delegate finishCalculatedRouteInType:HBNaviTypeRide route:rideManager.naviRoute error:nil];
     }
 }
 
 - (void)rideManager:(AMapNaviRideManager *)rideManager error:(NSError *)error {
     if (_delegateteFlag.finishFlag) {
-        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:rideManager.naviRoute error:error];
+        [_delegate finishCalculatedRouteInType:HBNaviTypeRide route:rideManager.naviRoute error:error];
     }
 }
 
 - (void)rideManager:(AMapNaviRideManager *)rideManager onCalculateRouteFailure:(NSError *)error {
     if (_delegateteFlag.finishFlag) {
-        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:rideManager.naviRoute error:error];
+        [_delegate finishCalculatedRouteInType:HBNaviTypeRide route:rideManager.naviRoute error:error];
     }
 }
 @end

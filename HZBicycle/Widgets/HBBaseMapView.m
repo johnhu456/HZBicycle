@@ -70,6 +70,7 @@ static CGFloat const kMapZoomLevel = 15;
     //设置显示区域
     [self setRegion:[HBMapManager getRegionFromNaviRoute:route] animated:YES];
     //显示路径
+    [self removeOverlays:self.overlays];
     [self addOverlay:[HBNaviManager getPolylineFromRoutes:route]];
 }
 @end

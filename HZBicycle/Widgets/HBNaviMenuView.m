@@ -101,7 +101,6 @@ static NSString *const kTitleRetry = @"重试";               //重试提示
 - (instancetype)initWithButtonClick:(void (^)(UIButton *))block {
     if (self = [super init]) {
         self.backgroundColor = HB_COLOR_DARKBLUE;
-        _failure = NO;
         self.bounds = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, kHeight);
         [self setupSubViews];
         [self setupCorners];
@@ -219,12 +218,22 @@ static NSString *const kTitleRetry = @"重试";               //重试提示
     self.lblAdress.text = _station.address;
 }
 
-- (void)setFailure:(BOOL)failure {
-    _failure = failure;
+
+#pragma mark - Public Method
+- (void)startLoading {
+    [self.btnStartNavi setAttributedTitle:[[NSAttributedString alloc] initWithString:@" "] forState:UIControlStateSelected];
+    [self.btnStartNavi setAttributedTitle:[[NSAttributedString alloc] initWithString:@" "] forState:UIControlStateNormal];
+    self.btnStartNavi.selected = YES;
+    self.indicatorView.hidden = NO;
+    self.btnStartNavi.enabled = NO;
+}
+
+- (void)endLoadingWithSuccess:(BOOL)success {
     [self setupButtonTitle];
-    self.btnStartNavi.selected = failure;
+    self.btnStartNavi.selected = !success;
+    self.btnStartNavi.enabled = YES;
     self.indicatorView.hidden = YES;
-    if (_failure) {
+    if (!success) {
         //设置数据显示
 #warning has space to improve
         self.lblDistance.text = @"";
@@ -250,10 +259,10 @@ static NSString *const kTitleRetry = @"重试";               //重试提示
 }
 
 - (NSString *)getTimeDescriptionWithSecond:(NSInteger)second {
-    if (second > kHoursInSeconds) {
+    if (second < kHoursInSeconds) {
         return [NSString stringWithFormat:@"预计需要：%d分",(int)(second/60.f)];
     } else {
-        return [NSString stringWithFormat:@"预计需要：%.1f时",second/kHoursInSeconds/1.f];
+        return [NSString stringWithFormat:@"预计需要：%.1f时",(CGFloat)(second/kHoursInSeconds)/1.f];
     }
 }
 
@@ -268,19 +277,17 @@ static NSString *const kTitleRetry = @"重试";               //重试提示
 - (void)handleNaviButtonOnClicked:(UIButton *)sender {
     if (sender.selected) {
         //显示加载
-        [self.btnStartNavi setAttributedTitle:[[NSAttributedString alloc] initWithString:@" "] forState:UIControlStateSelected];
-        [self.btnStartNavi setAttributedTitle:[[NSAttributedString alloc] initWithString:@" "] forState:UIControlStateNormal];
-        sender.selected = YES;
-        self.indicatorView.hidden = NO;
+        [self startLoading];
     }else {
-        sender.selected = NO;
-        self.indicatorView.hidden = NO;
+        [self endLoadingWithSuccess:YES];
     }
     //执行block
     if (self.buttonClicked) {
         self.buttonClicked(sender);
     }
 }
+
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

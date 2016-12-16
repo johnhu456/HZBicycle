@@ -11,6 +11,7 @@
 		9B946B667AAB42B3DCC29299 /* libPods-HZBicycleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BCE6ED818D3F0560B76B9A0 /* libPods-HZBicycleTests.a */; };
 		DFD2BB5A8813F20C23AF93B6 /* libPods-HZBicycleUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B762FBC5FC15352A619AC8 /* libPods-HZBicycleUITests.a */; };
 		E001D0661DEE7D3C00CCE77F /* HBNaviManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E001D0651DEE7D3C00CCE77F /* HBNaviManager.m */; };
+		E00C937B1E011E7D009D4775 /* UIView+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E00C937A1E011E7D009D4775 /* UIView+FHExtension.m */; };
 		E013EDD91DC9C3D5008F4259 /* HBBicyclePointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E013EDD81DC9C3D5008F4259 /* HBBicyclePointAnnotation.m */; };
 		E013EDDE1DCC5B90008F4259 /* HBBaseRoundButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E013EDDD1DCC5B8F008F4259 /* HBBaseRoundButton.m */; };
 		E013EDE21DCC642F008F4259 /* UIButton+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E013EDE11DCC642F008F4259 /* UIButton+FHExtension.m */; };
@@ -65,6 +66,7 @@
 		E0CF37351DDEBF03002F9746 /* HBHUDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF37341DDEBF03002F9746 /* HBHUDManager.m */; };
 		E0CF37391DDED193002F9746 /* HBAboutBicycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF37371DDED193002F9746 /* HBAboutBicycleViewController.m */; };
 		E0E079751DBF453E0028AB83 /* MainBicycleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */; };
+		E0E8903A1E0118DB00793154 /* HBNaviTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0E890391E0118DB00793154 /* HBNaviTitleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +98,8 @@
 		D38ED513A0D7E76B230AB75F /* Pods-HZBicycleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycleTests/Pods-HZBicycleTests.release.xcconfig"; sourceTree = "<group>"; };
 		E001D0641DEE7D3C00CCE77F /* HBNaviManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBNaviManager.h; path = Manager/HBNaviManager.h; sourceTree = "<group>"; };
 		E001D0651DEE7D3C00CCE77F /* HBNaviManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBNaviManager.m; path = Manager/HBNaviManager.m; sourceTree = "<group>"; };
+		E00C93791E011E7D009D4775 /* UIView+FHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FHExtension.h"; sourceTree = "<group>"; };
+		E00C937A1E011E7D009D4775 /* UIView+FHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FHExtension.m"; sourceTree = "<group>"; };
 		E013EDD71DC9C3D5008F4259 /* HBBicyclePointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBicyclePointAnnotation.h; path = Widgets/HBBicyclePointAnnotation.h; sourceTree = "<group>"; };
 		E013EDD81DC9C3D5008F4259 /* HBBicyclePointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBBicyclePointAnnotation.m; path = Widgets/HBBicyclePointAnnotation.m; sourceTree = "<group>"; };
 		E013EDDC1DCC5B8F008F4259 /* HBBaseRoundButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBaseRoundButton.h; path = Widgets/HBBaseRoundButton.h; sourceTree = "<group>"; };
@@ -201,6 +205,8 @@
 		E0E079701DBF2B8D0028AB83 /* FHMarco.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FHMarco.h; path = Util/FHMarco.h; sourceTree = "<group>"; };
 		E0E079731DBF453E0028AB83 /* MainBicycleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainBicycleViewController.h; path = ViewController/MainBicycleViewController.h; sourceTree = "<group>"; };
 		E0E079741DBF453E0028AB83 /* MainBicycleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainBicycleViewController.m; path = ViewController/MainBicycleViewController.m; sourceTree = "<group>"; };
+		E0E890381E0118DB00793154 /* HBNaviTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBNaviTitleView.h; path = Widgets/HBNaviTitleView.h; sourceTree = "<group>"; };
+		E0E890391E0118DB00793154 /* HBNaviTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBNaviTitleView.m; path = Widgets/HBNaviTitleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +325,8 @@
 			children = (
 				E04086231DF7DA4500457E23 /* HBNaviMenuView.h */,
 				E04086241DF7DA4500457E23 /* HBNaviMenuView.m */,
+				E0E890381E0118DB00793154 /* HBNaviTitleView.h */,
+				E0E890391E0118DB00793154 /* HBNaviTitleView.m */,
 			);
 			name = Navi;
 			sourceTree = "<group>";
@@ -432,6 +440,8 @@
 				E013EDE11DCC642F008F4259 /* UIButton+FHExtension.m */,
 				E0CF37191DDBF261002F9746 /* UIImage+FHExtension.h */,
 				E0CF371A1DDBF261002F9746 /* UIImage+FHExtension.m */,
+				E00C93791E011E7D009D4775 /* UIView+FHExtension.h */,
+				E00C937A1E011E7D009D4775 /* UIView+FHExtension.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -840,6 +850,7 @@
 				E029C2351DD1A74F00FC017B /* HBBaseViewController.m in Sources */,
 				E013EDE91DCC8B09008F4259 /* HBBicycleNavigationController.m in Sources */,
 				E06DD0CA1DD9F3BC0024039D /* HBSearchBar.m in Sources */,
+				E00C937B1E011E7D009D4775 /* UIView+FHExtension.m in Sources */,
 				E029C2311DD19A8000FC017B /* HBBicycleAccuracyCell.m in Sources */,
 				E06DD0D11DDAAB7C0024039D /* HBSearchTransition.m in Sources */,
 				E0630A9F1DB9C44C0012EA3A /* main.m in Sources */,
@@ -854,6 +865,7 @@
 				E08DD5811DC8984900064283 /* HBBicycleAnnotationView.m in Sources */,
 				E013EDDE1DCC5B90008F4259 /* HBBaseRoundButton.m in Sources */,
 				E09E603F1DD2C1BF00956F1C /* HBDownloadButton.m in Sources */,
+				E0E8903A1E0118DB00793154 /* HBNaviTitleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
