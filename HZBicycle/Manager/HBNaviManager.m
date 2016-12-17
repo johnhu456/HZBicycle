@@ -58,6 +58,9 @@
         switch (_naviType) {
             case HBNaviTypeWalk:
             {
+                AMapNaviRideManager *rideManager = (AMapNaviRideManager *)self.naviManager;
+                rideManager.delegate = nil;
+                rideManager = nil;
                 self.naviManager = nil;
                 AMapNaviWalkManager *naviWalkManager = [[AMapNaviWalkManager alloc] init];
                 naviWalkManager.delegate = self;
@@ -66,6 +69,9 @@
                 break;
             default:
             {
+                AMapNaviWalkManager *walkManager = (AMapNaviWalkManager *)self.naviManager;
+                walkManager.delegate = nil;
+                walkManager = nil;
                 self.naviManager = nil;
                 AMapNaviRideManager *naviRideManager = [[AMapNaviRideManager alloc] init];
                 naviRideManager.delegate = self;
@@ -103,14 +109,16 @@
             case HBNaviTypeRide:
                 //骑行导航
             {
-                [(AMapNaviRideManager *)self.naviManager calculateRideRouteWithStartPoint:self.startPoint
+                AMapNaviRideManager *rideManager = (AMapNaviRideManager *)self.naviManager;
+                [rideManager calculateRideRouteWithStartPoint:self.startPoint
                                                                                  endPoint:self.endPoint];
             }
                 break;
             default:
                 //步行导航
             {
-                [(AMapNaviWalkManager *)self.naviManager calculateWalkRouteWithStartPoints:@[self.startPoint]
+                AMapNaviWalkManager *walkManager = (AMapNaviWalkManager *)self.naviManager;
+                [walkManager calculateWalkRouteWithStartPoints:@[self.startPoint]
                                                                                  endPoints:@[self.endPoint]];
             }
                 break;
