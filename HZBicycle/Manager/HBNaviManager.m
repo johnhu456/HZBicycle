@@ -58,18 +58,24 @@
         switch (_naviType) {
             case HBNaviTypeWalk:
             {
-                _naviManager = nil;
+                AMapNaviRideManager *rideManager = (AMapNaviRideManager *)self.naviManager;
+                rideManager.delegate = nil;
+                rideManager = nil;
+                self.naviManager = nil;
                 AMapNaviWalkManager *naviWalkManager = [[AMapNaviWalkManager alloc] init];
                 naviWalkManager.delegate = self;
-                _naviManager = naviWalkManager;
+                self.naviManager = naviWalkManager;
             }
                 break;
             default:
             {
-                _naviManager = nil;
+                AMapNaviWalkManager *walkManager = (AMapNaviWalkManager *)self.naviManager;
+                walkManager.delegate = nil;
+                walkManager = nil;
+                self.naviManager = nil;
                 AMapNaviRideManager *naviRideManager = [[AMapNaviRideManager alloc] init];
                 naviRideManager.delegate = self;
-                _naviManager = naviRideManager;
+                self.naviManager = naviRideManager;
             }
                 break;
         }
@@ -103,18 +109,22 @@
             case HBNaviTypeRide:
                 //骑行导航
             {
-                [(AMapNaviRideManager *)self.naviManager calculateRideRouteWithStartPoint:self.startPoint
+                AMapNaviRideManager *rideManager = (AMapNaviRideManager *)self.naviManager;
+                [rideManager calculateRideRouteWithStartPoint:self.startPoint
                                                                                  endPoint:self.endPoint];
             }
                 break;
             default:
                 //步行导航
             {
-                [(AMapNaviWalkManager *)self.naviManager calculateWalkRouteWithStartPoints:@[self.startPoint]
+                AMapNaviWalkManager *walkManager = (AMapNaviWalkManager *)self.naviManager;
+                [walkManager calculateWalkRouteWithStartPoints:@[self.startPoint]
                                                                                  endPoints:@[self.endPoint]];
             }
                 break;
         }
+    }else {
+        _naviType = naviType;
     }
 }
 
@@ -144,19 +154,19 @@
 #pragma mark - AMapNaviRideManagerDelegate
 - (void)rideManagerOnCalculateRouteSuccess:(AMapNaviRideManager *)rideManager {
     if (_delegateteFlag.finishFlag) {
-        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:rideManager.naviRoute error:nil];
+        [_delegate finishCalculatedRouteInType:HBNaviTypeRide route:rideManager.naviRoute error:nil];
     }
 }
 
 - (void)rideManager:(AMapNaviRideManager *)rideManager error:(NSError *)error {
     if (_delegateteFlag.finishFlag) {
-        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:rideManager.naviRoute error:error];
+        [_delegate finishCalculatedRouteInType:HBNaviTypeRide route:rideManager.naviRoute error:error];
     }
 }
 
 - (void)rideManager:(AMapNaviRideManager *)rideManager onCalculateRouteFailure:(NSError *)error {
     if (_delegateteFlag.finishFlag) {
-        [_delegate finishCalculatedRouteInType:HBNaviTypeWalk route:rideManager.naviRoute error:error];
+        [_delegate finishCalculatedRouteInType:HBNaviTypeRide route:rideManager.naviRoute error:error];
     }
 }
 @end

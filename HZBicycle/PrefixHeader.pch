@@ -15,7 +15,9 @@
 #import <AMapLocationKit/AMapLocationKit.h>
 
 //视图控制器
+#import "HBBaseMapView.h"
 #import "HBBaseViewController.h"
+#import "MainNaviViewController.h"
 #import "HBSearchTransition.h"
 
 //布局
@@ -27,6 +29,7 @@
 #import "NSDictionary+FHExtension.h"
 #import "UIButton+FHExtension.h"
 #import "UIImage+FHExtension.h"
+#import "UIView+FHExtension.h"
 
 //管理类
 #import "HBRequestManager.h"
@@ -39,7 +42,6 @@
 //模型
 #import "HBBicycleStationModel.h"
 #import "HBBicycleResultModel.h"
-
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

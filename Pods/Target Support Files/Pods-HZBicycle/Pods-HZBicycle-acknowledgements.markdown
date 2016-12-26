@@ -44,6 +44,11 @@ Copyright © 2014 AutoNavi. All Rights Reserved.
 Copyright © 2014 AutoNavi. All Rights Reserved.
 
 
+## AMapSearch
+
+Copyright © 2014 AutoNavi. All Rights Reserved.
+
+
 ## DownloadButton
 
 Copyright (c) 2015 Pavel Katunin <wk.katunin@gmail.com>

@@ -47,7 +47,7 @@ typedef NS_ENUM(NSUInteger, HBNaviType){
 /**
  导航类型
  */
-@property (nonatomic, assign) HBNaviType naviType;
+@property (nonatomic, assign, readonly) HBNaviType naviType;
 
 /**
  起始点
