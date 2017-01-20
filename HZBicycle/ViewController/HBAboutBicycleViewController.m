@@ -62,6 +62,7 @@ static CGFloat const kInsets = 100.f;
     @WEAK_OBJ(buildLabel);
     UITextView *introduce = [[UITextView alloc] init];
     introduce.font = HB_FONT_MEDIUM_SIZE(14);
+    introduce.userInteractionEnabled = NO;
     introduce.textColor = HB_COLOR_DARKBLUE;
     introduce.textAlignment = NSTextAlignmentLeft;
     introduce.text = [self getIntroduce];
