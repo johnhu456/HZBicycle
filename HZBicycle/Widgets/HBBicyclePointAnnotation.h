@@ -8,6 +8,8 @@
 
 #import <MAMapKit/MAMapKit.h>
 
+@class HBBicycleStationModel;
+
 @interface HBBicyclePointAnnotation : MAPointAnnotation
 
 /**

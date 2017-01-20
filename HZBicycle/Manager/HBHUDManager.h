@@ -37,6 +37,11 @@
 + (void)showMailSettingError;
 
 /**
+ 提示路径规划错误
+ */
++ (void)showNaviCalculateError;
+
+/**
  网络加载中
  */
 + (void)showWaitProgress;

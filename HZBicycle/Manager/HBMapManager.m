@@ -8,7 +8,7 @@
 
 #import "HBMapManager.h"
 
-
+static CGFloat const kMapRegionAdjustConstant = 0.05;        //地图显示区域的微调整常数
 @implementation HBMapManager
 
 + (CLLocationCoordinate2D)convertToBaiduCoordinate:(CLLocationCoordinate2D)coordinate {
@@ -31,6 +31,14 @@
     //2.计算距离
     CLLocationDistance distance = MAMetersBetweenMapPoints(point1,point2);
     return (NSUInteger)distance;
+}
+    
++ (MACoordinateRegion)getRegionFromNaviRoute:(AMapNaviRoute *)route {
+    CLLocationCoordinate2D northEast = CLLocationCoordinate2DMake(route.routeBounds.northEast.latitude, route.routeBounds.northEast.longitude);
+    CLLocationCoordinate2D southWest = CLLocationCoordinate2DMake(route.routeBounds.southWest.latitude, route.routeBounds.southWest.longitude);
+    CLLocationDegrees latitudeDegree = northEast.latitude - southWest.latitude + kMapRegionAdjustConstant;
+    CLLocationDegrees longtitudeDegree = northEast.longitude - southWest.longitude + kMapRegionAdjustConstant;
+    return MACoordinateRegionMake(CLLocationCoordinate2DMake(route.routeCenterPoint.latitude, route.routeCenterPoint.longitude), MACoordinateSpanMake(latitudeDegree, longtitudeDegree));
 }
 
 @end

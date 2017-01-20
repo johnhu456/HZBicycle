@@ -13,9 +13,13 @@
 #import "HBSearchResultCell.h"
 
 @interface MainSearchViewController ()<UITableViewDelegate,UITableViewDataSource,HBSearchBarDelegete>
-
+{
+    BOOL _showRecentSearch;
+}
 #pragma mark - Views
 @property (nonatomic, strong) HBSearchBar *searchBar;
+
+@property (nonatomic, strong) UILabel *tipLabel;
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -23,18 +27,29 @@
 
 @property (nonatomic, strong) HBBicycleResultModel *searchResult;
 
+/**
+ 最近搜索
+ */
+@property (nonatomic, strong) NSArray *recentSearch;
+
 @end
 
 #pragma mark - Constant
 static CGFloat const kContentInsets = 15.f;
+static NSString *const kTipRecentSearch = @"最近搜索";
+static NSString *const kTipSearchResult = @"搜索结果";
 
 @implementation MainSearchViewController
 
 #pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //默认先显示最近搜索
+    _showRecentSearch = YES;
     //设置搜索框
     [self setupSearchBar];
+    //设置提示框
+    [self setupTipLabel];
     //设置Tableview
     [self setupTableView];
 }
@@ -61,11 +76,26 @@ static CGFloat const kContentInsets = 15.f;
     self.searchBar.delegate = self;
     [self.view addSubview:self.searchBar];
     [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(weakSelf.mas_topLayoutGuideBottom).with.offset(15.f);
+        make.top.equalTo(weakSelf.mas_topLayoutGuideBottom).with.offset(kContentInsets);
         make.height.mas_equalTo(@50);
         make.left.equalTo(weakSelf.view.mas_left).with.offset(kContentInsets);
         make.right.equalTo(weakSelf.view.mas_right).with.offset(-kContentInsets);
     }];
+}
+
+- (void)setupTipLabel {
+    @WEAKSELF;
+    self.tipLabel = [[UILabel alloc] init];
+    self.tipLabel.textAlignment = NSTextAlignmentLeft;
+    self.tipLabel.font = HB_FONT_MEDIUM_SIZE(14);
+    self.tipLabel.textColor = HB_COLOR_DARKBLUE;
+    [self.view addSubview:self.tipLabel];
+    [self.tipLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(weakSelf.searchBar.mas_bottom).with.offset(kContentInsets);
+        make.height.mas_equalTo(@14);
+        make.left.right.equalTo(weakSelf.searchBar);
+    }];
+    [self reloadTip];
 }
 
 - (void)setupTableView {
@@ -80,9 +110,17 @@ static CGFloat const kContentInsets = 15.f;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.equalTo(weakSelf.searchBar);
         make.bottom.equalTo(weakSelf.mas_bottomLayoutGuide);
-        make.top.equalTo(weakSelf.searchBar.mas_bottom).with.offset(kContentInsets);
+        make.top.equalTo(weakSelf.tipLabel.mas_bottom).with.offset(kContentInsets/2.f);
     }];
     [self.tableView registerNib:NibFromClass(HBSearchResultCell) forCellReuseIdentifier:StrFromClass(HBSearchResultCell)];
+}
+
+/**
+ 刷新提示
+ */
+- (void)reloadTip {
+    self.recentSearch = [HBUserDefultsManager recentSearchs];
+    self.tipLabel.text = _showRecentSearch ? @"最近搜索" : @"搜索结果";
 }
 
 #pragma mark - UITableViewDataSource
@@ -91,35 +129,48 @@ static CGFloat const kContentInsets = 15.f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.searchResult.count;
+    return _showRecentSearch ? self.recentSearch.count : self.searchResult.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HBSearchResultCell *searchResultCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBSearchResultCell)];
-    searchResultCell.stationModel = self.searchResult.data[indexPath.row];
+    //根据状态更改cell显示内容
+    if (_showRecentSearch) {
+        NSDictionary *recentSearch = self.recentSearch[indexPath.row];
+        [searchResultCell setRecentSearchText:recentSearch[kRecentSearchContent]];
+        searchResultCell.bottomCornered = indexPath.row == self.recentSearch.count - 1? YES : NO;
+    }else {
+        searchResultCell.stationModel = self.searchResult.data[indexPath.row];
+        searchResultCell.bottomCornered = indexPath.row == self.searchResult.count - 1? YES : NO;
+    }
     searchResultCell.topCornered = indexPath.row == 0 ? YES: NO;
-    searchResultCell.bottomCornered = indexPath.row == self.searchResult.count - 1? YES : NO;
     return searchResultCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    @WEAKSELF;
-    //第二次请求选中目的地周围的自行车
-    [HBHUDManager showWaitProgress];
-    HBBicycleStationModel *selectedStation = self.searchResult.data[indexPath.row];
-    CLLocationCoordinate2D wgs84Coordinate = [DFLocationConverter bd09ToWgs84:CLLocationCoordinate2DMake(selectedStation.lat, selectedStation.lon)];
-    [HBRequestManager sendNearBicycleRequestWithLatitude:@(wgs84Coordinate.latitude)
-                                              longtitude:@(wgs84Coordinate.longitude)
-                                                  length:@([HBUserDefultsManager searchDistance])
-                                       successJsonObject:^(NSDictionary *jsonDict) {
-                                           [weakSelf.navigationController popViewControllerAnimated:YES];
-                                           HBBicycleResultModel *stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
-                                           if ([weakSelf.delegate respondsToSelector:@selector(searchViewController:didChooseIndex:inResults:)]) {
-                                               [weakSelf.delegate searchViewController:self didChooseIndex:0 inResults:stationResult];
-                                           }
-                                       } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
+    //分最近搜索还是搜索结果
+    if (_showRecentSearch) {
+        NSDictionary *recentSearch = self.recentSearch[indexPath.row];
+        [self searchBar:self.searchBar didFinishEdit:recentSearch[kRecentSearchContent]];
+    }else {
+        @WEAKSELF;
+        //第二次请求选中目的地周围的自行车
+        [HBHUDManager showWaitProgress];
+        HBBicycleStationModel *selectedStation = self.searchResult.data[indexPath.row];
+        CLLocationCoordinate2D wgs84Coordinate = [DFLocationConverter bd09ToWgs84:CLLocationCoordinate2DMake(selectedStation.lat, selectedStation.lon)];
+        [HBRequestManager sendNearBicycleRequestWithLatitude:@(wgs84Coordinate.latitude)
+                                                  longtitude:@(wgs84Coordinate.longitude)
+                                                      length:@([HBUserDefultsManager searchDistance])
+                                           successJsonObject:^(NSDictionary *jsonDict) {
+                                               [weakSelf.navigationController popViewControllerAnimated:YES];
+                                               HBBicycleResultModel *stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
+                                               if ([weakSelf.delegate respondsToSelector:@selector(searchViewController:didChooseIndex:inResults:)]) {
+                                                   [weakSelf.delegate searchViewController:self didChooseIndex:0 inResults:stationResult];
+                                               }
+                                           } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
 #warning 错误处理。
-                                       }];
+                                           }];
+    }
 }
 
 #pragma mark - HBSearchBarDelegate
@@ -151,12 +202,15 @@ static CGFloat const kContentInsets = 15.f;
                                                    weakSelf.searchResult.count = result.count;
                                                    if (weakSelf.searchResult.data.count == 0) {
                                                        [HBHUDManager showNoSearchResult];
+                                                       _showRecentSearch = YES;
+                                                   }else {
+                                                       _showRecentSearch = NO;
                                                    }
+                                                   [weakSelf reloadTip];
                                                    [weakSelf.tableView reloadData];
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
 
                                                }];
-    NSLog(@"%@",[HBUserDefultsManager recentSearchs]);
 }
 
 
