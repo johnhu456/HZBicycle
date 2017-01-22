@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		72699032092EF5060AD07906 /* libPods-HZBicycle.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B01E247077F86EF4D76FA10E /* libPods-HZBicycle.a */; };
+		87319B59FBA9B9E9EA88BFF0 /* libPods-HZBicycleExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4410E051B04A150F302967AD /* libPods-HZBicycleExtension.a */; };
 		9B946B667AAB42B3DCC29299 /* libPods-HZBicycleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BCE6ED818D3F0560B76B9A0 /* libPods-HZBicycleTests.a */; };
 		DFD2BB5A8813F20C23AF93B6 /* libPods-HZBicycleUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5B762FBC5FC15352A619AC8 /* libPods-HZBicycleUITests.a */; };
 		E001D0661DEE7D3C00CCE77F /* HBNaviManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E001D0651DEE7D3C00CCE77F /* HBNaviManager.m */; };
@@ -17,6 +18,11 @@
 		E013EDE21DCC642F008F4259 /* UIButton+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E013EDE11DCC642F008F4259 /* UIButton+FHExtension.m */; };
 		E013EDE51DCC835E008F4259 /* MainSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E013EDE41DCC835E008F4259 /* MainSettingViewController.m */; };
 		E013EDE91DCC8B09008F4259 /* HBBicycleNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E013EDE81DCC8B09008F4259 /* HBBicycleNavigationController.m */; };
+		E02263AB1E348AA500114A59 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E02263AA1E348AA500114A59 /* NotificationCenter.framework */; };
+		E02263AF1E348AA500114A59 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E02263AE1E348AA500114A59 /* TodayViewController.m */; };
+		E02263B21E348AA500114A59 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02263B01E348AA500114A59 /* MainInterface.storyboard */; };
+		E02263B61E348AA500114A59 /* HZBicycleExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E02263A91E348AA500114A59 /* HZBicycleExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E02263C71E34972800114A59 /* HBUserDefultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0C61DD9CB000024039D /* HBUserDefultsManager.m */; };
 		E0279D7B1E31EAA200BF1340 /* HBRealTimeNaviController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0279D7A1E31EAA200BF1340 /* HBRealTimeNaviController.m */; };
 		E029C22C1DD199A700FC017B /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = E029C22B1DD199A700FC017B /* UINavigationBar+Awesome.m */; };
 		E029C2311DD19A8000FC017B /* HBBicycleAccuracyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E029C22F1DD19A8000FC017B /* HBBicycleAccuracyCell.m */; };
@@ -71,6 +77,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E02263B41E348AA500114A59 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E0630A921DB9C44C0012EA3A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E02263A81E348AA500114A59;
+			remoteInfo = HZBicycleExtension;
+		};
 		E0630AB41DB9C44C0012EA3A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E0630A921DB9C44C0012EA3A /* Project object */;
@@ -87,15 +100,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E02263BA1E348AA500114A59 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E02263B61E348AA500114A59 /* HZBicycleExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0CBA75B2B4F8B78B4418E98B /* Pods-HZBicycle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycle.release.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycle/Pods-HZBicycle.release.xcconfig"; sourceTree = "<group>"; };
 		333A91589889BE4F39C78F19 /* Pods-HZBicycleUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycleUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycleUITests/Pods-HZBicycleUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4410E051B04A150F302967AD /* libPods-HZBicycleExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HZBicycleExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65143C83E9D15029B55E1BAF /* Pods-HZBicycle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycle/Pods-HZBicycle.debug.xcconfig"; sourceTree = "<group>"; };
 		6BCE6ED818D3F0560B76B9A0 /* libPods-HZBicycleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HZBicycleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B762FBC5FC15352A619AC8 /* libPods-HZBicycleUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HZBicycleUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01E247077F86EF4D76FA10E /* libPods-HZBicycle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HZBicycle.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C008C657FE06897F6F655318 /* Pods-HZBicycleExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycleExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycleExtension/Pods-HZBicycleExtension.release.xcconfig"; sourceTree = "<group>"; };
 		C5C57AC82A4FB62BFD3D11CF /* Pods-HZBicycleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycleUITests/Pods-HZBicycleUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		C9B3D3E98A72296CAC18F66B /* Pods-HZBicycleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycleTests/Pods-HZBicycleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D2742F87886C5A9798668635 /* Pods-HZBicycleExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycleExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycleExtension/Pods-HZBicycleExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		D38ED513A0D7E76B230AB75F /* Pods-HZBicycleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZBicycleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HZBicycleTests/Pods-HZBicycleTests.release.xcconfig"; sourceTree = "<group>"; };
 		E001D0641DEE7D3C00CCE77F /* HBNaviManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBNaviManager.h; path = Manager/HBNaviManager.h; sourceTree = "<group>"; };
 		E001D0651DEE7D3C00CCE77F /* HBNaviManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBNaviManager.m; path = Manager/HBNaviManager.m; sourceTree = "<group>"; };
@@ -111,6 +141,14 @@
 		E013EDE41DCC835E008F4259 /* MainSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainSettingViewController.m; path = ViewController/MainSettingViewController.m; sourceTree = "<group>"; };
 		E013EDE71DCC8B09008F4259 /* HBBicycleNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBBicycleNavigationController.h; path = NavigationController/HBBicycleNavigationController.h; sourceTree = "<group>"; };
 		E013EDE81DCC8B09008F4259 /* HBBicycleNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBBicycleNavigationController.m; path = NavigationController/HBBicycleNavigationController.m; sourceTree = "<group>"; };
+		E02263A91E348AA500114A59 /* HZBicycleExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HZBicycleExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E02263AA1E348AA500114A59 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		E02263AD1E348AA500114A59 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		E02263AE1E348AA500114A59 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		E02263B11E348AA500114A59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		E02263B31E348AA500114A59 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E02263BB1E348E3300114A59 /* HZBicycleExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HZBicycleExtension.entitlements; sourceTree = "<group>"; };
+		E02263BC1E3491A500114A59 /* HZBicycle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HZBicycle.entitlements; sourceTree = "<group>"; };
 		E0279D791E31EAA200BF1340 /* HBRealTimeNaviController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HBRealTimeNaviController.h; path = ViewController/HBRealTimeNaviController.h; sourceTree = "<group>"; };
 		E0279D7A1E31EAA200BF1340 /* HBRealTimeNaviController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HBRealTimeNaviController.m; path = ViewController/HBRealTimeNaviController.m; sourceTree = "<group>"; };
 		E029C22A1DD199A700FC017B /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
@@ -213,6 +251,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E02263A61E348AA500114A59 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E02263AB1E348AA500114A59 /* NotificationCenter.framework in Frameworks */,
+				87319B59FBA9B9E9EA88BFF0 /* libPods-HZBicycleExtension.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E0630A971DB9C44C0012EA3A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -249,6 +296,8 @@
 				D38ED513A0D7E76B230AB75F /* Pods-HZBicycleTests.release.xcconfig */,
 				C5C57AC82A4FB62BFD3D11CF /* Pods-HZBicycleUITests.debug.xcconfig */,
 				333A91589889BE4F39C78F19 /* Pods-HZBicycleUITests.release.xcconfig */,
+				D2742F87886C5A9798668635 /* Pods-HZBicycleExtension.debug.xcconfig */,
+				C008C657FE06897F6F655318 /* Pods-HZBicycleExtension.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -295,6 +344,26 @@
 				E029C22B1DD199A700FC017B /* UINavigationBar+Awesome.m */,
 			);
 			name = NavigationController;
+			sourceTree = "<group>";
+		};
+		E02263AC1E348AA500114A59 /* HZBicycleExtension */ = {
+			isa = PBXGroup;
+			children = (
+				E02263C11E3492A400114A59 /* Manager */,
+				E02263BB1E348E3300114A59 /* HZBicycleExtension.entitlements */,
+				E02263AD1E348AA500114A59 /* TodayViewController.h */,
+				E02263AE1E348AA500114A59 /* TodayViewController.m */,
+				E02263B01E348AA500114A59 /* MainInterface.storyboard */,
+				E02263B31E348AA500114A59 /* Info.plist */,
+			);
+			path = HZBicycleExtension;
+			sourceTree = "<group>";
+		};
+		E02263C11E3492A400114A59 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Manager;
 			sourceTree = "<group>";
 		};
 		E0279D771E31E27D00BF1340 /* Stations */ = {
@@ -362,6 +431,7 @@
 				E0630A9C1DB9C44C0012EA3A /* HZBicycle */,
 				E0630AB61DB9C44C0012EA3A /* HZBicycleTests */,
 				E0630AC11DB9C44C0012EA3A /* HZBicycleUITests */,
+				E02263AC1E348AA500114A59 /* HZBicycleExtension */,
 				E0630A9B1DB9C44C0012EA3A /* Products */,
 				AA632C990899087EEF41E9BD /* Pods */,
 				EABB50E024F3D70F894DA1BE /* Frameworks */,
@@ -374,6 +444,7 @@
 				E0630A9A1DB9C44C0012EA3A /* HZBicycle.app */,
 				E0630AB31DB9C44C0012EA3A /* HZBicycleTests.xctest */,
 				E0630ABE1DB9C44C0012EA3A /* HZBicycleUITests.xctest */,
+				E02263A91E348AA500114A59 /* HZBicycleExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -381,6 +452,7 @@
 		E0630A9C1DB9C44C0012EA3A /* HZBicycle */ = {
 			isa = PBXGroup;
 			children = (
+				E02263BC1E3491A500114A59 /* HZBicycle.entitlements */,
 				E06DD0CE1DDAAB4E0024039D /* Transition */,
 				E013EDE61DCC8AD1008F4259 /* NavigationController */,
 				E08DD5721DC73FDC00064283 /* Widgets */,
@@ -548,6 +620,8 @@
 				B01E247077F86EF4D76FA10E /* libPods-HZBicycle.a */,
 				6BCE6ED818D3F0560B76B9A0 /* libPods-HZBicycleTests.a */,
 				A5B762FBC5FC15352A619AC8 /* libPods-HZBicycleUITests.a */,
+				E02263AA1E348AA500114A59 /* NotificationCenter.framework */,
+				4410E051B04A150F302967AD /* libPods-HZBicycleExtension.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -555,6 +629,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E02263A81E348AA500114A59 /* HZBicycleExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E02263B91E348AA500114A59 /* Build configuration list for PBXNativeTarget "HZBicycleExtension" */;
+			buildPhases = (
+				DB686B4D8BAD1BFA98DFAFBF /* [CP] Check Pods Manifest.lock */,
+				E02263A51E348AA500114A59 /* Sources */,
+				E02263A61E348AA500114A59 /* Frameworks */,
+				E02263A71E348AA500114A59 /* Resources */,
+				E1C989EA32B4D982A196B4B9 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HZBicycleExtension;
+			productName = HZBicycleExtension;
+			productReference = E02263A91E348AA500114A59 /* HZBicycleExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		E0630A991DB9C44C0012EA3A /* HZBicycle */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E0630AC71DB9C44C0012EA3A /* Build configuration list for PBXNativeTarget "HZBicycle" */;
@@ -565,10 +658,12 @@
 				E0630A981DB9C44C0012EA3A /* Resources */,
 				80C659F7CEED46792BC39EDF /* [CP] Embed Pods Frameworks */,
 				2303FE74B3EAC7720489A402 /* [CP] Copy Pods Resources */,
+				E02263BA1E348AA500114A59 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				E02263B51E348AA500114A59 /* PBXTargetDependency */,
 			);
 			name = HZBicycle;
 			productName = HZBicycle;
@@ -626,10 +721,25 @@
 				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = MADAO;
 				TargetAttributes = {
+					E02263A81E348AA500114A59 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 8RG52VJRN9;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					E0630A991DB9C44C0012EA3A = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 8RG52VJRN9;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					E0630AB21DB9C44C0012EA3A = {
 						CreatedOnToolsVersion = 8.0;
@@ -661,11 +771,20 @@
 				E0630A991DB9C44C0012EA3A /* HZBicycle */,
 				E0630AB21DB9C44C0012EA3A /* HZBicycleTests */,
 				E0630ABD1DB9C44C0012EA3A /* HZBicycleUITests */,
+				E02263A81E348AA500114A59 /* HZBicycleExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E02263A71E348AA500114A59 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E02263B21E348AA500114A59 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E0630A981DB9C44C0012EA3A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -833,9 +952,48 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HZBicycleUITests/Pods-HZBicycleUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DB686B4D8BAD1BFA98DFAFBF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E1C989EA32B4D982A196B4B9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HZBicycleExtension/Pods-HZBicycleExtension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E02263A51E348AA500114A59 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E02263C71E34972800114A59 /* HBUserDefultsManager.m in Sources */,
+				E02263AF1E348AA500114A59 /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E0630A961DB9C44C0012EA3A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -910,6 +1068,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E02263B51E348AA500114A59 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E02263A81E348AA500114A59 /* HZBicycleExtension */;
+			targetProxy = E02263B41E348AA500114A59 /* PBXContainerItemProxy */;
+		};
 		E0630AB51DB9C44C0012EA3A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E0630A991DB9C44C0012EA3A /* HZBicycle */;
@@ -923,6 +1086,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		E02263B01E348AA500114A59 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E02263B11E348AA500114A59 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		E0630AA61DB9C44C0012EA3A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -942,6 +1113,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E02263B71E348AA500114A59 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2742F87886C5A9798668635 /* Pods-HZBicycleExtension.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = HZBicycleExtension/HZBicycleExtension.entitlements;
+				DEVELOPMENT_TEAM = 8RG52VJRN9;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = HZBicycleExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.MADAO.HXBicycle.HZBicycleExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		E02263B81E348AA500114A59 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C008C657FE06897F6F655318 /* Pods-HZBicycleExtension.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = HZBicycleExtension/HZBicycleExtension.entitlements;
+				DEVELOPMENT_TEAM = 8RG52VJRN9;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = HZBicycleExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.MADAO.HXBicycle.HZBicycleExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		E0630AC51DB9C44C0012EA3A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1043,6 +1246,7 @@
 			baseConfigurationReference = 65143C83E9D15029B55E1BAF /* Pods-HZBicycle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HZBicycle/HZBicycle.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8RG52VJRN9;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1062,6 +1266,7 @@
 			baseConfigurationReference = 0CBA75B2B4F8B78B4418E98B /* Pods-HZBicycle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = HZBicycle/HZBicycle.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8RG52VJRN9;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1133,6 +1338,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E02263B91E348AA500114A59 /* Build configuration list for PBXNativeTarget "HZBicycleExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E02263B71E348AA500114A59 /* Debug */,
+				E02263B81E348AA500114A59 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E0630A951DB9C44C0012EA3A /* Build configuration list for PBXProject "HZBicycle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

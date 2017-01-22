@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 extern NSString *const kSearchDistanceKey;  //查找范围Key;
 extern NSString *const kSearchRecentKey; //最近搜索Key;
 

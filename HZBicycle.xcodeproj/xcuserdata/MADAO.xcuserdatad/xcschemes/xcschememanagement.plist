@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>HZBicycleExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>E02263A81E348AA500114A59</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E0630A991DB9C44C0012EA3A</key>
 		<dict>
 			<key>primary</key>

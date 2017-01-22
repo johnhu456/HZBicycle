@@ -13,6 +13,9 @@
 /*最大搜索条数*/
 static NSUInteger const kMaxRecentSearch = 6;
 
+/*Group ID*/
+static NSString *const kGroupId = @"group.com.madao.HZBicycle";
+
 //UserDefaultsKey
 NSString *const kSearchDistanceKey = @"kSearchDistanceKey";
 NSString *const kSearchRecentKey = @"kSearchRecentKey";
@@ -27,11 +30,13 @@ static NSString *const kRecentSearchTimestamp = @"kRecentSearchTimestamp";
 //搜索范围
 
 + (void)setSearchDistance:(CGFloat)searchDistance {
-    [[NSUserDefaults standardUserDefaults] setObject:@(searchDistance) forKey:kSearchDistanceKey];
+    NSUserDefaults *groupDefaults = [[NSUserDefaults alloc] initWithSuiteName:kGroupId];
+    [groupDefaults setObject:@(searchDistance) forKey:kSearchDistanceKey];
 }
 
 + (CGFloat)searchDistance {
-    NSNumber *searchDistance = [[NSUserDefaults standardUserDefaults] objectForKey:kSearchDistanceKey];
+    NSUserDefaults *groupDefaults = [[NSUserDefaults alloc] initWithSuiteName:kGroupId];
+    NSNumber *searchDistance = [groupDefaults objectForKey:kSearchDistanceKey];
     if (searchDistance == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:@(800) forKey:kSearchDistanceKey];
         return 800;
