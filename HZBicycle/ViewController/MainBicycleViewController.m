@@ -14,7 +14,7 @@
 
 #import "HBLocationButton.h"
 
-@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete,UINavigationControllerDelegate,SeachViewControllerDelegate,HBStationsViewControllerDelegate,HBNaviDelegate>
+@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete,UINavigationControllerDelegate,SeachViewControllerDelegate,HBStationsViewControllerDelegate>
 
 #pragma mark - Views
 /**
@@ -64,7 +64,7 @@ static CGFloat const kContentInsets = 15.f;
     //注册通知
     [self registerNotifications];
     //注册导航代理
-    [self registerNaviDelegate];
+//    [self registerNaviDelegate];
     //设置地图视图
     [self setupMapView];
     //设置定位按钮等
@@ -96,9 +96,9 @@ static CGFloat const kContentInsets = 15.f;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOfflineMapFinished:) name:kNotificationOfflineMapFinished object:nil];
 }
 
-- (void)registerNaviDelegate {
-    [HBNaviManager sharedManager].delegate = self;
-}
+//- (void)registerNaviDelegate {
+//    [HBNaviManager sharedManager].delegate = self;
+//}
 
 - (void)setupMapView {
     //添加地图
@@ -231,10 +231,6 @@ static CGFloat const kContentInsets = 15.f;
     }
 }
 
-- (void)offlineDataDidReload:(MAMapView *)mapView {
-    [mapView reloadMap];
-}
-
 #pragma mark - HBSearchBarDelegate
 - (void)searchBarDidBeginEdit:(HBSearchBar *)searchBar {
     [self.searchBar resignSearchBarWithFinish:NO];
@@ -262,8 +258,7 @@ static CGFloat const kContentInsets = 15.f;
         [self.mapView selectAnnotation:self.mapView.annotations[index] animated:YES];
         HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
         [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
-        
-#warning to push navi vc with station 
+        //Push NaviViewController
         MainNaviViewController *naviViewController = [[MainNaviViewController alloc] initWithStations:self.stationResult targetIndex:index location:self.mapView.userLocation.location];
         [self.navigationController pushViewController:naviViewController animated:YES];
     } else {

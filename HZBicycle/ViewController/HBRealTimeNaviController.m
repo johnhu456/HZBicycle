@@ -9,7 +9,7 @@
 #import "HBRealTimeNaviController.h"
 #import <AMapNaviKit/AMapNaviKit.h>
 
-@interface HBRealTimeNaviController () <AMapNaviRideViewDelegate,AMapNaviRideManagerDelegate,AMapNaviWalkViewDelegate>
+@interface HBRealTimeNaviController () <AMapNaviWalkViewDelegate,AMapNaviRideViewDelegate>
 
 @property (nonatomic, strong) AMapNaviRideView *naviRideView;
 
@@ -26,7 +26,8 @@
 #pragma mark - Lazy Init 
 - (AMapNaviRideView *)naviRideView {
     if (_naviRideView == nil) {
-        _naviRideView = [[AMapNaviRideView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height)];
+        _naviRideView = [[AMapNaviRideView alloc] initWithFrame:self.view.frame];
+        _naviRideView.showMoreButton = NO;
         _naviRideView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [_naviRideView setDelegate:self];
         [self.view addSubview:_naviRideView];
@@ -36,7 +37,8 @@
 
 -(AMapNaviWalkView *)naviWalkView {
     if (_naviWalkView == nil) {
-        _naviWalkView = [[AMapNaviWalkView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height - 64)];
+        _naviWalkView = [[AMapNaviWalkView alloc] initWithFrame:self.view.frame];
+        _naviWalkView.showMoreButton = NO;
         _naviWalkView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [_naviWalkView setDelegate:self];
         [self.view addSubview:_naviWalkView];
@@ -74,6 +76,22 @@
     }
 }
 
+#pragma mark - NaviViewDelegate
+- (void)walkViewCloseButtonClicked:(AMapNaviWalkView *)walkView {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)rideViewCloseButtonClicked:(AMapNaviRideView *)rideView {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIStatusBarStyle
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

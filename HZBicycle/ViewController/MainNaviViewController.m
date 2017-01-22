@@ -92,7 +92,9 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
             [weakSelf setupNaviRouteWithType:[HBNaviManager sharedManager].naviType];
         }else {
             HBRealTimeNaviController *naviController = [[HBRealTimeNaviController alloc] initWithNaviType:[HBNaviManager sharedManager].naviType];
-            [self.navigationController pushViewController: naviController animated:YES];
+            [self presentViewController:naviController animated:YES completion:^{
+                [weakSelf.navigationController popViewControllerAnimated:NO];
+            }];
         }
     }];
     [self.view addSubview:self.naviMenuView];
@@ -120,7 +122,6 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
         polylineRenderer.strokeColor  = HB_COLOR_DARKBLUE;
         polylineRenderer.lineJoinType = kMALineJoinRound;
         polylineRenderer.lineCapType  = kMALineCapRound;
-#warning color may needs to adjust
         return polylineRenderer;
     }
     return nil;
