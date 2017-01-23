@@ -18,6 +18,7 @@
 #import "HBBicycleResultModel.h"
 
 #import "NSDictionary+FHExtension.h"
+#import "UIImage+FHExtension.h"
 
 
 @interface TodayViewController () <NCWidgetProviding,CLLocationManagerDelegate>
@@ -27,19 +28,33 @@
 /**
  最近可还
  */
-@property (weak, nonatomic) IBOutlet UILabel *lblRestoreable;
+@property (weak, nonatomic) IBOutlet UILabel *lblRestoreable;    //可还标签
 @property (weak, nonatomic) IBOutlet UIView *viewRestoreable;
+@property (weak, nonatomic) IBOutlet UIImageView *iconRestoreable;  //可还icon
+@property (weak, nonatomic) IBOutlet UILabel *countRestoreable;  //可还数量
 
 /**
  最近可借
  */
-@property (weak, nonatomic) IBOutlet UILabel *lblRentable;
+@property (weak, nonatomic) IBOutlet UILabel *lblRentable;   //可借标签
 @property (weak, nonatomic) IBOutlet UIView *viewRentable;
+@property (weak, nonatomic) IBOutlet UIImageView *iconRentable; //可借icon
+@property (weak, nonatomic) IBOutlet UILabel *countRentable;  //可借数量
 
 /**
  最近可还
  */
 @property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
+
+/**
+ 最近可还站点
+ */
+@property (nonatomic, strong) HBBicycleStationModel *nearestRestoreableStation;
+
+/**
+ 最近可借站点
+ */
+@property (nonatomic, strong) HBBicycleStationModel *nearestRentableStation;
 
 /**
  定位权限/网络权限提示
@@ -51,6 +66,10 @@
 NSString *const kLocateTips = @"请允许定位，获得更佳体验";        //打开定位提示
 NSString *const kLocateFail = @"定位失败啦";                   //定位失败
 NSString *const kNetworkFail = @"网络出错啦";                  //数据更新失败
+NSString *const kNetworkFetching = @"数据获取中";              //数据获取中
+NSString *const kNearByNoData = @"附近无可用站点数据";          //附近无站点信息
+NSString *const kNoAcceptable = @"找不到符合的站点";            //无符合站点
+
 CGFloat const kTipInsetsTop = 20.f;                          //上边距
 CGFloat const kTipInsetsLeft = 8.f;                          //左边距
 CGFloat const kTipInsetsHeight = 70.f;                       //高度
@@ -87,11 +106,20 @@ CGFloat const kTipInsetsHeight = 70.f;                       //高度
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.lblRentable.adjustsFontSizeToFitWidth = YES;
+    self.lblRestoreable.adjustsFontSizeToFitWidth = YES;
+    self.iconRestoreable.image = [UIImage imageNamed:@"round_softorange"];
+    self.iconRentable.image = [UIImage imageNamed:@"round_softgreen"];
     //设定折叠模式最大Size
 #ifdef __IPHONE_10_0
     //如果需要折叠
-    self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
+    self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeCompact;
 #endif
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    [self addTipWithText:kNetworkFetching];
 }
 
 #pragma mark - WidgetsDisplayModeChange 
@@ -103,7 +131,6 @@ CGFloat const kTipInsetsHeight = 70.f;                       //高度
         self.preferredContentSize = CGSizeMake(0, 110);
     }
 #endif
-//    self.view.frame = CGRectMake(0, 0, 375, 500);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -116,12 +143,7 @@ CGFloat const kTipInsetsHeight = 70.f;                       //高度
 - (void)startLocateAndGetData {
     //开始定位并获取数据
     if ([CLLocationManager locationServicesEnabled]) {
-        if ([self.view.subviews containsObject:self.lblTips]) {
-            self.viewRentable.hidden = NO;
-            self.viewRestoreable.hidden = NO;
-            [self.lblTips removeFromSuperview];
-            self.lblTips = nil;
-        }
+        [self addTipWithText:kNetworkFetching];
         [self.locationManager requestLocation];
     }else {
         [self addTipWithText:kLocateTips];
@@ -129,14 +151,25 @@ CGFloat const kTipInsetsHeight = 70.f;                       //高度
 
 }
 
+#pragma mark - HandleTap
+
+- (IBAction)handleLabelRestoreOnTap:(UITapGestureRecognizer *)sender {
+    if (self.nearestRestoreableStation) {
+        NSString *urlString = [NSString stringWithFormat:@"PBicycles://getWithStationID?stationId=%ld",self.nearestRestoreableStation.stationID];
+        [self.extensionContext openURL:[NSURL URLWithString:urlString] completionHandler:nil];
+    }
+}
+
+- (IBAction)handleLabelRentOnTap:(UITapGestureRecognizer *)sender {
+    if (self.nearestRentableStation) {
+        NSString *urlString = [NSString stringWithFormat:@"PBicycles://getWithStationID?stationId=%ld",self.nearestRentableStation.stationID];
+        [self.extensionContext openURL:[NSURL URLWithString:urlString] completionHandler:nil];
+    }
+}
+
 #pragma mark - LocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    //恢复显示
-    self.viewRentable.hidden = NO;
-    self.viewRestoreable.hidden = NO;
-    [self.lblTips removeFromSuperview];
-    self.lblTips = nil;
-    
+//    [self addTipWithText:kNetworkFetching];
     CLLocation *result = [locations lastObject];
     CLLocationCoordinate2D coordinate = result.coordinate;
     __weak typeof(self) weakSelf = self;
@@ -149,21 +182,25 @@ CGFloat const kTipInsetsHeight = 70.f;                       //高度
     [params setObjectOrNil:@([HBUserDefultsManager searchDistance]) forKey:@"len"];
     nearBicycleRequest.requestArguments = params;
     [nearBicycleRequest startWithCompletionBlockWithSuccess:^(__kindof YTKBaseRequest * _Nonnull request) {
-        if (weakSelf.lblTips) {
-            if (weakSelf.lblTips) {
-                weakSelf.viewRentable.hidden = NO;
-                weakSelf.viewRestoreable.hidden = NO;
-                [weakSelf.lblTips removeFromSuperview];
-                weakSelf.lblTips = nil;
-            }
-        }
         NSData *resposneData = request.responseData;
         NSDictionary *dic = [NSDictionary fh_dictionaryWithData:resposneData];
         HBBicycleResultModel *resultModel = [HBBicycleResultModel mj_objectWithKeyValues:dic];
+        [HBUserDefultsManager saveLastExtensionSearchWithResult:resultModel];
         HBBicycleStationModel *rentResult = [resultModel nearestRentableStation];
         HBBicycleStationModel *restoreResult = [resultModel nearestRestoreableStation];
-        weakSelf.lblRentable.text = rentResult.name;
-        weakSelf.lblRestoreable.text = restoreResult.name;
+        weakSelf.nearestRentableStation = rentResult;
+        weakSelf.nearestRestoreableStation = restoreResult;
+        if (rentResult == nil && restoreResult == nil) {
+            //附近无任何数据
+            [weakSelf addTipWithText:kNearByNoData];
+        }else {
+            //仅有单一数据
+            weakSelf.lblRestoreable.text = restoreResult ? restoreResult.name : kNoAcceptable;
+            weakSelf.lblRentable.text = rentResult ? rentResult.name : kNoAcceptable;
+            weakSelf.countRestoreable.text = restoreResult ? [NSString stringWithFormat:@"%lu",(unsigned long)restoreResult.restorecount] : @"";
+            weakSelf.countRentable.text = rentResult ? [NSString stringWithFormat:@"%lu",(unsigned long)rentResult.rentcount] : @"";
+            [weakSelf removeTipAndDisplay];
+        }
     } failure:^(__kindof YTKBaseRequest * _Nonnull request) {
         //提示网路错误
         [weakSelf addTipWithText:kNetworkFail];
@@ -191,6 +228,16 @@ CGFloat const kTipInsetsHeight = 70.f;                       //高度
         make.right.equalTo(weakSelf.view.mas_right).with.offset(-kTipInsetsLeft);
     }];
     self.lblTips.text = text;
+}
+
+- (void)removeTipAndDisplay {
+    //恢复显示
+    if ([self.view.subviews containsObject:self.lblTips]) {
+        self.viewRentable.hidden = NO;
+        self.viewRestoreable.hidden = NO;
+        [self.lblTips removeFromSuperview];
+        self.lblTips = nil;
+    }
 }
 
 - (UIEdgeInsets)widgetMarginInsetsForProposedMarginInsets:(UIEdgeInsets)defaultMarginInsets {

@@ -7,6 +7,7 @@
 //
 
 #import "MainBicycleViewController.h"
+#import "AppDelegate.h"
 
 #import "MainSettingViewController.h"
 #import "MainSearchViewController.h"
@@ -94,6 +95,7 @@ static CGFloat const kContentInsets = 15.f;
 #pragma mark - Layout
 - (void)registerNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOfflineMapFinished:) name:kNotificationOfflineMapFinished object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOpenFromExtension:) name:kNotificationHandleOpenFromExtension object:nil];
 }
 
 //- (void)registerNaviDelegate {
@@ -288,9 +290,24 @@ static CGFloat const kContentInsets = 15.f;
     }
 }
 
+- (void)handleOpenFromExtension:(NSNotification *)notification {
+    NSString *stationID = notification.userInfo[kExtensionStationIDKey];
+    NSUInteger index = 0;
+    HBBicycleResultModel *result = [HBUserDefultsManager lastExtensionSearch];
+    for (HBBicycleStationModel *station in result.data) {
+        NSString *stationStr = [NSString stringWithFormat:@"%ld",station.stationID];
+        if ([stationStr isEqualToString:stationID]) {
+            index = [result.data indexOfObject:station];
+            break;
+        }
+    }
+    if (result) {
+        [self showStationDetailWithStations:result stationIndex:index];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private Method
@@ -305,6 +322,9 @@ static CGFloat const kContentInsets = 15.f;
         resState = state;
         if (screenshotImage && resState) {
             HBStationsViewController *stationsVC = [[HBStationsViewController alloc] initWithStations:stations index:index blurBackImage:screenshotImage];
+            //清楚扩展的数据记录
+            [HBUserDefultsManager saveLastExtensionSearchWithResult:nil];
+            
             stationsVC.delegate = self;
             [weakSelf addChildViewController:stationsVC];
             [weakSelf.view addSubview:stationsVC.view];

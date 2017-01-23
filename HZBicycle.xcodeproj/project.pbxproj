@@ -61,6 +61,8 @@
 		E06DD0DC1DDAD6FE0024039D /* HBSearchResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E06DD0DA1DDAD6FE0024039D /* HBSearchResultCell.xib */; };
 		E06DD0DF1DDB22310024039D /* HBStationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0DE1DDB22310024039D /* HBStationsViewController.m */; };
 		E06DD0E31DDB31980024039D /* HBStationsFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0E21DDB31980024039D /* HBStationsFlowLayout.m */; };
+		E081E3AE1E35D1DE0099C670 /* UIImage+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E0CF371A1DDBF261002F9746 /* UIImage+FHExtension.m */; };
+		E081E3AF1E35D68D0099C670 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0630AA91DB9C44C0012EA3A /* Assets.xcassets */; };
 		E08DD5701DC6F90700064283 /* HBMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD56D1DC6F90700064283 /* HBMapManager.m */; };
 		E08DD5711DC6F90700064283 /* HBOfflineMapManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD56F1DC6F90700064283 /* HBOfflineMapManager.m */; };
 		E08DD5761DC7401900064283 /* HBLocationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E08DD5751DC7401900064283 /* HBLocationButton.m */; };
@@ -779,6 +781,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E081E3AF1E35D68D0099C670 /* Assets.xcassets in Resources */,
 				E02263B21E348AA500114A59 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -988,6 +991,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E02263D01E34B24A00114A59 /* HBBicycleStationModel.m in Sources */,
+				E081E3AE1E35D1DE0099C670 /* UIImage+FHExtension.m in Sources */,
 				E02263C71E34972800114A59 /* HBUserDefultsManager.m in Sources */,
 				E02263CF1E34B24300114A59 /* HBBicycleResultModel.m in Sources */,
 				E02263C91E349F2F00114A59 /* NSDictionary+FHExtension.m in Sources */,

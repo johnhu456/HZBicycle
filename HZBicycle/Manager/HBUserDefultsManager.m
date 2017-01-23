@@ -23,6 +23,7 @@ NSString *const kSearchRecentKey = @"kSearchRecentKey";
 //RecentSearchKey
 NSString *const kRecentSearchContent = @"kRecentSearchContent";
 static NSString *const kRecentSearchTimestamp = @"kRecentSearchTimestamp";
+static NSString *const kLastExtensionSearch = @"kLastExtensionSearch";
 
 @implementation HBUserDefultsManager
 
@@ -90,5 +91,18 @@ static NSString *const kRecentSearchTimestamp = @"kRecentSearchTimestamp";
         NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:kRecentSearchTimestamp ascending:NO];
         return [recentSearch sortedArrayUsingDescriptors:@[descriptor]];
     }
+}
+
+#pragma mark - Extension
++ (void)saveLastExtensionSearchWithResult:(HBBicycleResultModel *)result {
+    NSData *resultsData = [result mj_JSONData];
+    NSUserDefaults *groupDefaults = [[NSUserDefaults alloc] initWithSuiteName:kGroupId];
+    [groupDefaults setValue:resultsData forKey:kLastExtensionSearch];
+}
+
++ (HBBicycleResultModel *)lastExtensionSearch {
+    NSUserDefaults *groupDefaults = [[NSUserDefaults alloc] initWithSuiteName:kGroupId];
+    NSData *data = [groupDefaults valueForKey:kLastExtensionSearch];
+    return [HBBicycleResultModel mj_objectWithKeyValues:data];
 }
 @end
