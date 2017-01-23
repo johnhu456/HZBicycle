@@ -36,11 +36,10 @@
 		36B68833E81803391B8F8D12C4744928 /* Pods-HZBicycleUITests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D61696C344FA605A73339B54AA78D6B /* Pods-HZBicycleUITests-dummy.m */; };
 		3D41E590C2D15195583D8070C49A765B /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE038DAFD0A26963677A903088E296D /* NSObject+MJProperty.m */; };
 		3D53D3FB5897A16D10B003849DCE4DDC /* PKPendingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5169F39C768FD1F617162011DBC3C112 /* PKPendingView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E7C033D45446552A82353A59AFEC2B5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9C40863C436E81BE97E515C8419FB03 /* Foundation.framework */; };
 		3E8E6916C563B9CB12AA417275FC6EB3 /* NSLayoutConstraint+MASDebugAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 110A08EDB4A10C43F8DFA32277D65102 /* NSLayoutConstraint+MASDebugAdditions.m */; };
 		401F532EF8D2EBCD105E8A34C43637A5 /* DownloadButton-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D94337D18506A61BD90B451B22FB34C4 /* DownloadButton-dummy.m */; };
 		40918CB4CB23DCC4362F1C335C959A75 /* YTKChainRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ACF170032146CD5C39AFEFC4F5DF235 /* YTKChainRequest.m */; };
-		416D5803A840B03C69A34DC4C129FA0E /* Pods-HZBicycleExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B7B98D804BF7617EAFBC61D4AED987 /* Pods-HZBicycleExtension-dummy.m */; };
+		443AF9DD9773862D1CAFD53E0F418794 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9C40863C436E81BE97E515C8419FB03 /* Foundation.framework */; };
 		45E6ABDE68ABAA8406F71A48C139F3AD /* YTKBatchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 133E96A1087547CC4719DE6E8114846F /* YTKBatchRequest.m */; };
 		46401F3C7FF0B0CFE2E9B14914780835 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = BC974C89BAF488A7E0D5348B752A85EE /* AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48164A90E8FED84B03308055401943CA /* Pods-HZBicycle-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B79D09529C46F809BA20DD7FDA7629 /* Pods-HZBicycle-dummy.m */; };
@@ -161,16 +160,17 @@
 		F099E5987DD80E8D78E909AF81D3C587 /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = C85A03ABBDFF713137222189675D0AF0 /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F1F93EE1AA5E870F2CE81325CE9EB643 /* AFAutoPurgingImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 5CD859ACB8D7F93E28D9470C1C7F7648 /* AFAutoPurgingImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5CC06F3E0C232483A72DCCFAF393BE0 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DC31B7287A6D6B636943ECBE0BC6D7BB /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC567F79DB8252644D3FC74F9176FA8E /* Pods-HZBicycleExtension-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B7B98D804BF7617EAFBC61D4AED987 /* Pods-HZBicycleExtension-dummy.m */; };
 		FF01895AE68BB9CBDCADBCE9DC0C680C /* PKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 10EF03E55F301DC9BE6DC9065EAC30C5 /* PKMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		11AB6E89FEE2904E0E95CFA6270CF378 /* PBXContainerItemProxy */ = {
+		2AEB3E0904374DA002824386B9482955 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9E033EDB5EC0819481B0546434FA577B;
-			remoteInfo = AFNetworking;
+			remoteGlobalIDString = 016BD7FDCCFEE5171AEC6D020AAF5DDD;
+			remoteInfo = YTKNetwork;
 		};
 		2F2A81E0BCA6D5E46A2CCBAE6C4D962F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -186,12 +186,12 @@
 			remoteGlobalIDString = A16D1A3E8F852F11BE058269426331AE;
 			remoteInfo = DownloadButton;
 		};
-		38B5CDA3575BB3841DDAB009338B424F /* PBXContainerItemProxy */ = {
+		3472FCABD1E30EA74C1C823FCBA9579F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 016BD7FDCCFEE5171AEC6D020AAF5DDD;
-			remoteInfo = YTKNetwork;
+			remoteGlobalIDString = 9E033EDB5EC0819481B0546434FA577B;
+			remoteInfo = AFNetworking;
 		};
 		41A968FC439374A9203DA030F5712F3D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -214,6 +214,13 @@
 			remoteGlobalIDString = A316B54C67E947D23CECD230FA5BFAEF;
 			remoteInfo = MJExtension;
 		};
+		6C622C305488C65E2F2D1312D524679E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9DC8D9E02903E93BD0B2FEC9D846EA20;
+			remoteInfo = Masonry;
+		};
 		6ED2EA3D8A3F9F1EAD882895158174F3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -227,6 +234,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = EC89672EB91D04387FCCD72D28D7230D;
 			remoteInfo = "DownloadButton-DownloadButton";
+		};
+		8452134FFA239BC46EEA3A141B799796 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A316B54C67E947D23CECD230FA5BFAEF;
+			remoteInfo = MJExtension;
 		};
 		9BB4692653A4FE33010917D18BC1B31D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -537,14 +551,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3D0E080B0A0D63D37E2B3BD720C632BC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3E7C033D45446552A82353A59AFEC2B5 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		54E1C7F50D41AF75FE1622EDF07630D2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -629,6 +635,14 @@
 				8B1E1A45E0B423395CE2A513BB1B1010 /* MobileCoreServices.framework in Frameworks */,
 				D6661D944DA4B5402DA6B57914542DF9 /* Security.framework in Frameworks */,
 				E738C16AF8020F2D6948D867AA7109EF /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF1D2665D8372A152F1BA1C6F8AD4359 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				443AF9DD9773862D1CAFD53E0F418794 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1430,24 +1444,6 @@
 			productReference = B6D6020D63E160FD64069489CDC529CF /* libSVProgressHUD.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		41B03378D7C90CF416BD362BA4A81B72 /* Pods-HZBicycleExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C405BBDF44E0FB30C214F65E9AAFF010 /* Build configuration list for PBXNativeTarget "Pods-HZBicycleExtension" */;
-			buildPhases = (
-				95A8EFCBFDCC5C82DD0D5949ECAF7077 /* Sources */,
-				3D0E080B0A0D63D37E2B3BD720C632BC /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8DE684DA41298F75DC8C1109B42F3690 /* PBXTargetDependency */,
-				F8EC22A1B310101A3A0A1B7ACCD69F96 /* PBXTargetDependency */,
-			);
-			name = "Pods-HZBicycleExtension";
-			productName = "Pods-HZBicycleExtension";
-			productReference = 2ED4641D1B2384A7E916CCA3297D86A2 /* libPods-HZBicycleExtension.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		9DC8D9E02903E93BD0B2FEC9D846EA20 /* Masonry */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34CAE1CB89EDBF2E53735CC5D4E5E69F /* Build configuration list for PBXNativeTarget "Masonry" */;
@@ -1533,6 +1529,26 @@
 			productReference = 6F0DD97E99628261198E85B0BDEE69D2 /* libPods-HZBicycleUITests.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		DD840746D958881F2ECD85007661B224 /* Pods-HZBicycleExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D07C9F9B820D8B03FFBC4DF1D4195A1C /* Build configuration list for PBXNativeTarget "Pods-HZBicycleExtension" */;
+			buildPhases = (
+				78779CCD726E781330D23CE133665DE9 /* Sources */,
+				FF1D2665D8372A152F1BA1C6F8AD4359 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5D8584D49273023ACE59D6AF48D7CEA9 /* PBXTargetDependency */,
+				1983687C48A460C10FFB8C2879832E16 /* PBXTargetDependency */,
+				6F9D5F65502BF7457BCDEA5C0DF56D0D /* PBXTargetDependency */,
+				1C18932D751C96B6485C62E4680B681C /* PBXTargetDependency */,
+			);
+			name = "Pods-HZBicycleExtension";
+			productName = "Pods-HZBicycleExtension";
+			productReference = 2ED4641D1B2384A7E916CCA3297D86A2 /* libPods-HZBicycleExtension.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		E71C3434C7DAC1898A147BC0B83A3D3E /* Pods-HZBicycleTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5091DEC62E2A0BAA91AA208FB5503264 /* Build configuration list for PBXNativeTarget "Pods-HZBicycleTests" */;
@@ -1595,7 +1611,7 @@
 				9DC8D9E02903E93BD0B2FEC9D846EA20 /* Masonry */,
 				A316B54C67E947D23CECD230FA5BFAEF /* MJExtension */,
 				29A57A5F117284E225C011A456DB8A77 /* Pods-HZBicycle */,
-				41B03378D7C90CF416BD362BA4A81B72 /* Pods-HZBicycleExtension */,
+				DD840746D958881F2ECD85007661B224 /* Pods-HZBicycleExtension */,
 				E71C3434C7DAC1898A147BC0B83A3D3E /* Pods-HZBicycleTests */,
 				D40AFA9F96688E7D23F3B09905C275C0 /* Pods-HZBicycleUITests */,
 				34730717F46A754C7815D32346612482 /* SVProgressHUD */,
@@ -1645,19 +1661,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		78779CCD726E781330D23CE133665DE9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC567F79DB8252644D3FC74F9176FA8E /* Pods-HZBicycleExtension-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		854AFD42C56A901CD8D4E5B8601A9326 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				36B68833E81803391B8F8D12C4744928 /* Pods-HZBicycleUITests-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		95A8EFCBFDCC5C82DD0D5949ECAF7077 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				416D5803A840B03C69A34DC4C129FA0E /* Pods-HZBicycleExtension-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1763,17 +1779,41 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1983687C48A460C10FFB8C2879832E16 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MJExtension;
+			target = A316B54C67E947D23CECD230FA5BFAEF /* MJExtension */;
+			targetProxy = 8452134FFA239BC46EEA3A141B799796 /* PBXContainerItemProxy */;
+		};
+		1C18932D751C96B6485C62E4680B681C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = YTKNetwork;
+			target = 016BD7FDCCFEE5171AEC6D020AAF5DDD /* YTKNetwork */;
+			targetProxy = 2AEB3E0904374DA002824386B9482955 /* PBXContainerItemProxy */;
+		};
 		58777D79BFAAF338F0F161F82A18FBED /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Masonry;
 			target = 9DC8D9E02903E93BD0B2FEC9D846EA20 /* Masonry */;
 			targetProxy = 6ED2EA3D8A3F9F1EAD882895158174F3 /* PBXContainerItemProxy */;
 		};
+		5D8584D49273023ACE59D6AF48D7CEA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = AFNetworking;
+			target = 9E033EDB5EC0819481B0546434FA577B /* AFNetworking */;
+			targetProxy = 3472FCABD1E30EA74C1C823FCBA9579F /* PBXContainerItemProxy */;
+		};
 		6D9AA9F69C4B4A729EF462563598B44D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AFNetworking;
 			target = 9E033EDB5EC0819481B0546434FA577B /* AFNetworking */;
 			targetProxy = 4462A524A27BD31CBE4589ACE9E030E4 /* PBXContainerItemProxy */;
+		};
+		6F9D5F65502BF7457BCDEA5C0DF56D0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Masonry;
+			target = 9DC8D9E02903E93BD0B2FEC9D846EA20 /* Masonry */;
+			targetProxy = 6C622C305488C65E2F2D1312D524679E /* PBXContainerItemProxy */;
 		};
 		89E19A6B0224FA323D9564EC10CFAFCE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1786,12 +1826,6 @@
 			name = MJExtension;
 			target = A316B54C67E947D23CECD230FA5BFAEF /* MJExtension */;
 			targetProxy = 542B6E7EA98935E38701CC203BBE6864 /* PBXContainerItemProxy */;
-		};
-		8DE684DA41298F75DC8C1109B42F3690 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = AFNetworking;
-			target = 9E033EDB5EC0819481B0546434FA577B /* AFNetworking */;
-			targetProxy = 11AB6E89FEE2904E0E95CFA6270CF378 /* PBXContainerItemProxy */;
 		};
 		9DBED9CC62660988DBE1DB79C8CE2FDB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1828,12 +1862,6 @@
 			name = YTKNetwork;
 			target = 016BD7FDCCFEE5171AEC6D020AAF5DDD /* YTKNetwork */;
 			targetProxy = 41A968FC439374A9203DA030F5712F3D /* PBXContainerItemProxy */;
-		};
-		F8EC22A1B310101A3A0A1B7ACCD69F96 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = YTKNetwork;
-			target = 016BD7FDCCFEE5171AEC6D020AAF5DDD /* YTKNetwork */;
-			targetProxy = 38B5CDA3575BB3841DDAB009338B424F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1906,7 +1934,7 @@
 			};
 			name = Debug;
 		};
-		0FE804BE65BAEFCFE254791FDAA05016 /* Debug */ = {
+		13504B8CD6D7CEA257B3732294A7CC44 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57F367A0919CA115842FD524AE3F30E4 /* Pods-HZBicycleExtension.debug.xcconfig */;
 			buildSettings = {
@@ -1929,30 +1957,6 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
-		};
-		1B7D46BDA9A4A8ADFADA382111F84F80 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A081C5AF2CE003A6082473C9FA8E682 /* Pods-HZBicycleExtension.release.xcconfig */;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
 		};
 		1DE0E9F59382EACC3104D8071AA17ABB /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -2000,10 +2004,35 @@
 			};
 			name = Release;
 		};
-		24455948D3A3C98235995A605DB59FFB /* Release */ = {
+		2AD6A4F6387B0C6A5F1D4648637FFE60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAA3C366D647D513883DE859B6D9E7D2 /* Masonry.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Masonry/Masonry-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3896B9AF1B24D9C8FC0F798F2DDE094E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7DC76D8EB63F025264476044D3A08A7B /* MJExtension.xcconfig */;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -2132,33 +2161,11 @@
 			};
 			name = Debug;
 		};
-		5A6ACE61C4D128598EA7472C87982601 /* Debug */ = {
+		6112D689B55ABEF50170E0FA2A1EB4C2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CAA3C366D647D513883DE859B6D9E7D2 /* Masonry.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Masonry/Masonry-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		6CA42F62CE0652819ED46936FE31E065 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = CAA3C366D647D513883DE859B6D9E7D2 /* Masonry.xcconfig */;
-			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -2201,29 +2208,6 @@
 			};
 			name = Debug;
 		};
-		864257C72797C3D88C7F59CD746CD135 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7DC76D8EB63F025264476044D3A08A7B /* MJExtension.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/MJExtension/MJExtension-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
 		8F7B246812DCB09D6D8D67DC2AB46F6F /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C1244C6F3E053F25AF0EF2020E863448 /* YTKNetwork.xcconfig */;
@@ -2243,6 +2227,30 @@
 				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		9950D0CA648430F47F522D5544BCC8E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A081C5AF2CE003A6082473C9FA8E682 /* Pods-HZBicycleExtension.release.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -2353,6 +2361,30 @@
 			};
 			name = Release;
 		};
+		BFBD3CEE0C22B53ED873403A41E878EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7DC76D8EB63F025264476044D3A08A7B /* MJExtension.xcconfig */;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/MJExtension/MJExtension-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
 		C29A039E367DFE1B69EF8874DF65941E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DE9A6C5CBA8C0F2D25B6BDAABC74E9C3 /* Pods-HZBicycle.release.xcconfig */;
@@ -2446,8 +2478,8 @@
 		34CAE1CB89EDBF2E53735CC5D4E5E69F /* Build configuration list for PBXNativeTarget "Masonry" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5A6ACE61C4D128598EA7472C87982601 /* Debug */,
-				6CA42F62CE0652819ED46936FE31E065 /* Release */,
+				2AD6A4F6387B0C6A5F1D4648637FFE60 /* Debug */,
+				6112D689B55ABEF50170E0FA2A1EB4C2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2491,8 +2523,8 @@
 		64EE246612F53A73C8FBFCEC3A61508A /* Build configuration list for PBXNativeTarget "MJExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				864257C72797C3D88C7F59CD746CD135 /* Debug */,
-				24455948D3A3C98235995A605DB59FFB /* Release */,
+				BFBD3CEE0C22B53ED873403A41E878EB /* Debug */,
+				3896B9AF1B24D9C8FC0F798F2DDE094E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2506,11 +2538,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C405BBDF44E0FB30C214F65E9AAFF010 /* Build configuration list for PBXNativeTarget "Pods-HZBicycleExtension" */ = {
+		D07C9F9B820D8B03FFBC4DF1D4195A1C /* Build configuration list for PBXNativeTarget "Pods-HZBicycleExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0FE804BE65BAEFCFE254791FDAA05016 /* Debug */,
-				1B7D46BDA9A4A8ADFADA382111F84F80 /* Release */,
+				13504B8CD6D7CEA257B3732294A7CC44 /* Debug */,
+				9950D0CA648430F47F522D5544BCC8E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

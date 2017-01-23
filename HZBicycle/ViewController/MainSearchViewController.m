@@ -162,13 +162,14 @@ static NSString *const kTipSearchResult = @"搜索结果";
                                                   longtitude:@(wgs84Coordinate.longitude)
                                                       length:@([HBUserDefultsManager searchDistance])
                                            successJsonObject:^(NSDictionary *jsonDict) {
+                                               [HBHUDManager dismissWaitProgress];
                                                [weakSelf.navigationController popViewControllerAnimated:YES];
                                                HBBicycleResultModel *stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
                                                if ([weakSelf.delegate respondsToSelector:@selector(searchViewController:didChooseIndex:inResults:)]) {
                                                    [weakSelf.delegate searchViewController:self didChooseIndex:0 inResults:stationResult];
                                                }
                                            } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
-#warning 错误处理。
+                                                [HBHUDManager showNetworkError];
                                            }];
     }
 }
@@ -189,11 +190,15 @@ static NSString *const kTipSearchResult = @"搜索结果";
 -(void)searchBar:(HBSearchBar *)searchBar didFinishEdit:(NSString *)text {
     @WEAKSELF;
     [HBUserDefultsManager addSearchText:text];
+    //显示网络加载
+    [HBHUDManager showWaitProgress];
     [HBRequestManager sendSearchBicycleStationRequestWithOptions:text
                                                successJsonObject:^(NSDictionary *jsonDict) {
                                                    //因为返回结构不一致 需要做转换。
                                                    NSMutableArray *result = [[NSMutableArray alloc] init];
                                                    for (NSDictionary *stationDic in jsonDict[@"data"]) {
+                                                   //结束加载状态
+                                                   [HBHUDManager dismissWaitProgress];
                                                        HBBicycleStationModel *stationModel = [HBBicycleStationModel mj_objectWithKeyValues:stationDic[@"result"]];
                                                        [result addObject:stationModel];
                                                    }
@@ -209,7 +214,7 @@ static NSString *const kTipSearchResult = @"搜索结果";
                                                    [weakSelf reloadTip];
                                                    [weakSelf.tableView reloadData];
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
-
+                                                   [HBHUDManager showNetworkError];
                                                }];
 }
 

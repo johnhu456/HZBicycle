@@ -178,6 +178,7 @@ static CGFloat const kContentInsets = 15.f;
                                                       longtitude:@(wgs84Coordinate.longitude)
                                                           length:@([HBUserDefultsManager searchDistance])
                                                successJsonObject:^(NSDictionary *jsonDict) {
+                                                   [HBHUDManager dismissWaitProgress];
                                                    [weakSelf.mapView removeAnnotations:weakSelf.mapView.annotations];
                                                    weakSelf.stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
                                                    if (weakSelf.stationResult.count) {
@@ -189,6 +190,7 @@ static CGFloat const kContentInsets = 15.f;
                                                    [weakSelf.locationButton endActivityAnimation];
                                                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
+                                                   [HBHUDManager showNetworkError];
                                                    [weakSelf.locationButton endActivityAnimation];
                                                     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                }];

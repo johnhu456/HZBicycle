@@ -23,6 +23,12 @@
 		E02263B21E348AA500114A59 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E02263B01E348AA500114A59 /* MainInterface.storyboard */; };
 		E02263B61E348AA500114A59 /* HZBicycleExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E02263A91E348AA500114A59 /* HZBicycleExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		E02263C71E34972800114A59 /* HBUserDefultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E06DD0C61DD9CB000024039D /* HBUserDefultsManager.m */; };
+		E02263C91E349F2F00114A59 /* NSDictionary+FHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AF31DBDB41C0012EA3A /* NSDictionary+FHExtension.m */; };
+		E02263CB1E34A07600114A59 /* HBRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AD91DB9F04A0012EA3A /* HBRequestManager.m */; };
+		E02263CF1E34B24300114A59 /* HBBicycleResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AE81DB9F9550012EA3A /* HBBicycleResultModel.m */; };
+		E02263D01E34B24A00114A59 /* HBBicycleStationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AEB1DB9FA760012EA3A /* HBBicycleStationModel.m */; };
+		E02263D11E34B28500114A59 /* HBBicycleBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AE41DB9F1710012EA3A /* HBBicycleBaseModel.m */; };
+		E02263D21E34B2C000114A59 /* HBBaseDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E0630AD61DB9F0220012EA3A /* HBBaseDataModel.m */; };
 		E0279D7B1E31EAA200BF1340 /* HBRealTimeNaviController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0279D7A1E31EAA200BF1340 /* HBRealTimeNaviController.m */; };
 		E029C22C1DD199A700FC017B /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = E029C22B1DD199A700FC017B /* UINavigationBar+Awesome.m */; };
 		E029C2311DD19A8000FC017B /* HBBicycleAccuracyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E029C22F1DD19A8000FC017B /* HBBicycleAccuracyCell.m */; };
@@ -349,7 +355,6 @@
 		E02263AC1E348AA500114A59 /* HZBicycleExtension */ = {
 			isa = PBXGroup;
 			children = (
-				E02263C11E3492A400114A59 /* Manager */,
 				E02263BB1E348E3300114A59 /* HZBicycleExtension.entitlements */,
 				E02263AD1E348AA500114A59 /* TodayViewController.h */,
 				E02263AE1E348AA500114A59 /* TodayViewController.m */,
@@ -357,13 +362,6 @@
 				E02263B31E348AA500114A59 /* Info.plist */,
 			);
 			path = HZBicycleExtension;
-			sourceTree = "<group>";
-		};
-		E02263C11E3492A400114A59 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Manager;
 			sourceTree = "<group>";
 		};
 		E0279D771E31E27D00BF1340 /* Stations */ = {
@@ -989,8 +987,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E02263D01E34B24A00114A59 /* HBBicycleStationModel.m in Sources */,
 				E02263C71E34972800114A59 /* HBUserDefultsManager.m in Sources */,
+				E02263CF1E34B24300114A59 /* HBBicycleResultModel.m in Sources */,
+				E02263C91E349F2F00114A59 /* NSDictionary+FHExtension.m in Sources */,
+				E02263D21E34B2C000114A59 /* HBBaseDataModel.m in Sources */,
 				E02263AF1E348AA500114A59 /* TodayViewController.m in Sources */,
+				E02263D11E34B28500114A59 /* HBBicycleBaseModel.m in Sources */,
+				E02263CB1E34A07600114A59 /* HBRequestManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1120,6 +1124,11 @@
 				CODE_SIGN_ENTITLEMENTS = HZBicycleExtension/HZBicycleExtension.entitlements;
 				DEVELOPMENT_TEAM = 8RG52VJRN9;
 				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"HB_EXTENSION=1",
+				);
 				INFOPLIST_FILE = HZBicycleExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -1136,6 +1145,11 @@
 				CODE_SIGN_ENTITLEMENTS = HZBicycleExtension/HZBicycleExtension.entitlements;
 				DEVELOPMENT_TEAM = 8RG52VJRN9;
 				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"HB_EXTENSION=1",
+				);
 				INFOPLIST_FILE = HZBicycleExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";

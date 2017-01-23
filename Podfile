@@ -37,6 +37,8 @@ target 'HZBicycle' do
   target 'HZBicycleExtension' do
       inherit! :search_paths
       pod 'YTKNetwork','~>2.0.1'
+      pod 'MJExtension','~>3.0.13'
+      pod 'Masonry','~>1.0.2'
   end
 
 end
