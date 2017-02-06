@@ -41,6 +41,10 @@ extern NSString *const kRecentSearchContent; //搜索内容key
  */
 + (NSArray *)recentSearchs;
 
+/**
+ 清空最近搜索
+ */
++ (void)clearRecentSearchs;
 
 /**
  保存上一次扩展应用的搜索结果记录

@@ -93,6 +93,10 @@ static NSString *const kLastExtensionSearch = @"kLastExtensionSearch";
     }
 }
 
++ (void)clearRecentSearchs {
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kSearchRecentKey];
+}
+
 #pragma mark - Extension
 + (void)saveLastExtensionSearchWithResult:(HBBicycleResultModel *)result {
     NSData *resultsData = [result mj_JSONData];
