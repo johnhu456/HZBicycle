@@ -68,7 +68,7 @@ static NSString *const kDistrictNumber = @"0571-";
     
     //设置点击手势
     [self setupTapGestureRecognizer];
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -190,6 +190,7 @@ static NSString *const kDistrictNumber = @"0571-";
     }
     return YES;
 }
+
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking

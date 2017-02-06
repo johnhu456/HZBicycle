@@ -44,8 +44,6 @@ static CGFloat const kMapZoomLevel = 15;
         [self selectAnnotation:annotation animated:animated];
         if (self.zoomLevel != kMapZoomLevel) {
             [self setZoomLevel:kMapZoomLevel animated:animated];
-        }else {
-#warning
         }
     }
 }

@@ -59,4 +59,5 @@ extern NSString *const kNotificationOfflineMapFinished;
  是否正在下载
  */
 - (BOOL)isDownloading;
+
 @end

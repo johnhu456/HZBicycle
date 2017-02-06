@@ -30,6 +30,13 @@
                   animated:(BOOL)animated;
 
 /**
+ 添加一个站点
+
+ @param model 站点信息
+ */
+- (void)addAnnotationWithStation:(HBBicycleStationModel *)model;
+
+/**
  设置导航路径更新地图显示
 
  @param route 导航路径

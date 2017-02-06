@@ -7,6 +7,7 @@
 //
 
 #import "MainBicycleViewController.h"
+#import "AppDelegate.h"
 
 #import "MainSettingViewController.h"
 #import "MainSearchViewController.h"
@@ -14,7 +15,7 @@
 
 #import "HBLocationButton.h"
 
-@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete,UINavigationControllerDelegate,SeachViewControllerDelegate,HBStationsViewControllerDelegate,HBNaviDelegate>
+@interface MainBicycleViewController ()<MAMapViewDelegate,AMapLocationManagerDelegate,HBSearchBarDelegete,UINavigationControllerDelegate,SeachViewControllerDelegate,HBStationsViewControllerDelegate>
 
 #pragma mark - Views
 /**
@@ -64,7 +65,7 @@ static CGFloat const kContentInsets = 15.f;
     //注册通知
     [self registerNotifications];
     //注册导航代理
-    [self registerNaviDelegate];
+//    [self registerNaviDelegate];
     //设置地图视图
     [self setupMapView];
     //设置定位按钮等
@@ -94,11 +95,12 @@ static CGFloat const kContentInsets = 15.f;
 #pragma mark - Layout
 - (void)registerNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOfflineMapFinished:) name:kNotificationOfflineMapFinished object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOpenFromExtension:) name:kNotificationHandleOpenFromExtension object:nil];
 }
 
-- (void)registerNaviDelegate {
-    [HBNaviManager sharedManager].delegate = self;
-}
+//- (void)registerNaviDelegate {
+//    [HBNaviManager sharedManager].delegate = self;
+//}
 
 - (void)setupMapView {
     //添加地图
@@ -178,6 +180,7 @@ static CGFloat const kContentInsets = 15.f;
                                                       longtitude:@(wgs84Coordinate.longitude)
                                                           length:@([HBUserDefultsManager searchDistance])
                                                successJsonObject:^(NSDictionary *jsonDict) {
+                                                   [HBHUDManager dismissWaitProgress];
                                                    [weakSelf.mapView removeAnnotations:weakSelf.mapView.annotations];
                                                    weakSelf.stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
                                                    if (weakSelf.stationResult.count) {
@@ -189,6 +192,7 @@ static CGFloat const kContentInsets = 15.f;
                                                    [weakSelf.locationButton endActivityAnimation];
                                                    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
+                                                   [HBHUDManager showNetworkError];
                                                    [weakSelf.locationButton endActivityAnimation];
                                                     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                }];
@@ -231,10 +235,6 @@ static CGFloat const kContentInsets = 15.f;
     }
 }
 
-- (void)offlineDataDidReload:(MAMapView *)mapView {
-    [mapView reloadMap];
-}
-
 #pragma mark - HBSearchBarDelegate
 - (void)searchBarDidBeginEdit:(HBSearchBar *)searchBar {
     [self.searchBar resignSearchBarWithFinish:NO];
@@ -262,8 +262,7 @@ static CGFloat const kContentInsets = 15.f;
         [self.mapView selectAnnotation:self.mapView.annotations[index] animated:YES];
         HBBicyclePointAnnotation *annotation = [[HBBicyclePointAnnotation alloc] initWithStation:self.stationResult.data[index]];
         [self.mapView setCenterCoordinate:annotation.coordinate animated:YES];
-        
-#warning to push navi vc with station 
+        //Push NaviViewController
         MainNaviViewController *naviViewController = [[MainNaviViewController alloc] initWithStations:self.stationResult targetIndex:index location:self.mapView.userLocation.location];
         [self.navigationController pushViewController:naviViewController animated:YES];
     } else {
@@ -291,9 +290,24 @@ static CGFloat const kContentInsets = 15.f;
     }
 }
 
+- (void)handleOpenFromExtension:(NSNotification *)notification {
+    NSString *stationID = notification.userInfo[kExtensionStationIDKey];
+    NSUInteger index = 0;
+    HBBicycleResultModel *result = [HBUserDefultsManager lastExtensionSearch];
+    for (HBBicycleStationModel *station in result.data) {
+        NSString *stationStr = [NSString stringWithFormat:@"%ld",station.stationID];
+        if ([stationStr isEqualToString:stationID]) {
+            index = [result.data indexOfObject:station];
+            break;
+        }
+    }
+    if (result) {
+        [self showStationDetailWithStations:result stationIndex:index];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private Method
@@ -308,6 +322,9 @@ static CGFloat const kContentInsets = 15.f;
         resState = state;
         if (screenshotImage && resState) {
             HBStationsViewController *stationsVC = [[HBStationsViewController alloc] initWithStations:stations index:index blurBackImage:screenshotImage];
+            //清楚扩展的数据记录
+            [HBUserDefultsManager saveLastExtensionSearchWithResult:nil];
+            
             stationsVC.delegate = self;
             [weakSelf addChildViewController:stationsVC];
             [weakSelf.view addSubview:stationsVC.view];

@@ -36,8 +36,10 @@
 
 #pragma mark - Constant
 static CGFloat const kContentInsets = 15.f;
+static NSString *const kCellReuseIdentifier = @"kCellReuseIdentifier";
 static NSString *const kTipRecentSearch = @"最近搜索";
 static NSString *const kTipSearchResult = @"搜索结果";
+static NSString *const kTitleClearButton = @"清空历史";
 
 @implementation MainSearchViewController
 
@@ -119,8 +121,8 @@ static NSString *const kTipSearchResult = @"搜索结果";
  刷新提示
  */
 - (void)reloadTip {
-    self.recentSearch = [HBUserDefultsManager recentSearchs];
-    self.tipLabel.text = _showRecentSearch ? @"最近搜索" : @"搜索结果";
+    self.recentSearch = [[HBUserDefultsManager recentSearchs] copy];
+    self.tipLabel.text = _showRecentSearch ? kTipRecentSearch : kTipSearchResult;
 }
 
 #pragma mark - UITableViewDataSource
@@ -129,16 +131,31 @@ static NSString *const kTipSearchResult = @"搜索结果";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _showRecentSearch ? self.recentSearch.count : self.searchResult.count;
+    return _showRecentSearch ? self.recentSearch.count + 1: self.searchResult.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     HBSearchResultCell *searchResultCell = [tableView dequeueReusableCellWithIdentifier:StrFromClass(HBSearchResultCell)];
+    searchResultCell.bottomCornered = NO;
     //根据状态更改cell显示内容
     if (_showRecentSearch) {
-        NSDictionary *recentSearch = self.recentSearch[indexPath.row];
-        [searchResultCell setRecentSearchText:recentSearch[kRecentSearchContent]];
-        searchResultCell.bottomCornered = indexPath.row == self.recentSearch.count - 1? YES : NO;
+        if (indexPath.row == self.recentSearch.count) {
+            UITableViewCell *clearCell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
+            if (clearCell == nil) {
+                clearCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellReuseIdentifier];
+                clearCell.backgroundColor = [UIColor clearColor];
+                clearCell.selectionStyle = UITableViewCellSelectionStyleNone;
+                clearCell.textLabel.font = [UIFont systemFontOfSize:13];
+                clearCell.textLabel.textColor = [UIColor darkGrayColor];
+                clearCell.textLabel.textAlignment = NSTextAlignmentRight;
+            }
+            clearCell.textLabel.text = kTitleClearButton;
+            return clearCell;
+        }else {
+            NSDictionary *recentSearch = self.recentSearch[indexPath.row];
+            [searchResultCell setRecentSearchText:recentSearch[kRecentSearchContent]];
+            searchResultCell.bottomCornered = indexPath.row == self.recentSearch.count - 1? YES : NO;
+        }
     }else {
         searchResultCell.stationModel = self.searchResult.data[indexPath.row];
         searchResultCell.bottomCornered = indexPath.row == self.searchResult.count - 1? YES : NO;
@@ -150,8 +167,15 @@ static NSString *const kTipSearchResult = @"搜索结果";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //分最近搜索还是搜索结果
     if (_showRecentSearch) {
-        NSDictionary *recentSearch = self.recentSearch[indexPath.row];
-        [self searchBar:self.searchBar didFinishEdit:recentSearch[kRecentSearchContent]];
+        if (indexPath.row == self.recentSearch.count) {
+            //清空历史
+            [HBUserDefultsManager clearRecentSearchs];
+            self.recentSearch = nil;
+            [self.tableView reloadData];
+        }else {
+            NSDictionary *recentSearch = self.recentSearch[indexPath.row];
+            [self searchBar:self.searchBar didFinishEdit:recentSearch[kRecentSearchContent]];
+        }
     }else {
         @WEAKSELF;
         //第二次请求选中目的地周围的自行车
@@ -162,13 +186,14 @@ static NSString *const kTipSearchResult = @"搜索结果";
                                                   longtitude:@(wgs84Coordinate.longitude)
                                                       length:@([HBUserDefultsManager searchDistance])
                                            successJsonObject:^(NSDictionary *jsonDict) {
+                                               [HBHUDManager dismissWaitProgress];
                                                [weakSelf.navigationController popViewControllerAnimated:YES];
                                                HBBicycleResultModel *stationResult = [HBBicycleResultModel mj_objectWithKeyValues:jsonDict];
                                                if ([weakSelf.delegate respondsToSelector:@selector(searchViewController:didChooseIndex:inResults:)]) {
                                                    [weakSelf.delegate searchViewController:self didChooseIndex:0 inResults:stationResult];
                                                }
                                            } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
-#warning 错误处理。
+                                                [HBHUDManager showNetworkError];
                                            }];
     }
 }
@@ -189,11 +214,15 @@ static NSString *const kTipSearchResult = @"搜索结果";
 -(void)searchBar:(HBSearchBar *)searchBar didFinishEdit:(NSString *)text {
     @WEAKSELF;
     [HBUserDefultsManager addSearchText:text];
+    //显示网络加载
+    [HBHUDManager showWaitProgress];
     [HBRequestManager sendSearchBicycleStationRequestWithOptions:text
                                                successJsonObject:^(NSDictionary *jsonDict) {
                                                    //因为返回结构不一致 需要做转换。
                                                    NSMutableArray *result = [[NSMutableArray alloc] init];
                                                    for (NSDictionary *stationDic in jsonDict[@"data"]) {
+                                                   //结束加载状态
+                                                   [HBHUDManager dismissWaitProgress];
                                                        HBBicycleStationModel *stationModel = [HBBicycleStationModel mj_objectWithKeyValues:stationDic[@"result"]];
                                                        [result addObject:stationModel];
                                                    }
@@ -209,7 +238,7 @@ static NSString *const kTipSearchResult = @"搜索结果";
                                                    [weakSelf reloadTip];
                                                    [weakSelf.tableView reloadData];
                                                } failureCompletion:^(__kindof YTKBaseRequest * _Nonnull request) {
-
+                                                   [HBHUDManager showNetworkError];
                                                }];
 }
 
