@@ -29,6 +29,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.layer.mask = nil;
     // Initialization code
 }
 
@@ -51,6 +52,8 @@
         maskLayer.frame = self.bounds;
         maskLayer.path = maskPath.CGPath;
         self.layer.mask = maskLayer;
+    }else {
+        self.layer.mask = nil;
     }
     if (_bottomCornered && _topCornered) {
         [self setCornered];
@@ -85,5 +88,11 @@
 
     // Configure the view for the selected state
 }
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    self.layer.mask = nil;
+}
+
 
 @end

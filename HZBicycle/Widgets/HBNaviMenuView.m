@@ -254,7 +254,7 @@ static NSString *const kTitleRetry = @"重试";               //重试提示
     if (length>100) {
         return [NSString stringWithFormat:@"距您：%.1f公里",length/1000.f];
     }else {
-        return [NSString stringWithFormat:@"距您：%ld米",length];
+        return [NSString stringWithFormat:@"距您：%ld米",(long)length];
     }
 }
 

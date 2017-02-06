@@ -275,6 +275,7 @@ static CGFloat const kSizeAdapter = 1024.f * 1024.f;
             weakSelf.offlineMapCell.lblSize.text = [NSString stringWithFormat:@"%.2f/%.2f MB",received/kSizeAdapter,expected/kSizeAdapter];
         }
         if (downloadStatus == MAOfflineMapDownloadStatusCompleted) {
+            //发送完成通知
             //下载完成
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.downloadButton.stopDownloadButton.progress = 1;

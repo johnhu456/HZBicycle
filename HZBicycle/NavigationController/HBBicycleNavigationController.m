@@ -9,14 +9,18 @@
 #import "HBBicycleNavigationController.h"
 #import "UINavigationBar+Awesome.h"
 
+#import "AppDelegate.h"
+
 @interface HBBicycleNavigationController ()<UIGestureRecognizerDelegate>
 
 @end
 
 @implementation HBBicycleNavigationController
 
+#pragma mark - LifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleOpenFromExtension:) name:kNotificationHandleOpenFromExtension object:nil];
     //界面相关
     [self setupUserInterface];
     //开启侧滑返回
@@ -27,12 +31,21 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)setupUserInterface {
     self.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationBar lt_setBackgroundColor:HB_COLOR_DARKBLUE];
     [self.navigationBar setTitleTextAttributes:@{
                                                 NSForegroundColorAttributeName:[UIColor whiteColor]
                                                 }];
+}
+
+#pragma mark - NotificationHandleOpenFromExtension
+- (void)handleOpenFromExtension:(NSNotification *)notification {
+    [self popToRootViewControllerAnimated:YES];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

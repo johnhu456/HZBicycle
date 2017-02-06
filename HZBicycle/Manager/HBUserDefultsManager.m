@@ -13,6 +13,9 @@
 /*最大搜索条数*/
 static NSUInteger const kMaxRecentSearch = 6;
 
+/*Group ID*/
+static NSString *const kGroupId = @"group.com.madao.HZBicycle";
+
 //UserDefaultsKey
 NSString *const kSearchDistanceKey = @"kSearchDistanceKey";
 NSString *const kSearchRecentKey = @"kSearchRecentKey";
@@ -20,6 +23,7 @@ NSString *const kSearchRecentKey = @"kSearchRecentKey";
 //RecentSearchKey
 NSString *const kRecentSearchContent = @"kRecentSearchContent";
 static NSString *const kRecentSearchTimestamp = @"kRecentSearchTimestamp";
+static NSString *const kLastExtensionSearch = @"kLastExtensionSearch";
 
 @implementation HBUserDefultsManager
 
@@ -27,11 +31,13 @@ static NSString *const kRecentSearchTimestamp = @"kRecentSearchTimestamp";
 //搜索范围
 
 + (void)setSearchDistance:(CGFloat)searchDistance {
-    [[NSUserDefaults standardUserDefaults] setObject:@(searchDistance) forKey:kSearchDistanceKey];
+    NSUserDefaults *groupDefaults = [[NSUserDefaults alloc] initWithSuiteName:kGroupId];
+    [groupDefaults setObject:@(searchDistance) forKey:kSearchDistanceKey];
 }
 
 + (CGFloat)searchDistance {
-    NSNumber *searchDistance = [[NSUserDefaults standardUserDefaults] objectForKey:kSearchDistanceKey];
+    NSUserDefaults *groupDefaults = [[NSUserDefaults alloc] initWithSuiteName:kGroupId];
+    NSNumber *searchDistance = [groupDefaults objectForKey:kSearchDistanceKey];
     if (searchDistance == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:@(800) forKey:kSearchDistanceKey];
         return 800;
@@ -85,5 +91,22 @@ static NSString *const kRecentSearchTimestamp = @"kRecentSearchTimestamp";
         NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:kRecentSearchTimestamp ascending:NO];
         return [recentSearch sortedArrayUsingDescriptors:@[descriptor]];
     }
+}
+
++ (void)clearRecentSearchs {
+    [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kSearchRecentKey];
+}
+
+#pragma mark - Extension
++ (void)saveLastExtensionSearchWithResult:(HBBicycleResultModel *)result {
+    NSData *resultsData = [result mj_JSONData];
+    NSUserDefaults *groupDefaults = [[NSUserDefaults alloc] initWithSuiteName:kGroupId];
+    [groupDefaults setValue:resultsData forKey:kLastExtensionSearch];
+}
+
++ (HBBicycleResultModel *)lastExtensionSearch {
+    NSUserDefaults *groupDefaults = [[NSUserDefaults alloc] initWithSuiteName:kGroupId];
+    NSData *data = [groupDefaults valueForKey:kLastExtensionSearch];
+    return [HBBicycleResultModel mj_objectWithKeyValues:data];
 }
 @end

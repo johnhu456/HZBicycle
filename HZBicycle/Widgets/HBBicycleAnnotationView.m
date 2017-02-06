@@ -7,6 +7,7 @@
 //
 
 #import "HBBicycleAnnotationView.h"
+#import "UIImage+FHExtension.h"
 
 @interface HBBicycleAnnotationView()
 
@@ -25,7 +26,7 @@ static CGFloat const kContentAdd = 70.f;
 @implementation HBBicycleAnnotationView
 - (id)initWithAnnotation:(id<MAAnnotation>)annotation reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier]) {
-        self.image = ImageInName(@"main_bicycle");
+        self.image = [ImageInName(@"main_bicycle") scaleToSize:CGSizeMake(34, 45)];
         self.canShowCallout   = NO;
         self.draggable        = NO;
     }

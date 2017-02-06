@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-HZBicycleExtension.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-HZBicycleTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -93,6 +98,11 @@
 			<true/>
 		</dict>
 		<key>D40AFA9F96688E7D23F3B09905C275C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD840746D958881F2ECD85007661B224</key>
 		<dict>
 			<key>primary</key>
 			<true/>

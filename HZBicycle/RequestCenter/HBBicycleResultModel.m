@@ -15,4 +15,26 @@
              @"data":[HBBicycleStationModel class],
              };
 }
+
+- (HBBicycleStationModel *)nearestRentableStation {
+    HBBicycleStationModel *resultStation;
+    for (HBBicycleStationModel *station in self.data) {
+        if (station.rentcount > 0) {
+            resultStation = station;
+            break;
+        }
+    }
+    return resultStation;
+}
+
+- (HBBicycleStationModel *)nearestRestoreableStation {
+    HBBicycleStationModel *resultStation;
+    for (HBBicycleStationModel *station in self.data) {
+        if (station.restorecount > 0) {
+            resultStation = station;
+            break;
+        }
+    }
+    return resultStation;
+}
 @end

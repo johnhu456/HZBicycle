@@ -7,6 +7,9 @@
 //
 
 #import "HBHUDManager.h"
+#import "HBMarco.h"
+#import "FHMarco.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 static NSString *const kNoBicycleSearchResult = @"当前范围没有搜索到租赁点";
 static NSString *const kNoSearchResult = @"没有搜索到结果";
@@ -24,6 +27,7 @@ static NSString *const kNaviCalculateError = @"导航出错啦，请重试";
     [SVProgressHUD setBackgroundColor:FHColorWithHexRGBA(0x4F6C87,0.5)];
     [SVProgressHUD setMinimumDismissTimeInterval:1.5];
 }
+
 + (void)showBicycleSearchResult {
     [SVProgressHUD showErrorWithStatus:kNoBicycleSearchResult];
 }
@@ -45,12 +49,14 @@ static NSString *const kNaviCalculateError = @"导航出错啦，请重试";
 }
 
 + (void)showWaitProgress {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    //FIX: NOT avaliable on App Extension
+//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [SVProgressHUD show];
 }
 
 + (void)dismissWaitProgress {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    //FIX: NOT avaliable on App Extension
+//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [SVProgressHUD dismiss];
 }
 @end

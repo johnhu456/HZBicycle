@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *const kNotificationHandleOpenFromExtension;
+extern NSString *const kExtensionStationIDKey;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

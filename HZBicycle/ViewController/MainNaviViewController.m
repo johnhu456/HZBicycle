@@ -8,12 +8,13 @@
 
 #import "MainNaviViewController.h"
 
+#import "HBRealTimeNaviController.h"
+
+#import "HBBicycleStationModel.h"
 #import "HBNaviMenuView.h"
 #import "HBNaviTitleView.h"
 
-@interface MainNaviViewController ()<AMapNaviDriveViewDelegate,MAMapViewDelegate,HBNaviDelegate>
-
-@property (nonatomic, strong) AMapNaviDriveView *naviDriveView;
+@interface MainNaviViewController ()<MAMapViewDelegate,HBNaviDelegate>
 
 @property (nonatomic, weak) HBBicycleResultModel *stationResult;
 
@@ -80,7 +81,8 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
         make.bottom.equalTo(weakSelf.mas_bottomLayoutGuideTop).with.offset(- kHeightMenuView + 5.f);
     }];
     //添加自行车站点数据
-    [self.mapView addBicycleStations:self.stationResult withIndex:_targetIndex animated:NO];
+    [self.mapView addAnnotationWithStation:self.stationResult.data[_targetIndex]];
+//    [self.mapView addBicycleStations:self.stationResult withIndex:_targetIndex animated:NO];
 }
 
 - (void)setupMenuView {
@@ -89,8 +91,10 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
         if (sender.selected) {
             [weakSelf setupNaviRouteWithType:[HBNaviManager sharedManager].naviType];
         }else {
-#warning push new Navi
-            [weakSelf setupNaviRouteWithType:[HBNaviManager sharedManager].naviType];
+            HBRealTimeNaviController *naviController = [[HBRealTimeNaviController alloc] initWithNaviType:[HBNaviManager sharedManager].naviType];
+            [self presentViewController:naviController animated:YES completion:^{
+                [weakSelf.navigationController popViewControllerAnimated:NO];
+            }];
         }
     }];
     [self.view addSubview:self.naviMenuView];
@@ -118,7 +122,6 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
         polylineRenderer.strokeColor  = HB_COLOR_DARKBLUE;
         polylineRenderer.lineJoinType = kMALineJoinRound;
         polylineRenderer.lineCapType  = kMALineCapRound;
-#warning color may needs to adjust
         return polylineRenderer;
     }
     return nil;
@@ -142,7 +145,7 @@ static CGFloat const kHeightMenuView = 170.f;        //菜单栏高度
 #pragma mark - HBNaviManagerDelegate
 - (void)finishCalculatedRouteInType:(HBNaviType)type route:(AMapNaviRoute *)route error:(NSError *)error {
     if (!error) {
-        [self.mapView setNaviRoute:route withStationIndex:_targetIndex];
+        [self.mapView setNaviRoute:route withStationIndex:0];
         //设置菜单
         self.naviMenuView.route = route;
         self.naviMenuView.station = _stationResult.data[_targetIndex];
