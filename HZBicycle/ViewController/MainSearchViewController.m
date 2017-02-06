@@ -121,7 +121,7 @@ static NSString *const kTitleClearButton = @"清空历史";
  刷新提示
  */
 - (void)reloadTip {
-    self.recentSearch = [[HBUserDefultsManager recentSearchs] copy];
+    self.recentSearch = [HBUserDefultsManager recentSearchs];
     self.tipLabel.text = _showRecentSearch ? kTipRecentSearch : kTipSearchResult;
 }
 

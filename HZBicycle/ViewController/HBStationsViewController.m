@@ -125,7 +125,10 @@ static NSString *const kDistrictNumber = @"0571-";
     //ACTionsheet 选择
     HBBicycleStationModel *station = self.resultStations.data[indexPath.row];
     NSString *phone1 = [self getDistrictNumberWithPhone:[[station.stationPhone mutableCopy] substringFromIndex:13]];
-    NSString *phone2 = [self getDistrictNumberWithPhone:[[station.stationPhone2 mutableCopy] substringFromIndex:14]];
+    NSString *phone2 = nil;
+    if (![station.stationPhone2 isEqualToString:@""]) {
+        phone2 = [self getDistrictNumberWithPhone:[[station.stationPhone2 mutableCopy] substringFromIndex:14]];
+    }
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *show = [UIAlertAction actionWithTitle:@"前往" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if ([self.delegate respondsToSelector:@selector(stationViewController:didSelectedIndex:inStations:)]){
