@@ -16,7 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - AMap3DMap (4.3.0):
     - AMapFoundation (~> 1.2)
-  - AMapFoundation (1.3.2)
+  - AMapFoundation (1.3.4)
   - AMapLocation (2.1.1):
     - AMapFoundation (~> 1.2)
   - AMapNavi (2.3.0):
@@ -33,7 +33,7 @@ PODS:
 
 DEPENDENCIES:
   - AMap3DMap (~> 4.3.0)
-  - AMapFoundation (~> 1.3.1)
+  - AMapFoundation (~> 1.3.4)
   - AMapLocation (~> 2.1.1)
   - AMapNavi (~> 2.3.0)
   - AMapSearch (~> 4.4.0)
@@ -46,7 +46,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   AMap3DMap: 7ee2abfcb41651bbf80ff18ac5446c0ae46a671a
-  AMapFoundation: 843dc27b2c02bc0bc2ef3346bb3dd0456cf64dbb
+  AMapFoundation: 486493b8e9ae4a1cb7ce2d8d8978ee1aabf9bb34
   AMapLocation: dd203f76b034ef5cb546600f4e1ffad2a3a14072
   AMapNavi: 4f48c7b34275f80f3d14eff669ac739e0e190c1b
   AMapSearch: a6c7c83905dbe12aa059c7ff83cb0726cb4fc32f
@@ -56,6 +56,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: bfde85ed6c573ea802b9cb37894ed9b629034f1b
   YTKNetwork: c4b0c29c9d639dc050d475de69ee626d53eac598
 
-PODFILE CHECKSUM: 30f3279bf34af323380915648283747ac8aacfae
+PODFILE CHECKSUM: 8e3357b5ebeaa8598a33919b3ee0764fed5aa44b
 
 COCOAPODS: 1.1.0

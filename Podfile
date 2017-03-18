@@ -3,7 +3,7 @@
 
 target 'HZBicycle' do
   #AMap
-  pod 'AMapFoundation','~>1.3.1'
+  pod 'AMapFoundation','~>1.3.4'
   pod 'AMap3DMap','~>4.3.0'
   pod 'AMapLocation','~>2.1.1'
   pod 'AMapNavi','~>2.3.0'
